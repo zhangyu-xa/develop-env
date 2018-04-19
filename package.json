@@ -1,0 +1,27 @@
+{
+  "name": "devel-envirenment",
+  "version": "1.0.0",
+  "description": "a base project.",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhangyu-xa/develop-env.git"
+  },
+  "keywords": [
+    "env",
+    "devel"
+  ],
+  "author": "dream-zhang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhangyu-xa/develop-env/issues"
+  },
+  "homepage": "https://github.com/zhangyu-xa/develop-env#readme",
+  "devDependencies": {
+    "webpack": "^3.11.0"
+  }
+}
