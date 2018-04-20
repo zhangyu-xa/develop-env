@@ -1,19 +1,26 @@
 /**
  * Created by Zhangyu on 2018/4/20.
  */
-const utils = require("./utils");
+const Utils = require("./utils");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
 	entry: {app: "./src/index.js"},
 	output: {
 		filename: "[name].js",
-		path: utils.resolve("dist")
+		path: Utils.resolve("dist")
 	},
+	plugins:[
+		new HtmlWebpackPlugin({
+			filename: "index.html",
+			template: "./index.html"
+		})
+	],
 	module: {
 		rules: [{
 			test: /\.jsx?/,
 			include: [
-				utils.resolve("src")
+				Utils.resolve("src")
 			],
 			use: "babel-loader"
 		}]
