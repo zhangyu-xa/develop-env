@@ -4,6 +4,7 @@
 const Utils = require("./utils");
 const ConfRules = require("./modules/rules");
 const ConfPlugin = require("./modules/plugins");
+const ConfResolve = require("./modules/resolve");
 
 module.exports = {
 	entry: {app: "./src/index.js"},
@@ -14,5 +15,6 @@ module.exports = {
 	plugins: ConfPlugin,
 	module: {
 		rules: ConfRules
-	}
+	},
+	resolve: ConfResolve
 };
