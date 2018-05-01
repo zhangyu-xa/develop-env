@@ -1,0 +1,20 @@
+const webpack = require("webpack");
+const middleware = require("webpack-dev-middleware");
+const baseConfOptions = require("./webpack.base.conf");
+
+baseConfOptions.mode = "development";
+
+const compiler = webpack(baseConfOptions);
+
+const express = require("express");
+
+const app = express();
+
+app.use(middleware(compiler, {
+
+}));
+
+
+app.listen(8888, function () {
+	console.log("port 8888 is running.");
+});
