@@ -1,6 +1,10 @@
 /**
  * Created by Zhangyu on 2018/4/19.
  */
+
+if (module.hot) {
+	module.hot.accept();
+}
 import "./css/index.css";
 import ss from "component/tool";
 
@@ -20,3 +24,11 @@ setTimeout(function () {
 		console.log(data);
 	});
 }, 100);
+
+var divObj = document.getElementsByClassName("demo");
+
+divObj[0].innerText = "demo";
+
+window.onload = function () {
+	console.log("onload is finished.");
+}
