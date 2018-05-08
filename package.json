@@ -29,6 +29,7 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
+    "image-webpack-loader": "^4.2.0",
     "less": "^3.0.2",
     "less-loader": "^4.1.0",
     "promise-polyfill": "^7.1.2",
