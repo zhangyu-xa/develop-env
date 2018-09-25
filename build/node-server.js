@@ -14,6 +14,10 @@ app.use(middleware(compiler, {
 
 }));
 
+app.use(function (req, res, next) {
+	console.log("2222222222222222222222", req, res);
+})
+
 
 app.listen(8888, function () {
 	console.log("port 8888 is running.");

@@ -8,7 +8,11 @@ if (module.hot) {
 import "./css/index.css";
 import ss from "component/tool";
 
-console.log("this is a demo");
+function log(...args){
+
+}
+
+console.log("this is a demo", process.env.NODE_ENV);
 
 function mySyncFun() {
 	var p = new Promise(function (resolve, reject) {
@@ -27,8 +31,8 @@ setTimeout(function () {
 
 var divObj = document.getElementsByClassName("demo");
 
-divObj[0].innerText = "demo";
+//divObj[0].innerText = "demo";
 
 window.onload = function () {
-	console.log("onload is finished.");
+	console.log(" onload is finished.");
 }

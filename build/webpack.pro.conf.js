@@ -15,9 +15,9 @@ module.exports = smart(baseConf, {
 			use: ExtractTextPlugin.extract({
 				fallback: "style-loader",
 				use: [{
-					loader: "css-loader",
-					options: {minimize: true}
-				},
+						loader: "css-loader",
+						options: {minimize: true}
+					},
 					"less-loader"
 				]
 			})
@@ -29,9 +29,9 @@ module.exports = smart(baseConf, {
 			use: ExtractTextPlugin.extract({
 				fallback: "style-loader",
 				use: [{
-					loader: "css-loader",
-					options: {minimize: true}
-				},
+						loader: "css-loader",
+						options: {minimize: true}
+					},
 					"less-loader"
 				]
 			})

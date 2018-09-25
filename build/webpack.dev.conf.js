@@ -26,18 +26,6 @@ module.exports = smart(baseConf, {
 				]
 			})
 		}, {
-			test: /\.less$/,
-			include: [
-				Utils.resolve("src")
-			],
-			use: ExtractTextPlugin.extract({
-				fallback: "style-loader",
-				use: [
-					"css-loader",
-					"less-loader"
-				]
-			})
-		}, {
 			test: /\.(png|jpe?g|gif|svg|webp)$/i,
 			use: [{
 				loader: "file-loader",

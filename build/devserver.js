@@ -1,5 +1,5 @@
 module.exports= {
-	port: 80,
+	//port: 80,
 	publicPath: "/",
 	hot: true,
 	proxy: {
