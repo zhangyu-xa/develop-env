@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-	entry: {app: "./src/index.js"},
+	entry: {app: "./libs/index.js"},
 	output: {
 		publicPath: "/",
 		filename: "[name].js",
