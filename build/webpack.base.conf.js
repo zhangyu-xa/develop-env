@@ -7,9 +7,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-	entry: {app: "./libs/index.js"},
+	entry: {app: "./src/index.ts"},
 	output: {
-		publicPath: "/",
+		publicPath: "",
 		filename: "[name].js",
 		path: Utils.resolve("dist")
 	},
@@ -25,11 +25,9 @@ module.exports = {
 	],
 	resolve: {
 		//定义别名
-		alias: {
-			component: Utils.resolve("src/component")
-		},
+		alias: {},
 		//后缀名自动补全
-		extensions: [".js", ".vue", ".json", ".css"],
+		extensions: [".js", ".ts", ".json", ".css", ".tsx"],
 		//依赖查找位置定义
 		modules: [
 			Utils.resolve("node_modules"),
@@ -38,11 +36,14 @@ module.exports = {
 	},
 	module: {
 		rules: [{
-			test: /\.js$/,
-			include: [
-				Utils.resolve("src")
-			],
-			use: "babel-loader"
-		}]
+				test: /\.tsx?$/,
+				loader: "awesome-typescript-loader"
+			}, {
+				test: /\.js$/,
+				include: [
+					Utils.resolve("src")
+				],
+				use: "babel-loader"
+			}]
 	}
 };
