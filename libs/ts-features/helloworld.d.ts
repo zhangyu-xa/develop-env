@@ -1,0 +1,10 @@
+declare function sayHello(person: string): string;
+declare let user: string;
+declare let booleanVar: Boolean;
+declare let isRight: boolean;
+declare let nullvar: null;
+declare let undefinedVar: undefined;
+declare let mySuperVar: any;
+declare function myFun(params: object): void;
+declare let variable: string;
+declare let typeCheck: string | number;
