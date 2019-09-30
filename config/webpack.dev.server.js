@@ -1,6 +1,6 @@
 'use strict';
 
-const utils = require('./utils')
+const utils = require('./utils');
 const paths = require('./paths');
 const fs = require('fs');
 
@@ -47,7 +47,6 @@ module.exports = {
 	// Enable HTTPS if the HTTPS environment variable is set to 'true'
 	https: protocol === 'https',
 	host,
-	overlay: false,
 	progress: true,
 	// proxy block, now we use http-proxy-middleware instead.
 	proxy: {

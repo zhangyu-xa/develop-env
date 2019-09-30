@@ -2,7 +2,6 @@
 
 const chalk = require('chalk');
 const statsFormatter = require('./stats-formatter');
-const utils = require('../../config/utils');
 
 module.exports = function (compiler, config, moduleName) {
 	let isRecompiling = false;

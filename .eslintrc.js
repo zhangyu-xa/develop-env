@@ -26,6 +26,13 @@ module.exports = {
     // 1: 'warn'
     // 2: 'error
     // Common js rules
+    'semi': 0,
+    'quotes': 0,
+    'space-before-function-paren': 0,
+    'no-tabs': 0,
+    'indent': 0,
+    'eol-last': 0,
+    'spaced-comment': 0,
     // 要求使用 === 和 !==
     'eqeqeq': 2,
     // 禁用 arguments.caller 或 arguments.callee

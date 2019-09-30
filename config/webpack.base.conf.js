@@ -206,13 +206,20 @@ module.exports = {
 					// extensions .module.scss or .module.sass
 					{
 						test: lessRegex,
-						use: utils.getStyleLoaders(
+						use: [].concat(utils.getStyleLoaders(
 							{
 								importLoaders: 2,
 								sourceMap: isEnvProd && utils.isUseSourceMap(),
 							},
 							'less-loader'
-						),
+						), {
+							loader: 'sass-resources-loader',
+							options: {
+								resources: [
+									utils.resolve('src/styles/variables.less')
+								]
+							}
+						}),
 						// Don't consider CSS imports dead code even if the
 						// containing package claims to have no side effects.
 						// Remove this when webpack adds a warning or an error for this.
