@@ -8,6 +8,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const getClientEnvironment = require('./env');
 const InterpolateHtmlPlugin = require('./webpack-plugins/InterpolateHtmlPlugin');
 const ModuleScopePlugin = require('./webpack-plugins/ModuleScopePlugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const { isEnvProd } = utils.getNodeEnv();
@@ -82,6 +83,8 @@ module.exports = {
 				};
 			}
 		}),
+		// vue-loader need.
+		new VueLoaderPlugin(),
 		// Moment.js is an extremely popular library that bundles large locale files
 		// by default due to how Webpack interprets its code. This is a practical
 		// solution that requires the user to opt into importing specific locales.
@@ -128,12 +131,17 @@ module.exports = {
 			// First, run the linter.
 			// It's important to do this before Babel processes the JS.
 			{
-				test: /\.(js|mjs|jsx|ts|tsx)$/,
+				test: /\.(js|mjs|jsx|ts|tsx|vue)$/,
 				enforce: 'pre',
 				use: [
 					require.resolve('eslint-loader')
 				],
 				include: paths.appSrc,
+			},
+			{
+				test: /\.vue$/,
+				include: paths.appSrc,
+				loader: require.resolve('vue-loader')
 			},
 			{
 				// "oneOf" will traverse all following loaders until one will
@@ -158,22 +166,6 @@ module.exports = {
 						include: paths.appSrc,
 						loader: require.resolve('babel-loader'),
 						options: {
-							customize: require.resolve(
-								'babel-preset-react-app/webpack-overrides'
-							),
-							plugins: [
-								[
-									require.resolve('babel-plugin-named-asset-import'),
-									{
-										loaderMap: {
-											svg: {
-												ReactComponent:
-													'@svgr/webpack?-svgo,+titleProp,+ref![path]',
-											}
-										}
-									}
-								]
-							],
 							// This is a feature of `babel-loader` for webpack (not Babel itself).
 							// It enables caching results in ./node_modules/.cache/babel-loader/
 							// directory for faster rebuilds.
@@ -182,7 +174,7 @@ module.exports = {
 							cacheCompression: false,
 							// minimize
 							compact: isEnvProd
-						},
+						}
 					},
 					// "postcss" loader applies autoprefixer to our CSS.
 					// "css" loader resolves paths in CSS and adds assets as dependencies.
@@ -236,7 +228,7 @@ module.exports = {
 						// its runtime that would otherwise be processed through "file" loader.
 						// Also exclude `html` and `json` extensions so they get processed
 						// by webpacks internal loaders.
-						exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
+						exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.vue$/, /\.json$/],
 						options: {
 							name: 'static/media/[name].[hash:8].[ext]',
 						},

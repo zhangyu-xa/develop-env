@@ -1,7 +1,14 @@
-import './styles/index.less';
+import './styles/index.less';/*
+import 'element-ui/lib/theme-chalk/index.css';*/
 
-console.log("this is a demo", process.env.NODE_ENV);
+//import Vue from "vue";
+//import element from "element-ui/lib/element-ui.common";
 
-window.onload = function () {
-	console.log("window onload is finished.");
-}
+//Vue.use(element);
+
+import App from "./app.vue";
+
+new Vue({
+	el: "#app",
+	render: h => h(App)
+});

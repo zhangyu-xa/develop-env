@@ -1,9 +1,9 @@
 module.exports = {
   root: true,
-  extends: 'standard',
-  //plugins: ['react', 'jsdoc'],
-  parser: 'babel-eslint',
+  extends: ['standard', 'plugin:vue/recommended'],
+  plugins: ['vue', 'html'],
   parserOptions: {
+    parser: 'babel-eslint',
     sourceType: 'module',
     allowImportExportEverywhere: true,
     ecmaVersion: 6,
@@ -13,7 +13,8 @@ module.exports = {
     }
   },
   globals: {
-    window: true
+    window: true,
+    Vue: true
   },
   env: {
     browser: true,
@@ -33,6 +34,9 @@ module.exports = {
     'indent': 0,
     'eol-last': 0,
     'spaced-comment': 0,
+    'object-curly-spacing': 0,
+    'import/first': 0,
+    'no-new': 0,
     // 要求使用 === 和 !==
     'eqeqeq': 2,
     // 禁用 arguments.caller 或 arguments.callee
