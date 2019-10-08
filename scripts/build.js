@@ -14,31 +14,31 @@ process.on('unhandledRejection', err => {
 // Ensure environment variables are read.
 require('../webpack/env');
 
-//校验系统名字
-const sysName = process.argv.slice(2);
+console.log("process.argv:", process.argv);
 
-process.env.sysName = sysName[0];
+// 校验操作
+const tasks = process.argv.slice(2);
+// 校验系统名字
+process.env.sysName = tasks[1];
 
 const chalk = require('chalk');
-const fs = require('fs-extra');
-const utils = require('../webpack/utils');
-const paths = require('../webpack/paths');
-const webpackProdConfig = require('../webpack/webpack.prod.conf');
-const build = require('./mixin/build-task');
+const compiler = require('./mixin/compiles');
+let compiles = [];
 
-console.log("webpackProdConfig:", webpackProdConfig);
+if(tasks[0] === 'build') {
+	compiles = compiler.getBuildCompiles(tasks);
+} else if(tasks[0] === 'lib') {
+	//编译库
+	compiles = compiler.getLibCompiles(tasks);
+}
 
-console.log(chalk.cyan('\nCreating an optimized production build...\n\n'));
+if(compiles.length === 0) {
+	console.log(chalk.red("No tasks to compile. \n"));
+	process.exit(1);
+}
 
-// Remove all content but keep the directory so that
-// if you're in it, you don't end up in Trash
-fs.emptyDirSync(utils.getSysConfig("build.path") || paths.appBuild);
-// Merge with the public folder
-utils.copyPublicFolder(false, utils.getSysConfig("build.path"), file => file.indexOf(".html") < 0);
 // start compile, support muti-tasks
-Promise.all([
-	build(webpackProdConfig)
-]).then(()  => {
+Promise.all(compiles).then(()  => {
 	console.log(chalk.green('Packaged successfully.\n'));
 }, err => {
 	if (err && err.message) {
