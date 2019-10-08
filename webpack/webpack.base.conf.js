@@ -4,6 +4,7 @@
 const utils = require("./utils");
 const paths = require('./paths');
 const webpack = require("webpack");
+const alias = require('./alias');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const getClientEnvironment = require('./env');
 const InterpolateHtmlPlugin = require('./webpack-plugins/InterpolateHtmlPlugin');
@@ -90,9 +91,7 @@ module.exports = {
 	],
 	resolve: {
 		//定义别名
-		alias: {
-			"component": utils.resolve("src/component")
-		},
+		alias,
 		//后缀名自动补全
 		extensions: [".js", ".ts", ".json"],
 		//依赖查找位置定义

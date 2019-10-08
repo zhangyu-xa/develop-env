@@ -6,22 +6,24 @@ const baseConf = require("./webpack.base.conf");
 module.exports = smart(baseConf, {
 	mode: "development",
 	devtool: 'cheap-module-source-map',
+	entry: utils.getSysConfig("entry"),
 	output: {
-		publicPath: utils.getPublicPath(),
+		path: utils.getSysConfig("output.path") || undefined,
+		publicPath: utils.getSysConfig("output.publicPath") || utils.getPublicPath(),
 		// This does not produce a real file. It's just the virtual path that is
 		// served by WebpackDevServer in development. This is the JS bundle
 		// containing code from all our entry points, and the Webpack runtime.
-		filename: "static/js/[name].js",
+		filename: utils.getSysConfig("output.filename") || "static/js/[name].js",
 		// There are also additional JS chunk files if you use code splitting.
-		chunkFilename: "static/js/[name].chunk.js",
+		chunkFilename: utils.getSysConfig("output.chunkFilename") || "static/js/[name].chunk.js",
 		// Add /* filename */ comments to generated require()s in the output.
 		pathinfo: true
 	},
-	plugins: [
+	plugins: [].concat([
 		new webpack.HotModuleReplacementPlugin()
-	],
+	], utils.getSysConfig("plugins") || []),
 	module: {
-		rules: []
+		rules: utils.getSysConfig("rules") || []
 	}
 });
 

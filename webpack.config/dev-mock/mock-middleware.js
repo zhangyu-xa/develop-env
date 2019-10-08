@@ -10,4 +10,4 @@ function login(app) {
 module.exports = function (app) {
 	//register mock server
 	login(app);
-}
+};

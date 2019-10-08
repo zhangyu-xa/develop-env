@@ -18,20 +18,21 @@ const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false';
 module.exports = smart(baseConf, {
 	mode: "production",
 	devtool: 'source-map',
+	entry: utils.getSysConfig("entry"),
 	output: {
 		// The build folder.
-		path: paths.appBuild,
+		path: utils.getSysConfig("build.path") || paths.appBuild,
 		// There will be one main bundle, and one file per asynchronous chunk.
 		// In development, it does not produce real files.
-		filename: 'static/js/[name].[contenthash:8].js',
+		filename: utils.getSysConfig("build.filename") || 'static/js/[name].[contenthash:8].js',
 		// There are also additional JS chunk files if you use code splitting.
-		chunkFilename: 'static/js/[name].[contenthash:8].chunk.js',
+		chunkFilename: utils.getSysConfig("build.chunkFilename") || 'static/js/[name].[contenthash:8].chunk.js',
 		// Webpack uses `publicPath` to determine where the app is being served from.
 		// It requires a trailing slash, or the file assets will get an incorrect path.
 		// In development, we always serve from the root. This makes config easier.
 		// We inferred the "public path" (such as / or /my-project) from homepage.
 		// We use "/" in development.
-		publicPath: utils.getPublicPath(),
+		publicPath: utils.getSysConfig("build.publicPath") || utils.getPublicPath(),
 		// Add /* filename */ comments to generated require()s in the output.
 		pathinfo: false
 	},
@@ -101,7 +102,7 @@ module.exports = smart(baseConf, {
 			name: entrypoint => `runtime-${entrypoint.name}`,
 		}
 	},
-	plugins: [
+	plugins: [].concat([
 		new MiniCssExtractPlugin({
 			// Options similar to the same options in webpackOptions.output
 			// both options are optional
@@ -112,8 +113,8 @@ module.exports = smart(baseConf, {
 		// a network request.
 		shouldInlineRuntimeChunk &&
 		new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime-.+[.]js/]),
-	],
+	], utils.getSysConfig("plugins") || []),
 	module: {
-		rules: []
+		rules: utils.getSysConfig("rules") || []
 	}
 });

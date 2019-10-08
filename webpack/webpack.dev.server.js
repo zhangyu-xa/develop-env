@@ -58,7 +58,7 @@ module.exports = {
 	// middleware extends
 	before(app) {
 		// proxy middleware
-		if (fs.existsSync(paths.proxySetup) && false) {
+		if (fs.existsSync(paths.proxySetup)) {
 			// This registers user provided middleware for proxy reasons
 			require(paths.proxySetup)(app);
 		}

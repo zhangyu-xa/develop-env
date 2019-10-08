@@ -1,17 +1,11 @@
 'use strict';
 
 const proxyMiddleware = require("http-proxy-middleware");
+const utils = require("../../webpack/utils");
 
-const proxyConfig = {
+const proxyConfig = utils.getSysConfig("proxy") || {
 	"/api": {
 		target: 'http://58.49.28.186:58271'
-	},
-	"/staticResource": {
-		target: 'http://58.49.28.186:58271'
-	},
-	"/socket.io": {
-		target: 'http://58.49.28.186:58271',
-		ws: true
 	}
 };
 

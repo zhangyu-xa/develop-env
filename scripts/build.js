@@ -12,26 +12,33 @@ process.on('unhandledRejection', err => {
 });
 
 // Ensure environment variables are read.
-require('../config/env');
+require('../webpack/env');
+
+//校验系统名字
+const sysName = process.argv.slice(2);
+
+process.env.sysName = sysName[0];
 
 const chalk = require('chalk');
 const fs = require('fs-extra');
-const Utils = require('../config/utils');
-const paths = require('../config/paths');
-const webpackProdConfig = require('../config/webpack.prod.conf');
+const utils = require('../webpack/utils');
+const paths = require('../webpack/paths');
+const webpackProdConfig = require('../webpack/webpack.prod.conf');
 const build = require('./mixin/build-task');
 
-console.log(chalk.cyan('Creating an optimized production build...\n\n'));
+console.log("webpackProdConfig:", webpackProdConfig);
+
+console.log(chalk.cyan('\nCreating an optimized production build...\n\n'));
 
 // Remove all content but keep the directory so that
 // if you're in it, you don't end up in Trash
-fs.emptyDirSync(paths.appBuild);
+fs.emptyDirSync(utils.getSysConfig("build.path") || paths.appBuild);
 // Merge with the public folder
-Utils.copyPublicFolder();
+utils.copyPublicFolder(false, utils.getSysConfig("build.path"), file => file.indexOf(".html") < 0);
 // start compile, support muti-tasks
 Promise.all([
 	build(webpackProdConfig)
-]).then(stats  => {
+]).then(()  => {
 	console.log(chalk.green('Packaged successfully.\n'));
 }, err => {
 	if (err && err.message) {

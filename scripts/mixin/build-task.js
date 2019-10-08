@@ -3,7 +3,7 @@
 const webpack = require('webpack');
 const chalk = require('chalk');
 const statsFormatter = require('./stats-formatter');
-const utils = require('../../config/utils');
+const utils = require('../../webpack/utils');
 
 /**
  * single build task.
