@@ -4,6 +4,7 @@
 const utils = require("./utils");
 const paths = require('./paths');
 const webpack = require("webpack");
+const alias = require('./alias');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const getClientEnvironment = require('./env');
 const InterpolateHtmlPlugin = require('./webpack-plugins/InterpolateHtmlPlugin');
@@ -93,9 +94,7 @@ module.exports = {
 	],
 	resolve: {
 		//定义别名
-		alias: {
-			"component": utils.resolve("src/component")
-		},
+		alias,
 		//后缀名自动补全
 		extensions: [".js", ".ts", ".json"],
 		//依赖查找位置定义
@@ -238,18 +237,6 @@ module.exports = {
 				]
 			}
 		]
-	},
-	// Some libraries import Node modules but don't use them in the browser.
-	// Tell Webpack to provide empty mocks for them so importing them works.
-	node: {
-		module: 'empty',
-		dgram: 'empty',
-		dns: 'mock',
-		fs: 'empty',
-		http2: 'empty',
-		net: 'empty',
-		tls: 'empty',
-		child_process: 'empty',
 	},
 	// Turn off performance processing because we utilize
 	// our own hints via the FileSizeReporter

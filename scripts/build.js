@@ -12,26 +12,33 @@ process.on('unhandledRejection', err => {
 });
 
 // Ensure environment variables are read.
-require('../config/env');
+require('../webpack/env');
+
+console.log("process.argv:", process.argv);
+
+// 校验操作
+const tasks = process.argv.slice(2);
+// 校验系统名字
+process.env.sysName = tasks[1];
 
 const chalk = require('chalk');
-const fs = require('fs-extra');
-const Utils = require('../config/utils');
-const paths = require('../config/paths');
-const webpackProdConfig = require('../config/webpack.prod.conf');
-const build = require('./mixin/build-task');
+const compiler = require('./mixin/compiles');
+let compiles = [];
 
-console.log(chalk.cyan('Creating an optimized production build...\n\n'));
+if(tasks[0] === 'build') {
+	compiles = compiler.getBuildCompiles(tasks);
+} else if(tasks[0] === 'lib') {
+	//编译库
+	compiles = compiler.getLibCompiles(tasks);
+}
 
-// Remove all content but keep the directory so that
-// if you're in it, you don't end up in Trash
-fs.emptyDirSync(paths.appBuild);
-// Merge with the public folder
-Utils.copyPublicFolder();
+if(compiles.length === 0) {
+	console.log(chalk.red("No tasks to compile. \n"));
+	process.exit(1);
+}
+
 // start compile, support muti-tasks
-Promise.all([
-	build(webpackProdConfig)
-]).then(stats  => {
+Promise.all(compiles).then(()  => {
 	console.log(chalk.green('Packaged successfully.\n'));
 }, err => {
 	if (err && err.message) {

@@ -1,6 +1,6 @@
 'use strick';
 const chalk = require('chalk');
-const utils = require('../../config/utils');
+const utils = require('../../webpack/utils');
 
 const { isEnvDev, isEnvProd } = utils.getNodeEnv();
 

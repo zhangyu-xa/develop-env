@@ -58,12 +58,13 @@ module.exports = {
 	// middleware extends
 	before(app) {
 		// proxy middleware
-		if (fs.existsSync(paths.proxySetup) && false) {
+		console.log("\nprocess.env.ENABLE_MOCK:", process.env.ENABLE_MOCK);
+		if (process.env.ENABLE_MOCK !== 'true' && fs.existsSync(paths.proxySetup)) {
 			// This registers user provided middleware for proxy reasons
 			require(paths.proxySetup)(app);
 		}
 		//mock middleware
-		if (fs.existsSync(paths.mockSetup)) {
+		if (process.env.ENABLE_MOCK === 'true' && fs.existsSync(paths.mockSetup)) {
 			// This registers user provided middleware for mock reasons
 			require(paths.mockSetup)(app);
 		}

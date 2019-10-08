@@ -115,10 +115,10 @@ module.exports = {
 		return process.env.GENERATE_SOURCEMAP !== 'false';
 	},
 	// copy files before build
-	copyPublicFolder() {
-		fs.copySync(paths.appPublic, paths.appBuild, {
+	copyPublicFolder(from, dist, filterCbFun) {
+		fs.copySync(from || paths.appPublic, dist || paths.appBuild, {
 			dereference: true,
-			filter: file => file !== paths.appHtml,
+			filter: filterCbFun || (file => file !== paths.appHtml),
 		});
 	},
 	/**
@@ -149,5 +149,17 @@ module.exports = {
 	 */
 	fullExtend(str, length) {
 		return Array(length - str.length).fill(" ").join("") + str;
+	},
+	/**
+	 * 获取系统自定义配置中的变量
+	 * @param key - 对应的键值
+	 */
+	getSysConfig(key) {
+		const config = require('../webpack.config')[process.env.sysName];
+		if(!config) return undefined;
+		return key.split(".").reduce((res, cur) => {
+			if(!res) return undefined;
+			return res[cur] || undefined;
+		}, config);
 	}
 };

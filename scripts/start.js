@@ -12,20 +12,32 @@ process.on('unhandledRejection', err => {
 });
 
 // read the environment variables
-require('../config/env');
+require('../webpack/env');
+
+//校验系统名字
+const sysName = process.argv.slice(2);
+if(sysName.length > 1) {
+	console.log(chalk.red("In development mode , only one task is allowed. \n"));
+	process.exit(1);
+}
+
+process.env.sysName = sysName[0];
+
 
 const webpack = require('webpack');
 const chalk = require('chalk');
 const webpackDevServer = require('webpack-dev-server');
-const utils = require('../config/utils');
-const webpackDevConfig = require('../config/webpack.dev.conf');
-const devServerConfig = require('../config/webpack.dev.server');
+const utils = require('../webpack/utils');
+const webpackDevConfig = require('../webpack/webpack.dev.conf');
+const devServerConfig = require('../webpack/webpack.dev.server');
 const checkStatus = require('./mixin/dev-status');
+
+console.log("webpackDevConfig:", webpackDevConfig);
 
 //获取模块的名字
 const moduleName = utils.getFileNameByPath(webpackDevConfig.entry);
 
-console.log(chalk.blue(`Module 【${moduleName}】 begins to compiling...`));
+console.log(chalk.blue(`\nModule 【${moduleName}】 begins to compiling...`));
 console.log(chalk.blue("entry =>", webpackDevConfig.entry));
 console.log(chalk.blue("output =>", webpackDevConfig.output.path || "not set"));
 
@@ -40,7 +52,7 @@ checkStatus(compiler, webpackDevConfig, moduleName).then(stats => {
 	// start sever on watch
 	server.listen(devServerConfig.port, devServerConfig.host, err => {
 		if (err) {
-			console.log(err);
+			console.error(err);
 			process.exit(1);
 			return;
 		}
@@ -49,13 +61,13 @@ checkStatus(compiler, webpackDevConfig, moduleName).then(stats => {
 
 }, err => {
 	if (err && err.message) {
-		console.log(chalk.yellow(err.message));
+		console.error(chalk.yellow(err.message));
 	}
 	console.log(chalk.red('Failed to compile.\n'));
 	process.exit(1);
 }).catch(err => {
 	if (err && err.message) {
-		console.log(err.message);
+		console.error(err.message);
 	}
 	process.exit(1);
 })
