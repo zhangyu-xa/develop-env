@@ -1,8 +1,8 @@
 <template>
     <section class="main-container">
-        <nav-header class="header"></nav-header>
-        <menu-list class="menu"></menu-list>
-        <article class="content">
+        <nav-header class="header" />
+        <menu-list class="menu" />
+        <!--<article class="content">
             <el-table :data="tableData">
                 <el-table-column prop="date" label="日期" width="140">
                 </el-table-column>
@@ -11,7 +11,8 @@
                 <el-table-column prop="address" label="地址">
                 </el-table-column>
             </el-table>
-        </article>
+        </article>-->
+        <router-view></router-view>
     </section>
 </template>
 
@@ -23,7 +24,7 @@
 	export default {
 		name: "MainModule",
         components: {
-	        navHeader,
+			navHeader,
             menuList
         },
 		data() {
@@ -60,6 +61,8 @@
         }
         .menu {
             grid-area: menu;
+
+            padding: 20px;
         }
         .content {
             grid-area: content;

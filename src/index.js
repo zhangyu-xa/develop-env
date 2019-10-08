@@ -1,14 +1,11 @@
-import './styles/index.less';/*
-import 'element-ui/lib/theme-chalk/index.css';*/
+import './styles/index.less';
 
-//import Vue from "vue";
-//import element from "element-ui/lib/element-ui.common";
-
-//Vue.use(element);
+import router from "./router/router";
 
 import App from "./app.vue";
 
 new Vue({
 	el: "#app",
+	router,
 	render: h => h(App)
 });

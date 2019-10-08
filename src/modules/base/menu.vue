@@ -1,7 +1,7 @@
 <template>
     <el-menu :default-openeds="[]">
         <el-menu-item index="1">运营总览</el-menu-item>
-        <el-submenu index="2" >
+        <el-submenu index="2">
             <template slot="title"><i class="el-icon-message"></i>设备列表</template>
             <el-menu-item index="2-1">设备总数</el-menu-item>
             <el-menu-item index="2-2">正常设备</el-menu-item>
@@ -22,24 +22,26 @@
 
 <style lang="less">
     .menu {
-        background-color: #181c2a;
+        background-color: #d8e0ef;
         font-size: 16px;
 
         .el-menu-item, .el-submenu__title {
-            color: #e2e2e2;
+            height: 46px;
+            line-height: 46px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            color: #000000;
 
             &:hover {
-                background-color: #1E2335;
+                background-color: #a0b9df;
             }
         }
-        .el-submenu__title {
-            color: #e2e2e2;
-        }
         .el-menu {
-            background-color: #000000;
+            background-color: #d8e0ef;
         }
         .el-menu-item.is-active {
-            background-color: #1E2335;
+            background-color: #3d78d2;
+            color: #efefef;
         }
     }
 </style>

@@ -14,7 +14,8 @@ module.exports = {
   },
   globals: {
     window: true,
-    Vue: true
+    Vue: true,
+    VueRouter: true
   },
   env: {
     browser: true,
@@ -44,6 +45,12 @@ module.exports = {
     // 警告出现未使用过的变量
     'no-unused-vars': 1,
     // 要求构造函数首字母大写
-    'new-cap': 2
+    'new-cap': 2,
+    // 屏蔽vue缩进校验
+    'vue/html-indent': 0,
+    'vue/html-self-closing': 0,
+    'vue/max-attributes-per-line': 0,
+    'vue/name-property-casing': 0,
+    'vue/singleline-html-element-content-newline': 0
   }
 };

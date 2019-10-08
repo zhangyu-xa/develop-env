@@ -12,7 +12,7 @@
 
 <style lang="less">
     .header {
-        background-color: #0b1532;
+        background-color: #3d78d2;
 
         text-indent: 20px;
         font-size: 24px;
