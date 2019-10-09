@@ -5,7 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "dev": "node ./scripts/start.js",
+    "dev": "npm run lib utils && node ./scripts/start.js",
     "build": "node ./scripts/build.js build",
     "lib": "node ./scripts/build.js lib"
   },
@@ -29,6 +29,7 @@
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "fetch-like-axios": "^0.0.3",
     "file-loader": "^4.2.0",
     "fs-extra": "^8.1.0",
     "html-webpack-plugin": "^4.0.0-beta.8",

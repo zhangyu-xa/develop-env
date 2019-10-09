@@ -21,8 +21,6 @@ function normalBuild() {
 	// Remove all content but keep the directory so that
 	// if you're in it, you don't end up in Trash
 	fs.emptyDirSync(utils.getSysConfig("build.path") || paths.appBuild);
-	// Merge with the public folder
-	utils.copyPublicFolder(false, utils.getSysConfig("build.path"), file => file.indexOf(".html") < 0);
 
 	return [build(webpackProdConfig)];
 }
@@ -118,7 +116,7 @@ module.exports = {
 	getBuildCompiles(tasks, callback) {
 		if (process.env.BUILD_LIBS !== 'false') {
 			this.getLibCompiles(tasks, compilers => {
-				callback([...normalBuild(), ...compilers]);
+				callback([...compilers, ...normalBuild()]);
 			});
 			return;
 		}

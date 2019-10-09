@@ -36,6 +36,7 @@ module.exports = {
     'eol-last': 0,
     'spaced-comment': 0,
     'object-curly-spacing': 0,
+    'dot-notation': 0,
     'import/first': 0,
     'no-new': 0,
     // 要求使用 === 和 !==

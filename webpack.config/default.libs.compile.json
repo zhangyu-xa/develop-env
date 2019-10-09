@@ -4,13 +4,14 @@
     "entry": "multi",
     "output": "static/js/components/",
     "library": "[name]",
+    "libraryExport": "default",
     "libraryTarget": "umd"
   },
   "utils": {
     "path": "src/utils/",
     "entry": "one",
-    "output": "static/js/utils.js",
-    "library": "Utils",
+    "outputPath": "public/library",
+    "output": "utils.min.js",
     "libraryTarget": "window"
   }
 }
