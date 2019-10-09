@@ -33,6 +33,9 @@ module.exports = {
     'indent': 0,
     'eol-last': 0,
     'spaced-comment': 0,
+    'object-curly-spacing': 0,
+    'dot-notation': 0,
+    'import/first': 0,
     // 要求使用 === 和 !==
     'eqeqeq': 2,
     // 禁用 arguments.caller 或 arguments.callee

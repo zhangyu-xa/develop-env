@@ -21,6 +21,7 @@ module.exports = {
 	 * @returns {string|*}
 	 */
 	resolve(dir) {
+		if(!dir) return undefined;
 		return path.join(__dirname, "..", dir)
 	},
 	/**

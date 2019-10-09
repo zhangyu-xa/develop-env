@@ -19,7 +19,7 @@ module.exports = function (config) {
 		entry: utils.resolve(config.input),
 		output: {
 			// The build folder.
-			path: utils.getSysConfig("build.path") || paths.appBuild,
+			path: utils.resolve(config.outputPath) || utils.getSysConfig("build.path") || paths.appBuild,
 			// There will be one main bundle, and one file per asynchronous chunk.
 			// In development, it does not produce real files.
 			filename: config.output,
@@ -30,7 +30,7 @@ module.exports = function (config) {
 			// We use "/" in development.
 			publicPath: utils.getSysConfig("build.publicPath") || utils.getPublicPath(),
 			library: config.library,
-			libraryExport: 'default',
+			libraryExport: config.libraryExport,
 			libraryTarget: config.libraryTarget, // 通用模块定义
 			umdNamedDefine: true,
 			// Add /* filename */ comments to generated require()s in the output.

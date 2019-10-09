@@ -21,6 +21,7 @@ process.env.sysName = tasks[1];
 
 const chalk = require('chalk');
 const compiler = require('./mixin/compiles');
+const utils = require('../webpack/utils');
 
 if(tasks[0] === 'build') {
 	compiler.getBuildCompiles(tasks, build);
@@ -40,6 +41,9 @@ function build(compiles) {
 
 	// start compile, support muti-tasks
 	Promise.all(compiles).then(()  => {
+		// Merge with the public folder
+		utils.copyPublicFolder(false, utils.getSysConfig("build.path"), file => file.indexOf(".html") < 0);
+
 		console.log(chalk.green('Packaged successfully.\n'));
 	}, err => {
 		if (err && err.message) {
