@@ -10,31 +10,28 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const baseConf = require("./webpack.base.conf");
 
 module.exports = function (config) {
-	//定义输出格式
-	const library = config.globalName ? config.globalName : '[name]';
-	const libraryTarget = config.globalName ? 'window' : 'umd';
 	//不在需要那么多plugins
 	baseConf.plugins = [];
 
 	return smart(baseConf, {
 		mode: 'production',
 		devtool: 'source-map',
-		entry: utils.getSysConfig("entry"),
+		entry: utils.resolve(config.input),
 		output: {
 			// The build folder.
 			path: utils.getSysConfig("build.path") || paths.appBuild,
 			// There will be one main bundle, and one file per asynchronous chunk.
 			// In development, it does not produce real files.
-			filename: 'static/js/[name]/[name].js',
+			filename: config.output,
 			// Webpack uses `publicPath` to determine where the app is being served from.
 			// It requires a trailing slash, or the file assets will get an incorrect path.
 			// In development, we always serve from the root. This makes config easier.
 			// We inferred the "public path" (such as / or /my-project) from homepage.
 			// We use "/" in development.
 			publicPath: utils.getSysConfig("build.publicPath") || utils.getPublicPath(),
-			library,
+			library: config.library,
 			libraryExport: 'default',
-			libraryTarget: libraryTarget, // 通用模块定义
+			libraryTarget: config.libraryTarget, // 通用模块定义
 			umdNamedDefine: true,
 			// Add /* filename */ comments to generated require()s in the output.
 			pathinfo: false
