@@ -28,7 +28,7 @@ module.exports = function (config, moduleName) {
 			//格式化输出
 			statsFormatter(stats, reject, moduleName);
 
-			console.log(chalk.blue(`=============total:${process.env.TASKSNUM},  done:${process.env.TASKSDONENUM++}==================( ${Math.round(100*process.env.TASKSDONENUM/process.env.TASKSNUM)}% )\n\n`));
+			console.log(chalk.blue(`=============total:${process.env.TASKSNUM},  done:${++process.env.TASKSDONENUM}==================( ${parseFloat(100*process.env.TASKSDONENUM/process.env.TASKSNUM).toFixed(1)}% )\n\n`));
 
 			resolve(stats);
 		});
