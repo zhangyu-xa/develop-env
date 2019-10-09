@@ -26,7 +26,7 @@ module.exports = function (stats, reject, moduleName) {
 	});
 
 	isEnvProd && console.log(chalk.blue(`Module 【${moduleName}】 packaging `),chalk.green(`successfully`), chalk.blue(`. time consuming:`),
-		chalk.yellow(`${(stats.endTime - stats.startTime) / 1000}s\n\n`));
+		chalk.yellow(`${(stats.endTime - stats.startTime) / 1000}s`));
 
 	isEnvDev && console.log(chalk.yellow("times consuming:"), `${(stats.endTime - stats.startTime) / 1000}s`);
 

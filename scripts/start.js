@@ -32,8 +32,6 @@ const webpackDevConfig = require('../webpack/webpack.dev.conf');
 const devServerConfig = require('../webpack/webpack.dev.server');
 const checkStatus = require('./mixin/dev-status');
 
-console.log("webpackDevConfig:", webpackDevConfig);
-
 //获取模块的名字
 const moduleName = utils.getFileNameByPath(webpackDevConfig.entry);
 

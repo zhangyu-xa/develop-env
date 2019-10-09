@@ -20,17 +20,19 @@ module.exports = {
 		}
 	},
 	subtasks: {
-		'components': {
-			path: "src/components/",
-			entry: "multi",
-			library: '[name]',
-			libraryTarget: 'umd'
+		"components": {
+			"path": "src/components/",
+			"entry": "multi",
+			"output": "static/js/components/",
+			"library": "[name]",
+			"libraryTarget": "umd"
 		},
-		'utils': {
-			path: "src/utils/",
-			entry: "one",
-			library: 'Utils',
-			libraryTarget: 'window'
+		"utils": {
+			"path": "src/utils/",
+			"entry": "one",
+			"output": "static/js/utils.js",
+			"library": "Utils",
+			"libraryTarget": "window"
 		}
 	},
 	plugins: [],

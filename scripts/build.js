@@ -14,8 +14,6 @@ process.on('unhandledRejection', err => {
 // Ensure environment variables are read.
 require('../webpack/env');
 
-console.log("process.argv:", process.argv);
-
 // 校验操作
 const tasks = process.argv.slice(2);
 // 校验系统名字
@@ -23,32 +21,36 @@ process.env.sysName = tasks[1];
 
 const chalk = require('chalk');
 const compiler = require('./mixin/compiles');
-let compiles = [];
 
 if(tasks[0] === 'build') {
-	compiles = compiler.getBuildCompiles(tasks);
+	compiler.getBuildCompiles(tasks, build);
 } else if(tasks[0] === 'lib') {
 	//编译库
-	compiles = compiler.getLibCompiles(tasks);
+	compiler.getLibCompiles(tasks, build);
 }
 
-if(compiles.length === 0) {
-	console.log(chalk.red("No tasks to compile. \n"));
-	process.exit(1);
-}
+function build(compiles) {
+	if(compiles.length === 0) {
+		console.log(chalk.red("No tasks to be compiled. \n"));
+		process.exit(0);
+	}
 
-// start compile, support muti-tasks
-Promise.all(compiles).then(()  => {
-	console.log(chalk.green('Packaged successfully.\n'));
-}, err => {
-	if (err && err.message) {
-		console.log(chalk.yellow(err.message));
-	}
-	console.log(chalk.red('Failed to package.\n'));
-	process.exit(1);
-}).catch(err => {
-	if (err && err.message) {
-		console.log(err.message);
-	}
-	process.exit(1);
-});
+	process.env.TASKSNUM = compiles.length;
+	process.env.TASKSDONENUM = 0;
+
+	// start compile, support muti-tasks
+	Promise.all(compiles).then(()  => {
+		console.log(chalk.green('Packaged successfully.\n'));
+	}, err => {
+		if (err && err.message) {
+			console.log(chalk.yellow(err.message));
+		}
+		console.log(chalk.red('Failed to package.\n'));
+		process.exit(1);
+	}).catch(err => {
+		if (err && err.message) {
+			console.log(err.message);
+		}
+		process.exit(1);
+	});
+}
