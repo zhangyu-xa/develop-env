@@ -2,7 +2,7 @@
     <section class="main-container">
         <nav-header class="header" />
         <menu-list class="menu" />
-        <!--<article class="content">
+        <!--<article >
             <el-table :data="tableData">
                 <el-table-column prop="date" label="日期" width="140">
                 </el-table-column>
@@ -12,7 +12,7 @@
                 </el-table-column>
             </el-table>
         </article>-->
-        <router-view></router-view>
+        <router-view class="content"></router-view>
     </section>
 </template>
 

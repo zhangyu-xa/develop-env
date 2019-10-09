@@ -1,7 +1,16 @@
 import modules from './modules';
 
 const routes = [
-	{ path: '/summary', component: modules.summary },
+	{
+		alias: '/summary',
+		path: '/summary',
+		component: modules.summary
+	},
+	{
+		name: 'deviceList',
+		path: '/deviceList/:type',
+		component: modules.deviceList
+	},
 	{ path: '/realAlarm', component: modules.realAlarm },
 	{ path: '/statistis', component: modules.statistics }
 ];
