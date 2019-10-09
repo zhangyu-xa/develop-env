@@ -42,7 +42,7 @@ function build(compiles) {
 	// start compile, support muti-tasks
 	Promise.all(compiles).then(()  => {
 		// Merge with the public folder
-		utils.copyPublicFolder(false, utils.getSysConfig("build.path"), file => file.indexOf(".html") < 0);
+		tasks[0] === 'build' && utils.copyPublicFolder(false, utils.getSysConfig("build.path"), file => file.indexOf(".html") < 0);
 
 		console.log(chalk.green('Packaged successfully.\n'));
 	}, err => {
