@@ -1,6 +1,7 @@
 <template>
     <div class="ele-table">
         <el-table
+                v-show="!displayMode || displayMode==='list'"
                 :data="data"
                 height="1"
                 stripe="true"
@@ -28,6 +29,7 @@
                 <i v-for="(opera, index) in options.operators.operas" :key="index" :class="opera.icon" :title="opera.title"></i>
             </el-table-column>
         </el-table>
+        <slot name="elemap" :slotClass="'ele-map'"></slot>
         <el-pagination
                 v-if="showPagination"
                 class="pagination"
@@ -45,7 +47,7 @@
 <script>
 	export default {
 		name: "table",
-		props: ['options'],
+		props: ['options', 'displayMode'],
 		data() {
 			return {
 				currentPage: 1,
@@ -57,7 +59,10 @@
 			// 监听是否触发了数据刷新
 			"options.async.fresh": function () {
 				this.freshData();
-			}
+			},
+            "displayMode": function (val) {
+                
+            }
 		},
         computed: {
 			showPagination() {
@@ -99,7 +104,7 @@
         display: flex;
         flex-direction: column;
 
-        .el-table {
+        .el-table, .ele-map {
             flex: 1 1 auto;
         }
 

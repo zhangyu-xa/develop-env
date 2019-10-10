@@ -1,6 +1,6 @@
 <template>
-    <el-menu :default-openeds="[]">
-        <router-link index="1" tag="el-menu-item" :to="{path: '/summary'}"><i class="el-icon-message"></i>运营总览</router-link>
+    <el-menu default-active="activeIndex">
+        <router-link index="1" tag="el-menu-item" :to="{name: 'summary'}"><i class="el-icon-message"></i>运营总览</router-link>
         <el-submenu index="2">
             <template slot="title"><i class="el-icon-message"></i>设备列表</template>
             <router-link index="2-1" tag="el-menu-item" :to="{name: 'deviceList', params: {type: 'all'}}"><i class="el-icon-message"></i>设备总数</router-link>
@@ -9,14 +9,19 @@
             <router-link index="2-4" tag="el-menu-item" :to="{name: 'deviceList', params: {type: 'fault'}}"><i class="el-icon-message"></i>故障设备</router-link>
             <router-link index="2-5" tag="el-menu-item" :to="{name: 'deviceList', params: {type: 'offline'}}"><i class="el-icon-message"></i>断网设置</router-link>
         </el-submenu>
-        <router-link index="3" tag="el-menu-item" :to="{path: '/realAlarm'}"><i class="el-icon-message"></i>实时告警</router-link>
-        <router-link index="4" tag="el-menu-item" :to="{path: '/statistis'}"><i class="el-icon-message"></i>统计分析</router-link>
+        <router-link index="3" tag="el-menu-item" :to="{name: 'realAlarm'}"><i class="el-icon-message"></i>实时告警</router-link>
+        <router-link index="4" tag="el-menu-item" :to="{name: 'statistis'}"><i class="el-icon-message"></i>统计分析</router-link>
     </el-menu>
 </template>
 
 <script>
 	export default {
-		name: "menu"
+		name: "menu",
+		data() {
+			return {
+				activeIndex: '1'
+			}
+		}
 	}
 </script>
 

@@ -42,6 +42,10 @@ export default function (context) {
 				label: "安装位置",
 				prop: "deviceLocation",
 				tips: true
+			}, {
+				label: "最近告警时间",
+				prop: "updatedTime",
+				width: 150
 			}],
 			operators: {
 				label: "操作",
@@ -62,6 +66,12 @@ export default function (context) {
 				}, {
 					title: "编辑",
 					icon: "el-icon-edit"
+				}, {
+					title: "明细统计",
+					icon: "el-icon-s-custom"
+				}, {
+					title: "报警统计",
+					icon: "el-icon-tickets"
 				}]
 			},
 			async: {

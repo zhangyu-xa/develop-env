@@ -48,26 +48,17 @@ export default function (context) {
 				prop: "deviceId",
 				width: 150,
 				operas: [{
-					title: "报警推送",
+					title: "明细统计",
 					icon: "el-icon-s-custom"
 				}, {
-					title: "设备详情",
+					title: "报警统计",
 					icon: "el-icon-tickets"
-				}, {
-					title: "告警日志",
-					icon: "el-icon-document"
-				}, {
-					title: "设备操作",
-					icon: "el-icon-setting"
-				}, {
-					title: "编辑",
-					icon: "el-icon-edit"
 				}]
 			},
 			async: {
 				fresh: "",
 				pagination: true,
-				pageSize: 10,
+				pageSize: 15,
 				getData: context.getGeneralInfoList
 			}
 		},
@@ -76,7 +67,8 @@ export default function (context) {
 				deviceSerialId: '',
 				acct: '',
 				bindSts:'',
-				currentSts: ''
+				currentSts: '',
+				netSts: ''
 			},
 			fields: [{
 				prop: 'deviceSerialId',
@@ -88,6 +80,18 @@ export default function (context) {
 				type: 'el-input',
 				placeholder: '负责人账号',
 				isShow: true
+			}, {
+				prop: 'netSts',
+				type: 'el-select',
+				placeholder: '联网状态',
+				isShow: true,
+				selOptions: [{
+					label: "在线",
+					val: "1"
+				}, {
+					label: "离线",
+					val: "0"
+				}]
 			}, {
 				prop: 'bindSts',
 				type: 'el-select',

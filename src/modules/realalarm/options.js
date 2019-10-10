@@ -12,20 +12,6 @@ export default function (context) {
 				width: 150,
 				tips: true
 			}, {
-				label: "联网状态",
-				prop: "netStatus",
-				width: 80,
-				align: "center"
-			}, {
-				label: "设备状态",
-				prop: "currentStatus",
-				width: 80,
-				align: "center"
-			}, {
-				label: "设备类型",
-				prop: "deviceType",
-				width: 120
-			}, {
 				label: "负责人账号",
 				prop: "responsibleAcct",
 				align: "center",
@@ -35,48 +21,45 @@ export default function (context) {
 				prop: "belongedCorporation",
 				tips: true
 			}, {
-				label: "SIM卡串码",
-				prop: "simCode",
-				width: 120
+				label: "设备状态",
+				prop: "currentStatus",
+				width: 80,
+				align: "center"
 			}, {
 				label: "安装位置",
 				prop: "deviceLocation",
 				tips: true
+			}, {
+				label: "最近告警时间",
+				prop: "updatedTime",
+				width: 170
 			}],
 			operators: {
 				label: "操作",
 				prop: "deviceId",
 				width: 150,
 				operas: [{
-					title: "报警推送",
-					icon: "el-icon-s-custom"
-				}, {
 					title: "设备详情",
 					icon: "el-icon-tickets"
 				}, {
-					title: "告警日志",
+					title: "告警处理",
 					icon: "el-icon-document"
-				}, {
-					title: "设备操作",
-					icon: "el-icon-setting"
-				}, {
-					title: "编辑",
-					icon: "el-icon-edit"
 				}]
 			},
 			async: {
 				fresh: "",
 				pagination: true,
-				pageSize: 10,
+				pageSize: 15,
 				getData: context.getGeneralInfoList
 			}
 		},
 		filterOptions: {
 			params: {
 				deviceSerialId: '',
+				deviceLocation: '',
 				acct: '',
-				bindSts:'',
-				currentSts: ''
+				currentSts: '',
+				netSts: ''
 			},
 			fields: [{
 				prop: 'deviceSerialId',
@@ -89,16 +72,21 @@ export default function (context) {
 				placeholder: '负责人账号',
 				isShow: true
 			}, {
-				prop: 'bindSts',
+				prop: 'deviceLocation',
+				type: 'el-input',
+				placeholder: '安装位置',
+				isShow: true
+			}, {
+				prop: 'netSts',
 				type: 'el-select',
-				placeholder: '绑定状态',
+				placeholder: '联网状态',
 				isShow: true,
 				selOptions: [{
-					label: "绑定",
-					val: "1"
+					label: "在线",
+					val: "online"
 				}, {
-					label: "未绑定",
-					val: "0"
+					label: "离线",
+					val: "offline"
 				}]
 			}, {
 				prop: 'currentSts',
