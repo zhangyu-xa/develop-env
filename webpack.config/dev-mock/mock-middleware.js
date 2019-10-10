@@ -2,8 +2,8 @@
 
 //login module
 function login(app) {
-	app.get('/api', function (req, res) {
-		return res.json({user: "zhangyu"});
+	app.get('/dadaoApi/v1/generalInfo', function (req, res) {
+		return res.json(require('./getGeneralInfoListByParam.json'));
 	});
 }
 

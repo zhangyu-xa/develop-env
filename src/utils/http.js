@@ -5,7 +5,7 @@ const config = {
 	timeout: 30 * 1000,
 	xhrMode: "fetch",
 	headers: {
-		"Accept": "application/json; charset=utf-8",
+		Accept: "application/json; charset=utf-8",
 		"Content-Type": "application/json; charset=utf-8"
 	}
 };
@@ -48,7 +48,7 @@ export const $http = function({ url, type, data, method, headers, cancelHttp = f
 	const options = {
 		url,
 		method: method || "get",
-		headers: Object.assign({}, {"Authorization": token}, headers),
+		headers: Object.assign({}, {Authorization: token}, headers),
 		...(type === "query" ? {params: data || {}} : {data: data || {}}),
 		...(cancelHttp ? {cancelToken: new CancelToken(cancelHttp)} : {})
 	};
