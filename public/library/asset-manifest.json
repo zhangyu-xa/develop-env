@@ -1,0 +1,7 @@
+{
+  "files": {
+    "main.js": "/utils.min.js",
+    "main.js.map": "/utils.min.js.map",
+    "utils.min.js.LICENSE": "/utils.min.js.LICENSE"
+  }
+}

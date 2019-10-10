@@ -1,6 +1,6 @@
 <template>
     <div class="device-list">
-        <el-form :inline="true" :model="filter" class="demo-form-inline">
+        <el-form :inline="true" :model="filter" class="demo-form-inline filter">
             <el-form-item label="">
                 <el-input v-model="filter.deviceId" placeholder="设备ID"></el-input>
             </el-form-item>
@@ -31,12 +31,15 @@
             <el-button>导出报表</el-button>
         </div>
         <el-table
+                class="data-content"
                 :data="tableData"
-                border
-                style="width: 100%">
+                stripe="true"
+                header-cell-class-name="header-cell"
+                cell-class-name="data-cell"
+                height="1">
             <el-table-column
                     type="selection"
-                    width="55">
+                    width="45">
             </el-table-column>
             <el-table-column
                     prop="id"
@@ -45,27 +48,32 @@
             </el-table-column>
             <el-table-column
                     prop="name"
-                    label="设备名称"
-                    width="180">
+                    show-overflow-tooltip="true"
+                    label="设备名称">
             </el-table-column>
             <el-table-column
                     prop="networkStatus"
-                    label="设备类型">
+                    label="设备类型"
+                    width="80">
             </el-table-column>
             <el-table-column
                     prop="networkStatus"
+                    show-overflow-tooltip="true"
                     label="所属公司">
             </el-table-column>
             <el-table-column
                     prop="networkStatus"
-                    label="联网状态">
+                    label="联网状态"
+                    width="80">
             </el-table-column>
             <el-table-column
                     prop="status"
-                    label="设备状态">
+                    label="设备状态"
+                    width="80">
             </el-table-column>
             <el-table-column
-                    label="操作">
+                    label="操作"
+                    width="150">
                 <i class="el-icon-s-custom" title="报警推送 "></i>
                 <i class="el-icon-tickets" title="设备详情"></i>
                 <i class="el-icon-document" title="报警日志"></i>
@@ -74,6 +82,8 @@
             </el-table-column>
         </el-table>
         <el-pagination
+                class="pagination"
+                background
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
                 :current-page.sync="currentPage"
@@ -85,6 +95,7 @@
 </template>
 
 <script>
+    import Store from './store';
 	export default {
 		data() {
 			return {
@@ -92,16 +103,44 @@
 				filter: {
 					deviceId: '',
 					account: '',
-                    bind: '',
-                    status: ''
+					bind: '',
+					status: ''
 				},
 				tableData: [{
 					id: '2016',
 					name: '阿新伟1号',
 					type: '智能用电',
-                    owner: '大道科技',
-                    networkStatus: '在线',
-                    status: '正常'
+					owner: '大道科技',
+					networkStatus: '在线',
+					status: '正常'
+				}, {
+					id: '2016',
+					name: '阿新伟1号',
+					type: '智能用电',
+					owner: '大道科技',
+					networkStatus: '在线',
+					status: '正常'
+				}, {
+					id: '2016',
+					name: '阿新伟1号',
+					type: '智能用电',
+					owner: '大道科技',
+					networkStatus: '在线',
+					status: '正常'
+				}, {
+					id: '2016',
+					name: '阿新伟1号',
+					type: '智能用电',
+					owner: '大道科技',
+					networkStatus: '在线',
+					status: '正常'
+				}, {
+					id: '2016',
+					name: '阿新伟1号',
+					type: '智能用电',
+					owner: '大道科技',
+					networkStatus: '在线',
+					status: '正常'
 				}, {
 					id: '2016',
 					name: '阿新伟1号',
@@ -154,6 +193,14 @@
 				}]
 			}
 		},
+		mounted() {
+			Store.getGeneralInfoListByParam({
+				limit: 30,
+				pageNum: 1
+			}).then(data => {
+                console.log(data);
+			});
+		},
 		methods: {
 			onSubmit() {
 				console.log('submit!');
@@ -168,10 +215,30 @@
 	}
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
     .device-list {
+        display: flex;
+        flex-direction: column;
+
+        .filter {
+            flex: 0 0 50px;
+        }
+
         .toolbar {
-            text-align: right;
+            flex: 0 0 50px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .data-content {
+            flex: 1 1 auto;
+        }
+
+        .pagination {
+            flex: 0 0 30px;
+            display: flex;
+            align-items: center;
         }
     }
 </style>

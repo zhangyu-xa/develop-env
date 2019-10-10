@@ -1,1 +1,23 @@
 @import "./reset.less";
+@import "./el-table.less";
+@import "./el-form.less";
+
+.el-button {
+  padding: 10px 20px;
+
+  &+.el-button {
+    margin-left: 2px;
+  }
+}
+.el-input {
+  .el-input__inner {
+    height: 35px;
+    line-height: 35px;
+  }
+}
+
+.el-select {
+  .el-input__suffix {
+    line-height: 35px;
+  }
+}

@@ -5,7 +5,7 @@ const config = {
 	timeout: 30 * 1000,
 	xhrMode: "fetch",
 	headers: {
-		Accept: "application/json; charset=utf-8",
+		"Accept": "application/json; charset=utf-8",
 		"Content-Type": "application/json; charset=utf-8"
 	}
 };
@@ -43,12 +43,12 @@ httpRequest.interceptors.response.use(
 );
 
 export const $http = function({ url, type, data, method, headers, cancelHttp = false, isMultiPart = false }) {
-	const token = "";//Utils.getCache("token", "session");
+	const token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyTmFtZSI6ImF3ZWkiLCJleHAiOjE1NzIxMDA2MDh9.3MAt1JRD3z6fX5urm1mjVo-aMHEnxZ94puiWJ6lQlw4";//Utils.getCache("token", "session");
 	//组装请求参数
 	const options = {
 		url,
 		method: method || "get",
-		headers: Object.assign({}, {Authorization: token}, headers),
+		headers: Object.assign({}, {"Authorization": token}, headers),
 		...(type === "query" ? {params: data || {}} : {data: data || {}}),
 		...(cancelHttp ? {cancelToken: new CancelToken(cancelHttp)} : {})
 	};
@@ -57,6 +57,6 @@ export const $http = function({ url, type, data, method, headers, cancelHttp = f
 		options.headers["Content-Type"] = "multipart/form-data";
 		options.headers["Accept"] = "";
 	}
-
+	console.log("options:", options);
 	return httpRequest(options);
 };

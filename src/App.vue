@@ -68,7 +68,7 @@
             grid-area: content;
             background-color: white;
 
-            padding: 6px;
+            padding: 6px 18px 6px 6px;
         }
     }
 </style>
