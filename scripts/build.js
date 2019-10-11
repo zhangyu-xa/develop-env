@@ -34,12 +34,12 @@ if(tasks[0] === 'build') {
 		console.log('Do not need to package libs.');
 		return;
 	}
-	// 编译库
-	compiler.getLibCompiles(tasks, build);
 	// 配置库文件
 	utils.event.on("manifest", json => {
 		modulesManifest = Object.assign(modulesManifest, json);
 	});
+	// 编译库
+	compiler.getLibCompiles(tasks, build);
 }
 
 function build(compiles) {
