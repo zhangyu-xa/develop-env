@@ -24,7 +24,7 @@
 		},
 		methods: {
 			getGeneralInfoList(params, callback) {
-				const type = this.$route.params.type || (this.$route.name && 'alarm');
+				const type = this.$route.params.type || this.$route.name === 'realAlarm' && 'alarm';
 
 				Store.getGeneralInfoListByParam({
 					limit: params.pageSize,

@@ -45,6 +45,7 @@ module.exports = {
     'quote-props': 0,
     'no-mixed-spaces-and-tabs': 0,
     'standard/no-callback-literal': 0,
+    'no-mixed-operators': 0,
     // 要求使用 === 和 !==
     'eqeqeq': 2,
     // 禁用 arguments.caller 或 arguments.callee
