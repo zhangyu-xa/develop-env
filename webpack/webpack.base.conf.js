@@ -87,6 +87,7 @@ module.exports = {
 		// vue-loader need.
 		new VueLoaderPlugin()
 	],
+	externals: require(paths.appPackageJson).externals,
 	resolve: {
 		//定义别名
 		alias,
