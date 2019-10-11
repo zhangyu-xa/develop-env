@@ -39,6 +39,7 @@ module.exports = {
     'object-curly-spacing': 0,
     'dot-notation': 0,
     'import/first': 0,
+    'keyword-spacing': 0,
     'no-new': 0,
     'quote-props': 0,
     'no-mixed-spaces-and-tabs': 0,

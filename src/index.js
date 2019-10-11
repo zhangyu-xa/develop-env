@@ -1,5 +1,9 @@
 import './styles/index.less';
 
+if(process.env.NODE_ENV === 'development') {
+	require('./hot');
+}
+
 import router from "./router/router";
 
 import components from "./components/index";

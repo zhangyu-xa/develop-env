@@ -22,12 +22,24 @@ process.env.sysName = tasks[1];
 const chalk = require('chalk');
 const compiler = require('./mixin/compiles');
 const utils = require('../webpack/utils');
+const paths = require('../webpack/paths');
+
+let modulesManifest = {};
 
 if(tasks[0] === 'build') {
+	// build html
 	compiler.getBuildCompiles(tasks, build);
 } else if(tasks[0] === 'lib') {
-	//编译库
+	if (process.env.BUILD_LIBS !== 'true') {
+		console.log('Do not need to package libs.');
+		return;
+	}
+	// 编译库
 	compiler.getLibCompiles(tasks, build);
+	// 配置库文件
+	utils.event.on("manifest", json => {
+		modulesManifest = Object.assign(modulesManifest, json);
+	});
 }
 
 function build(compiles) {
@@ -41,10 +53,15 @@ function build(compiles) {
 
 	// start compile, support muti-tasks
 	Promise.all(compiles).then(()  => {
+		if(tasks[0] === "lib") {
+			utils.writeFile(`${paths.appWebpackConfig}/modules-manifest.json`, JSON.stringify(modulesManifest, null, 2));
+		}
 		// Merge with the public folder
-		tasks[0] === 'build' && utils.copyPublicFolder(false, utils.getSysConfig("build.path"), file => file.indexOf(".html") < 0);
+		if(tasks[0] === 'build') {
+			utils.copyPublicFolder(false, utils.getSysConfig("build.path"), file => file.indexOf(".html") < 0);
+		}
 
-		console.log(chalk.green('Packaged successfully.\n'));
+		console.log(chalk.green(`${tasks[0] === "lib" ? 'Packaged' : 'build'} successfully.\n`));
 	}, err => {
 		if (err && err.message) {
 			console.log(chalk.yellow(err.message));

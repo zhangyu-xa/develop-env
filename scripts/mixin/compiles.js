@@ -1,29 +1,12 @@
-const fs = require('fs-extra');
 const chalk = require('chalk');
 const {smart} = require("webpack-merge");
 const utils = require('../../webpack/utils');
-const paths = require('../../webpack/paths');
 const build = require('./build-task');
 
 const webpackProdConfig = require('../../webpack/webpack.prod.conf');
 const webpackLibConfig = require('../../webpack/webpack.lib.conf');
 const config = require('../../webpack.config')[process.env.sysName];
 const defaultTaskConfig = require('../../webpack.config/default.libs.compile.json');
-
-/**
- * 正常编译，分析依赖
- * @returns {[Promise<unknown>]}
- */
-function normalBuild() {
-	//编译html
-	console.log(chalk.cyan('\nCreating an optimized production build...\n\n'));
-
-	// Remove all content but keep the directory so that
-	// if you're in it, you don't end up in Trash
-	fs.emptyDirSync(utils.getSysConfig("build.path") || paths.appBuild);
-
-	return [build(webpackProdConfig)];
-}
 
 /**
  * 格式化打包任务的配置参数
@@ -54,15 +37,17 @@ function formateTaskConfigs(tasks) {
  * @returns {Promise<void>}
  */
 async function multiPackagesLib(task) {
-	let libAbsPath = utils.resolve(task.path);
-	let files = await utils.readdir(libAbsPath);
+	const libAbsPath = utils.resolve(task.path);
+	const files = await utils.readdir(libAbsPath);
 
 	return files.filter(file => file !== "index.js").map(name => {
-		let filePath = libAbsPath + '\\' + name;
-		return build(webpackLibConfig(Object.assign({}, task, {
+		const filePath = libAbsPath + '\\' + name;
+		const manifest = {
 			input: `${task.path}${name}${utils.isDir(filePath) ? `/index.js` : ``}`,
 			output: `${task.output}${name}${utils.isDir(filePath) ? `/${name}.js` : ``}`
-		})), name);
+		};
+		utils.event.emit("manifest", {[name]: manifest});
+		return build(webpackLibConfig(Object.assign({}, task, manifest)), name);
 	});
 }
 
@@ -76,36 +61,14 @@ function onePackageLib(task, errTasks) {
 		errTasks.push({name: task.name, message: `库【${task.name}】没有指定编译后的文件路径和名字`});
 		return;
 	}
-	return build(webpackLibConfig(Object.assign({}, task, {
-		input: `${task.path}index.js`
-	})), task.name);
+	const manifest = {
+		input: `${task.path}index.js`,
+		output: `${task.output}`
+	};
+	utils.event.emit("manifest", {[task.name]: manifest});
+	return build(webpackLibConfig(Object.assign({}, task, manifest)), task.name);
 }
 
-
-async function readConfig() {
-	let result = await Promise.all(readArr);
-	let json = { baseComponent: {}, businessComponent: {} };
-	result[0].forEach(dir => {
-		json.baseComponent[dir] = {
-			input: `src/components/${dir}/index.js`,
-			output: `/${filePath}/js/baseComponent/${dir}/${dir}.js`,
-			isBaseComponent: true
-		};
-	});
-	result[1].forEach(dir => {
-		json.businessComponent[dir] = {
-			input: `src/businessComponents/${dir}/index.js`,
-			output: `/${filePath}/js/businessComponents/${dir}/${dir}.js`,
-			isBusinessComponent: true
-		};
-	});
-	utils.writeFile(
-		paths.resolveApp('config/components.config.js'),
-		`module.exports = ${JSON.stringify(json, null, 2)}`
-	).then(() => {
-		console.log('create file success in config/component.config.js')
-	});
-}
 
 module.exports = {
 	/**
@@ -114,13 +77,10 @@ module.exports = {
 	 * @param callback - 回调函数
 	 */
 	getBuildCompiles(tasks, callback) {
-		if (process.env.BUILD_LIBS !== 'false') {
-			this.getLibCompiles(tasks, compilers => {
-				callback([...compilers, ...normalBuild()]);
-			});
-			return;
-		}
-		callback(normalBuild());
+		//编译html
+		console.log(chalk.cyan('\nCreating an optimized production build...\n\n'));
+
+		callback([build(webpackProdConfig)]);
 	},
 	/**
 	 * 编译库

@@ -10,8 +10,7 @@
   "utils": {
     "path": "src/utils/",
     "entry": "one",
-    "outputPath": "public/library",
-    "output": "utils.min.js",
+    "output": "static/js/utils.js",
     "libraryTarget": "window"
   }
 }

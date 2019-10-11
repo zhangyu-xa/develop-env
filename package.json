@@ -5,9 +5,10 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "dev": "npm run lib utils && node ./scripts/start.js",
-    "build": "node ./scripts/build.js build",
-    "lib": "node ./scripts/build.js lib"
+    "dev": "node ./scripts/start.js",
+    "prod": "node ./scripts/build.js build",
+    "lib": "node ./scripts/build.js lib",
+    "build": "node ./scripts/clear.js && npm run lib && node ./scripts/build.js build"
   },
   "author": "Zenview.tech",
   "homepage": "",
