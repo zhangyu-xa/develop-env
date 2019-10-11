@@ -84,6 +84,7 @@ module.exports = {
 			}
 		})
 	],
+	externals: require(paths.appPackageJson).externals,
 	resolve: {
 		//定义别名
 		alias,
