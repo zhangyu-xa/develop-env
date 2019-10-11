@@ -1,13 +1,13 @@
 <template>
     <el-form :inline="true" :model="options.params" class="demo-form-inline">
-        <el-form-item v-for="field in options.fields" label="">
+        <el-form-item v-for="(field, index) in options.fields" :key="index" label="">
             <component :is="`${field.type}`"
                        v-show="field.isShow"
                        v-model="options.params[field.prop]"
                        :placeholder="field.placeholder"
                        clearable>
                 <el-option v-if="field.type === 'el-select'"
-                           v-for="opt in field.selOptions"
+                           v-for="(opt, index) in field.selOptions" :key="index"
                            :label="opt.label" :value="opt.val"></el-option>
             </component>
         </el-form-item>

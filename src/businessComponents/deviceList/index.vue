@@ -15,7 +15,7 @@
 	export default {
 		props: ['options', 'displayMode'],
 		data() {
-			let curOpts = this.options(this);
+			const curOpts = this.options(this);
 			return {
 				tableOptions: curOpts.tableOptions,
                 filterOptions: curOpts.filterOptions,
@@ -24,14 +24,14 @@
 		},
 		methods: {
 			getGeneralInfoList(params, callback) {
-				let type = this.$route.params.type || this.$route.name && 'alarm';
+				const type = this.$route.params.type || (this.$route.name && 'alarm');
 
 				Store.getGeneralInfoListByParam({
 					limit: params.pageSize,
 					pageNum: params.currentPage,
-					...(type === "all" || !type ? this.filterOptions.params :
-						type === "offline" ? Object.assign({}, this.filterOptions.params, {netSts: type}) :
-							Object.assign({}, this.filterOptions.params, {currentSts: type}))
+					...(type === "all" || !type ? this.filterOptions.params
+                        : type === "offline" ? Object.assign({}, this.filterOptions.params, {netSts: type})
+                            : Object.assign({}, this.filterOptions.params, {currentSts: type}))
 				}).then(data => {
 					this.total = data.totalCount;
 					callback({

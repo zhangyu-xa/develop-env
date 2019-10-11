@@ -40,9 +40,11 @@ module.exports = {
     'dot-notation': 0,
     'import/first': 0,
     'keyword-spacing': 0,
+    'key-spacing': 0,
     'no-new': 0,
     'quote-props': 0,
     'no-mixed-spaces-and-tabs': 0,
+    'standard/no-callback-literal': 0,
     // 要求使用 === 和 !==
     'eqeqeq': 2,
     // 禁用 arguments.caller 或 arguments.callee
@@ -58,6 +60,7 @@ module.exports = {
     'vue/name-property-casing': 0,
     'vue/singleline-html-element-content-newline': 0,
     'vue/html-closing-bracket-newline': 0,
-    'vue/attributes-order': 0
+    'vue/attributes-order': 0,
+    'vue/no-use-v-if-with-v-for': 0
   }
 };

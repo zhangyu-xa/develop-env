@@ -59,10 +59,7 @@
 			// 监听是否触发了数据刷新
 			"options.async.fresh": function () {
 				this.freshData();
-			},
-            "displayMode": function (val) {
-                
-            }
+			}
 		},
         computed: {
 			showPagination() {
