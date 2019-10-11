@@ -1,6 +1,6 @@
 export default {
-	summary: () => import('../modules/summary/index.vue'),
-	realAlarm: () => import('../modules/realalarm/index.vue'),
-	statistics: () => import('../modules/statistics/index.vue'),
-	deviceList: () => import('../modules/devicelist/index.vue')
+	summary: () => import(/*webpackChunkName: 'summary'*/'../modules/summary/index.vue'),
+	realAlarm: () => import(/*webpackChunkName: 'realAlarm'*/'../modules/realalarm/index.vue'),
+	statistics: () => import(/*webpackChunkName: 'statistics'*/'../modules/statistics/index.vue'),
+	deviceList: () => import(/*webpackChunkName: 'deviceList'*/'../modules/devicelist/index.vue')
 };
