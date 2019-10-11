@@ -64,7 +64,9 @@
         flex-direction: column;
 
         .filter {
-            flex: 0 0 50px;
+            flex: 0 0 80px;
+            display: flex;
+            align-items: center;
         }
 
         .toolbar {
