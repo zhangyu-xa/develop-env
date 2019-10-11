@@ -36,6 +36,7 @@ module.exports = {
     'object-curly-spacing': 0,
     'dot-notation': 0,
     'import/first': 0,
+    'keyword-spacing': 0,
     // 要求使用 === 和 !==
     'eqeqeq': 2,
     // 禁用 arguments.caller 或 arguments.callee

@@ -5,6 +5,7 @@ const path = require("path");
 const postcssNormalize = require('postcss-normalize');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const fs = require('fs-extra');
+const EventEmitter = require('events').EventEmitter;
 const paths = require("./paths");
 
 module.exports = {
@@ -196,5 +197,6 @@ module.exports = {
 	},
 	isDir(path) {
 		return fs.existsSync(path) && fs.statSync(path).isDirectory();
-	}
+	},
+	event: new EventEmitter()
 };

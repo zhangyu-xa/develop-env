@@ -20,6 +20,9 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <script type="text/javascript" src="%PUBLIC_URL%/library/utils.min.js"></script>
+    <!-- 载入全局依赖 -->
+    %MODULE_MANIFEST%
+    <!-- 载入全局脚本 -->
+    %GLOBAL_IMPORTS%
   </body>
 </html>
