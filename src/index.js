@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 import './styles/index.less';
 
 if(process.env.NODE_ENV === 'development') {
