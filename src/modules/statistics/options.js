@@ -85,40 +85,34 @@ export default function (context) {
 				type: 'el-select',
 				placeholder: '联网状态',
 				isShow: true,
-				selOptions: [{
-					label: "在线",
-					val: "1"
-				}, {
-					label: "离线",
-					val: "0"
-				}]
+				selOptions: Object.keys(Dict.netStatus).map(k => {
+					return {
+						label: Dict.netStatus[k],
+						val: k
+					}
+				})
 			}, {
 				prop: 'bindSts',
 				type: 'el-select',
 				placeholder: '绑定状态',
 				isShow: true,
-				selOptions: [{
-					label: "绑定",
-					val: "1"
-				}, {
-					label: "未绑定",
-					val: "0"
-				}]
+				selOptions: Object.keys(Dict.bingStatus).map(k => {
+					return {
+						label: Dict.bingStatus[k],
+						val: k
+					}
+				})
 			}, {
 				prop: 'currentSts',
 				type: 'el-select',
 				placeholder: '设备状态',
 				isShow: true,
-				selOptions: [{
-					label: "正常",
-					val: "normal"
-				}, {
-					label: "告警",
-					val: "alarm"
-				}, {
-					label: "故障",
-					val: "fault"
-				}]
+				selOptions: Object.keys(Dict.currentStatus).map(k => {
+					return {
+						label: Dict.currentStatus[k],
+						val: k
+					}
+				})
 			}]
 		}
 	}

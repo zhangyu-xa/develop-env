@@ -5,7 +5,7 @@
         <device-count class="device-count-alarm" :dev-type="'alarm'" @click="clickHandler"></device-count>
         <device-count class="device-count-fault" :dev-type="'fault'" @click="clickHandler"></device-count>
         <device-count class="device-count-offline" :dev-type="'offline'" @click="clickHandler"></device-count>
-        <ele-map class="device-map"></ele-map>
+        <ele-map class="device-map" :container="'summary'"></ele-map>
         <alarm-list class="alarm-list"></alarm-list>
         <trend-analysis :category="'alarm'" class="analysis-alarm"></trend-analysis>
         <trend-analysis :category="'fault'" class="analysis-fault"></trend-analysis>

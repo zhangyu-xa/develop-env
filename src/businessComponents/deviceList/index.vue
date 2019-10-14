@@ -4,7 +4,7 @@
         <slot name="toolbar" :total="total"/>
         <comps-table ref="table" :options="tableOptions" :displayMode="displayMode" class="data-content" @select="selectChange">
             <template v-slot:elemap="props">
-                <div v-show="displayMode==='map'" :class="props.slotClass" style="background-color: #5daf34">高德地图{{props.slotClass}}</div>
+                <ele-map v-show="displayMode==='map'" :container="'alarm'" :class="props.slotClass"></ele-map>
             </template>
         </comps-table>
     </div>
@@ -12,8 +12,12 @@
 
 <script>
     import Store from './store';
+    import eleMap from '../../components/map/index.vue';
 	export default {
 		props: ['options', 'displayMode'],
+        components: {
+			eleMap
+        },
 		data() {
 			const curOpts = this.options(this);
 			return {

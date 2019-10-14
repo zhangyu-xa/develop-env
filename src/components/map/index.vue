@@ -1,14 +1,13 @@
 <template>
-    <section id="mapContainer"></section>
+    <section :id="`${container}-map`"></section>
 </template>
 
 <script>
 	export default {
 		name: "map",
+        props: ['container'],
 		mounted() {
-			window.onMapLoad = () => {
-				new AMap.Map("mapContainer");
-            };
+			new AMap.Map(`${this.container}-map`);
 		}
 	}
 </script>

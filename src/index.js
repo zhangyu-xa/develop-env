@@ -11,6 +11,9 @@ import router from "./router/router";
 import components from "./components/index";
 Vue.use(components);
 
+import filters from './filters';
+Vue.use(filters);
+
 import App from "./app.vue";
 
 new Vue({

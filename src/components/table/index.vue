@@ -20,6 +20,7 @@
                     :width="column.width"
                     :align="column.align"
                     :show-overflow-tooltip="column.tips">
+                <template slot-scope="scope">{{ scope.row[column.prop] | tableFilter(column.prop) }}</template>
             </el-table-column>
             <el-table-column
                     v-if="options.operators"

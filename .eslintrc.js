@@ -18,7 +18,8 @@ module.exports = {
     VueRouter: true,
     $http: true,
     echarts: true,
-    AMap: true
+    AMap: true,
+    Dict: true
   },
   env: {
     browser: true,
