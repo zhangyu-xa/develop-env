@@ -35,7 +35,6 @@
 				Store.getGeneralTrail({currentSts: 'alarm'}),
 				Store.getGeneralTrail({currentSts: 'fault'})
 			]).then(resArr => {
-				console.log("resArr:", resArr)
                 this.newAlarms = resArr[0];
                 this.newFaults = resArr[1];
 			});

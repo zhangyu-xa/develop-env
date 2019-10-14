@@ -5,7 +5,7 @@
         <device-count class="device-count-alarm" :dev-type="'alarm'" @click="clickHandler"></device-count>
         <device-count class="device-count-fault" :dev-type="'fault'" @click="clickHandler"></device-count>
         <device-count class="device-count-offline" :dev-type="'offline'" @click="clickHandler"></device-count>
-        <section class="device-map"></section>
+        <ele-map class="device-map"></ele-map>
         <alarm-list class="alarm-list"></alarm-list>
         <trend-analysis :category="'alarm'" class="analysis-alarm"></trend-analysis>
         <trend-analysis :category="'fault'" class="analysis-fault"></trend-analysis>
@@ -16,13 +16,15 @@
     import deviceCount from "./components/deviceCount.vue";
     import alarmList from "./components/alarmList.vue";
     import trendAnalysis from "./components/trendAnalysis.vue";
+    import eleMap from '../../components/map/index.vue';
 
 	export default {
 		name: "summary",
         components: {
 			deviceCount,
 	        alarmList,
-	        trendAnalysis
+	        trendAnalysis,
+	        eleMap
         },
         methods: {
 	        clickHandler(type) {
