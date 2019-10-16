@@ -2,6 +2,7 @@
     <section class="main-container">
         <nav-header class="header" />
         <menu-list class="menu" />
+        <bread-crumb class="bread-crumb"></bread-crumb>
         <router-view class="content"></router-view>
     </section>
 </template>
@@ -10,12 +11,14 @@
 
     import menuList from "./modules/base/menu.vue";
     import navHeader from "./modules/base/nav.vue";
+    import breadCrumb from "./modules/base/breadcrumb.vue";
 
 	export default {
 		name: "MainModule",
         components: {
 			navHeader,
-            menuList
+            menuList,
+	        breadCrumb
         },
 		data() {
 			return {}
@@ -25,7 +28,7 @@
 
 <style lang="less" scoped>
     .main-container {
-        background-color: @primary;
+        /*background-color: @primary;*/
 
         position: absolute;
         left: 0;
@@ -34,9 +37,10 @@
         bottom: 0;
 
         display: grid;
-        grid-template-rows: 60px 1fr;
+        grid-template-rows: 60px 40px 1fr;
         grid-template-columns: 280px 1fr;
         grid-template-areas: "header header"
+                             "menu breadcrumb"
                              "menu content";
 
         .header {
@@ -47,11 +51,19 @@
 
             padding: 20px;
         }
+        .bread-crumb {
+            grid-area: breadcrumb;
+
+            padding-left: 6px;
+            display: flex;
+            align-items: center;
+            background-color: white;
+        }
         .content {
             grid-area: content;
             background-color: white;
 
-            padding: 6px;
+            padding: 0 6px 6px 6px;
         }
     }
 </style>

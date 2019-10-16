@@ -28,7 +28,6 @@
         },
         methods: {
 	        clickHandler(type) {
-	        	console.log("type: ", type);
 		        this.$router.push({name: 'deviceList', params: {type: type}});
 	        }
         }
@@ -37,7 +36,7 @@
 
 <style lang="less">
     .summary {
-        padding: 30px 40px !important;
+        padding: 0 40px 30px 40px !important;
         overflow-y: auto;
 
         display: grid;
@@ -67,11 +66,11 @@
         }
         .device-count-alarm {
             grid-area: alarm;
-            background-color: rgb(237, 178, 71);
+            background-color: #edb247;
         }
         .device-count-fault {
             grid-area: fault;
-            background-color: rgb(255, 86, 86);
+            background-color: #ff5656;
         }
         .device-count-offline {
             grid-area: offline;

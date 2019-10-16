@@ -65,11 +65,13 @@
     "vue-loader": "^15.7.1",
     "vue-router": "^3.1.3",
     "vue-style-loader": "^4.1.2",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "vuex": "^3.1.1"
   },
   "externals": {
     "vue": "Vue",
     "vue-router": "VueRouter",
-    "echarts": "echarts"
+    "echarts": "echarts",
+    "vuex": "Vuex"
   }
 }

@@ -4,8 +4,10 @@ const filters = {
 		return Dict.currentSts[val];
 	},
 	tableFilter(val, key) {
-		console.log(val, key, Dict[key] && Dict[key][val] && Dict[key][val]);
-		return Dict[key] && Dict[key][val] ? Dict[key][val] : val;
+		if(Dict[key] && Dict[key][val]) {
+			return `<span class='${val}'>${Dict[key][val]}</span>`
+		}
+		return val;
 	}
 }
 

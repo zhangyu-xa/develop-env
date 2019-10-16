@@ -54,9 +54,6 @@
 				this.filterOptions.fields.forEach((field, pos) => {
 					if (field.prop === fieldProp) this.filterOptions.fields[pos].isShow = isShow;
 				});
-			},
-			getTotal() {
-				return this.$refs.table.total;
 			}
 		}
 	}
@@ -68,9 +65,7 @@
         flex-direction: column;
 
         .filter {
-            flex: 0 0 80px;
-            display: flex;
-            align-items: center;
+            flex: 0 0 60px;
         }
 
         .toolbar {

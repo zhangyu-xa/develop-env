@@ -20,7 +20,9 @@
                     :width="column.width"
                     :align="column.align"
                     :show-overflow-tooltip="column.tips">
-                <template slot-scope="scope">{{ scope.row[column.prop] | tableFilter(column.prop) }}</template>
+                <template slot-scope="scope">
+                    <div v-html="$options.filters.tableFilter(scope.row[column.prop], column.prop)"></div>
+                </template>
             </el-table-column>
             <el-table-column
                     v-if="options.operators"
@@ -104,6 +106,45 @@
 
         .el-table, .ele-map {
             flex: 1 1 auto;
+        }
+
+        .el-table {
+            .normal, .alarm, .fault, .offline, .online {
+                padding: 1px 4px;
+                border-radius: 2px;
+                border-style: solid;
+                border-width: 1px;
+                font-size: 12px;
+            }
+            .normal {
+                background-color: #e9f8f2;
+                border-color: #d2f1e6;
+                color: #67c23a;
+            }
+
+            .alarm {
+                background-color: #fbf6ec;
+                border-color: #f7e7ca;
+                color: #edb247;
+            }
+
+            .fault {
+                background-color: #ffeded;
+                border-color: #ffdada;
+                color: #ff5656;
+            }
+
+            .offline {
+                background-color: #e2e4e8;
+                border-color: #d3d4d4;
+                color: #909399;
+            }
+
+            .online {
+                background-color: #e9f8f2;
+                border-color: #d2f1e6;
+                color: #67c23a;
+            }
         }
 
         .pagination {
