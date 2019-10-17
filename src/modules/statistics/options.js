@@ -49,10 +49,12 @@ export default function (context) {
 				width: 150,
 				operas: [{
 					title: "明细统计",
-					icon: "el-icon-s-custom"
+					icon: "el-icon-s-custom",
+					operator: context.operators
 				}, {
 					title: "报警统计",
-					icon: "el-icon-tickets"
+					icon: "el-icon-tickets",
+					operator: context.operators
 				}]
 			},
 			async: {

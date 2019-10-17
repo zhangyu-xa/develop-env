@@ -49,19 +49,24 @@ export default function (context) {
 				width: 150,
 				operas: [{
 					title: "报警推送",
-					icon: "el-icon-s-custom"
+					icon: "el-icon-s-custom",
+					operator: context.operators
 				}, {
 					title: "设备详情",
-					icon: "el-icon-tickets"
+					icon: "el-icon-tickets",
+					operator: context.operators
 				}, {
 					title: "告警日志",
-					icon: "el-icon-document"
+					icon: "el-icon-document",
+					operator: context.operators
 				}, {
 					title: "设备操作",
-					icon: "el-icon-setting"
+					icon: "el-icon-setting",
+					operator: context.operators
 				}, {
 					title: "编辑",
-					icon: "el-icon-edit"
+					icon: "el-icon-edit",
+					operator: context.operators
 				}]
 			},
 			async: {

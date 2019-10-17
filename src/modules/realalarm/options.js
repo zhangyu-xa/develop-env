@@ -40,10 +40,12 @@ export default function (context) {
 				width: 150,
 				operas: [{
 					title: "设备详情",
-					icon: "el-icon-tickets"
+					icon: "el-icon-tickets",
+					operator: context.operators
 				}, {
 					title: "告警处理",
-					icon: "el-icon-document"
+					icon: "el-icon-document",
+					operator: context.operators
 				}]
 			},
 			async: {

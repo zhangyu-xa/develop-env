@@ -29,7 +29,10 @@
                     :label="options.operators.label"
                     :width="options.operators.width"
                     align="center">
-                <i v-for="(opera, index) in options.operators.operas" :key="index" :class="opera.icon" :title="opera.title"></i>
+                <i v-for="(opera, index) in options.operators.operas" :key="index"
+                   @click="opera.operator"
+                   :class="opera.icon"
+                   :title="opera.title"></i>
             </el-table-column>
         </el-table>
         <slot name="elemap" :slotClass="'ele-map'"></slot>

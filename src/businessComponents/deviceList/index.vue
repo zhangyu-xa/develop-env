@@ -54,6 +54,9 @@
 				this.filterOptions.fields.forEach((field, pos) => {
 					if (field.prop === fieldProp) this.filterOptions.fields[pos].isShow = isShow;
 				});
+			},
+			operators() {
+				this.$router.push({name: "deviceDetail"});
 			}
 		}
 	}
