@@ -28,11 +28,14 @@
                     v-if="options.operators"
                     :label="options.operators.label"
                     :width="options.operators.width"
+                    :prop="options.operators.prop"
                     align="center">
-                <i v-for="(opera, index) in options.operators.operas" :key="index"
-                   @click="opera.operator"
-                   :class="opera.icon"
-                   :title="opera.title"></i>
+                <template slot-scope="scope">
+                    <i v-for="(opera, index) in options.operators.operas" :key="index"
+                       @click="opera.operator(opera.operaType, scope.row[options.operators.prop])"
+                       :class="opera.icon"
+                       :title="opera.title"></i>
+                </template>
             </el-table-column>
         </el-table>
         <slot name="elemap" :slotClass="'ele-map'"></slot>

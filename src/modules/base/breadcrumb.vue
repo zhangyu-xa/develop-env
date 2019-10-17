@@ -7,14 +7,16 @@
 <script>
 	import {$tools} from "../../utils";
 
+	const rootCrumb = {
+		name: "summary",
+		label: "智慧用电"
+	};
+
 	export default {
 		name: "breadcrumb",
 		data() {
 			return {
-				breadCrumb: [{
-					name: "summary",
-					label: "智慧用电"
-				}]
+				breadCrumb: []
 			};
 		},
         computed: {
@@ -25,8 +27,10 @@
 		watch: {
 			$route(to, from) {
 				console.log(to, from);
-				this.breadCrumb = this.breadCrumb.slice(0, 1);
-				this.breadCrumb.push(...$tools.getBreadCrumb(to, from));
+				this.breadCrumb = [];
+				if (to.name !== "summary") {
+					this.breadCrumb.push(rootCrumb, ...$tools.getBreadCrumb(to, from));
+				}
 			}
 		}
 	}

@@ -50,10 +50,12 @@ export default function (context) {
 				operas: [{
 					title: "明细统计",
 					icon: "el-icon-s-custom",
+					operaType: "detail-statistics",
 					operator: context.operators
 				}, {
 					title: "报警统计",
 					icon: "el-icon-tickets",
+					operaType: "alarm-statistics",
 					operator: context.operators
 				}]
 			},

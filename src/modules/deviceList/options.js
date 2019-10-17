@@ -53,14 +53,17 @@ export default function (context) {
 					operator: context.operators
 				}, {
 					title: "设备详情",
+					operaType: "device-details",
 					icon: "el-icon-tickets",
 					operator: context.operators
 				}, {
 					title: "告警日志",
+					operaType: "alarm-logs",
 					icon: "el-icon-document",
 					operator: context.operators
 				}, {
 					title: "设备操作",
+					operaType: "device-contrl",
 					icon: "el-icon-setting",
 					operator: context.operators
 				}, {

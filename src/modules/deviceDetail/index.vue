@@ -14,6 +14,19 @@
 				activeName: 'second'
 			};
 		},
+		computed: {
+			routerParams() {
+				return this.$route.params.type;
+			}
+		},
+		watch: {
+			routerParams: function (type) {
+				console.log("type:", type);
+			}
+		},
+        mounted(){
+			console.log("this.$route.params.type:", this.$route.params.type);
+        },
 		methods: {
 			handleClick(tab, event) {
 				console.log(tab, event);

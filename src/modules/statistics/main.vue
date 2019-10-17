@@ -1,5 +1,5 @@
 <template>
-    <device-list ref="deviceList" :options="options">
+    <device-list ref="deviceList" :options="options" @operator="operator">
         <template v-slot:toolbar="props" >
             <div class="toolbar">
                 <div class="tips">共有&nbsp;&nbsp;{{props.total}}&nbsp;&nbsp;个设备</div>
@@ -23,7 +23,15 @@
 			return {
 				options: options
 			};
-		}
+		},
+        methods: {
+	        operator(data) {
+		        console.log("data:", data);
+		        this.$router.push({
+			        path: `/statistis/deviceDetail/${data.type}`
+		        })
+	        }
+        }
 	}
 </script>
 

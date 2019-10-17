@@ -55,8 +55,11 @@
 					if (field.prop === fieldProp) this.filterOptions.fields[pos].isShow = isShow;
 				});
 			},
-			operators() {
-				this.$router.push({name: "deviceDetail"});
+			operators(type, data) {
+				this.$emit("operator", {
+					type,
+                    data
+                })
 			}
 		}
 	}
@@ -78,7 +81,7 @@
             align-items: center;
 
             .tips {
-                flex: 0 0 200px;
+                flex: 0 0 250px;
 
                 font-size: 14px;
                 color: darkgrey;

@@ -41,10 +41,12 @@ export default function (context) {
 				operas: [{
 					title: "设备详情",
 					icon: "el-icon-tickets",
+					operaType: "device-details",
 					operator: context.operators
 				}, {
 					title: "告警处理",
 					icon: "el-icon-document",
+					operaType: "alarm-logs",
 					operator: context.operators
 				}]
 			},
