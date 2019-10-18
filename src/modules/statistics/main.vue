@@ -16,22 +16,24 @@
 	import options from './options';
 	export default {
 		name: "main",
-        components: {
-	        deviceList
-        },
+		components: {
+			deviceList
+		},
 		data() {
 			return {
 				options: options
 			};
 		},
-        methods: {
-	        operator(data) {
-		        console.log("data:", data);
-		        this.$router.push({
-			        path: `/statistis/deviceDetail/${data.type}`
-		        })
-	        }
-        }
+		methods: {
+			operator({data, type}) {
+				this.$router.push({
+					path: `/statistic/deviceDetail/${type}`,
+                    query: {
+                        id: data.deviceId
+                    }
+				})
+			}
+		}
 	}
 </script>
 

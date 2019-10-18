@@ -50,6 +50,7 @@ export default function (context) {
 				operas: [{
 					title: "报警推送",
 					icon: "el-icon-s-custom",
+					operaType: "alarmsend",
 					operator: context.operators
 				}, {
 					title: "设备详情",
@@ -68,6 +69,7 @@ export default function (context) {
 					operator: context.operators
 				}, {
 					title: "编辑",
+					operaType: "edit",
 					icon: "el-icon-edit",
 					operator: context.operators
 				}]

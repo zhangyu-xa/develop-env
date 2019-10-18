@@ -32,7 +32,7 @@
                     align="center">
                 <template slot-scope="scope">
                     <i v-for="(opera, index) in options.operators.operas" :key="index"
-                       @click="opera.operator(opera.operaType, scope.row[options.operators.prop])"
+                       @click="opera.operator(opera.operaType, scope.row)"
                        :class="opera.icon"
                        :title="opera.title"></i>
                 </template>

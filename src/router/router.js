@@ -16,7 +16,7 @@ export const routes = [
 			{ name: 'deviceDetail', path: 'deviceDetail/:operatype', component: modules.deviceDetail }
 		]
 	},
-	{ name: 'statistis', path: '/statistis', component: modules.statistics, redirect: '/statistis/', label: "统计分析",
+	{ name: 'statistic', path: '/statistic', component: modules.statistics, redirect: '/statistic/', label: "统计分析",
 		children: [
 			{ name: 'main', path: '/', component: modules.statisticsMain },
 			{ name: 'deviceDetail', path: 'deviceDetail/:operatype', component: modules.deviceDetail }

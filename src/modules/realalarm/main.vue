@@ -36,10 +36,12 @@
 			changeDisplay(mode) {
 				this.curDisplayMode = mode;
 			},
-			operator(data) {
-				console.log("data:", data);
+			operator({type, data}) {
 				this.$router.push({
-					path: `/realAlarm/deviceDetail/${data.type}`
+					path: `/realAlarm/deviceDetail/${type}`,
+                    query: {
+	                    id: data.deviceId
+                    }
 				})
 			}
 		}

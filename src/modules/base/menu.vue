@@ -10,7 +10,7 @@
             <router-link index="2-5" tag="el-menu-item" :to="{name: 'deviceList', params: {type: 'offline'}}"><i class="fa fa-wifi"></i>断网设置</router-link>
         </el-submenu>
         <router-link index="3" tag="el-menu-item" :to="{name: 'realAlarm'}"><i class="fa fa-warning"></i>实时告警</router-link>
-        <router-link index="4" tag="el-menu-item" :to="{name: 'statistis'}"><i class="fa fa-bar-chart"></i>统计分析</router-link>
+        <router-link index="4" tag="el-menu-item" :to="{name: 'statistic'}"><i class="fa fa-bar-chart"></i>统计分析</router-link>
     </el-menu>
 </template>
 
