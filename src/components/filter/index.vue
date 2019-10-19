@@ -1,8 +1,8 @@
 <template>
     <el-form :inline="true" :model="options.params" class="demo-form-inline">
         <el-form-item v-for="(field, index) in options.fields" :key="index" label="">
-            <component :is="`${field.type}`"
-                       v-show="field.isShow"
+            <component v-if="field.type !=='el-date-picker'" :is="`${field.type}`"
+                       v-show="field.isShow || field.isShow===undefined"
                        v-model="options.params[field.prop]"
                        :placeholder="field.placeholder"
                        clearable>
@@ -10,6 +10,14 @@
                            v-for="(opt, index) in field.selOptions" :key="index"
                            :label="opt.label" :value="opt.val"></el-option>
             </component>
+            <el-date-picker
+                    v-if="field.type ==='el-date-picker'"
+                    v-model="options.params[field.prop]"
+                    type="daterange"
+                    range-separator="至"
+                    start-placeholder="开始日期"
+                    end-placeholder="结束日期">
+            </el-date-picker>
         </el-form-item>
         <el-form-item>
             <el-button type="primary" @click="onSubmit">查询</el-button>

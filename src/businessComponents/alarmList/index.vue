@@ -1,0 +1,80 @@
+<template>
+    <section class="alarms-list-query">
+        <comps-filter :options="filterOptions" class="filter" @trigger="filterChange"></comps-filter>
+        <slot name="toolbar" :total="total"/>
+        <comps-table ref="table" :options="tableOptions" class="data-content" @select="selectChange"></comps-table>
+    </section>
+</template>
+
+<script>
+    import Store from './store';
+    import options from './options';
+	export default {
+		data() {
+			const curOpts = options(this);
+
+			console.log("curOpts:", curOpts);
+			return {
+				tableOptions: curOpts.tableOptions,
+                filterOptions: curOpts.filterOptions,
+                total: ''
+			}
+		},
+		methods: {
+			getGeneralInfoList(params, callback) {
+				const type = 'realAlarm';
+
+				Store.getGeneralInfoListByParam({
+					limit: params.pageSize,
+					pageNum: params.currentPage/*,
+					...(Object.assign({}, this.filterOptions.params, {currentSts: type}))*/
+				}).then(data => {
+					this.total = data.totalCount;
+					callback({
+						data: data.dataResultList,
+						total: data.totalCount
+					});
+				});
+			},
+			filterChange() {
+				this.tableOptions.async.fresh = Date.now();
+			},
+			selectChange(items) {
+				this.$emit("select", items);
+			},
+			operators(type, data) {}
+		}
+	}
+</script>
+
+<style lang="less">
+    .alarms-list-query {
+        display: flex;
+        flex-direction: column;
+
+        .filter {
+            flex: 0 0 60px;
+        }
+
+        .toolbar {
+            flex: 0 0 50px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+
+            .tips {
+                flex: 0 0 250px;
+
+                font-size: 14px;
+            }
+            .btns {
+                flex: 1 1 auto;
+                text-align: right;
+            }
+        }
+
+        .data-content {
+            flex: 1 1 auto;
+        }
+    }
+</style>

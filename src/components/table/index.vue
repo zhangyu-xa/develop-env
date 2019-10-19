@@ -116,40 +116,27 @@
 
         .el-table {
             .normal, .alarm, .fault, .offline, .online {
-                padding: 1px 4px;
-                border-radius: 2px;
-                border-style: solid;
-                border-width: 1px;
+                .status-style();
                 font-size: 12px;
             }
             .normal {
-                background-color: #e9f8f2;
-                border-color: #d2f1e6;
-                color: #67c23a;
+                .normal-status();
             }
 
             .alarm {
-                background-color: #fbf6ec;
-                border-color: #f7e7ca;
-                color: #edb247;
+                .alarm-status();
             }
 
             .fault {
-                background-color: #ffeded;
-                border-color: #ffdada;
-                color: #ff5656;
+                .fault-status();
             }
 
             .offline {
-                background-color: #e2e4e8;
-                border-color: #d3d4d4;
-                color: #909399;
+                .offline-status();
             }
 
             .online {
-                background-color: #e9f8f2;
-                border-color: #d2f1e6;
-                color: #67c23a;
+                .online-status();
             }
         }
 

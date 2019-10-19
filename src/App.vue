@@ -1,8 +1,8 @@
 <template>
-    <section class="main-container">
+    <section class="main-container" :class="{'no-crumb': !isShowCrumnb}">
         <nav-header class="header" />
         <menu-list class="menu" />
-        <bread-crumb class="bread-crumb"></bread-crumb>
+        <bread-crumb class="bread-crumb" v-show="isShowCrumnb"></bread-crumb>
         <router-view class="content"></router-view>
     </section>
 </template>
@@ -20,9 +20,27 @@
             menuList,
 	        breadCrumb
         },
+		watch: {
+			$route(to, from) {
+				if (to.name === "summary") {
+					this.isShowCrumnb = false;
+				} else {
+					this.isShowCrumnb = true;
+                }
+			}
+		},
 		data() {
-			return {}
-		}
+			return {
+				isShowCrumnb: true
+            }
+		},
+        mounted() {
+			if(this.$route.name === "summary") {
+				this.isShowCrumnb = false;
+			} else {
+				this.isShowCrumnb = true;
+            }
+        }
 	}
 </script>
 
@@ -42,6 +60,13 @@
         grid-template-areas: "header header"
                              "menu breadcrumb"
                              "menu content";
+
+        &.no-crumb {
+            grid-template-rows: 60px 1fr;
+            grid-template-columns: 280px 1fr;
+            grid-template-areas: "header header"
+                                 "menu content";
+        }
 
         .header {
             grid-area: header;

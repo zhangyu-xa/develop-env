@@ -18,13 +18,13 @@ export default function (category) {
 		},
 		xAxis: {
 			type: 'category',
-			data: category.keys
+			data: category.keys.reverse()
 		},
 		yAxis: {
 			type: 'value'
 		},
 		series: [{
-			data: category.values,
+			data: category.values.reverse(),
 			type: 'line',
 			itemStyle: {
 				normal: {

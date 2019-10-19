@@ -6,26 +6,18 @@
                 :key="index"
                 :label="tab.label"
                 :name="tab.name">
-            <component :is="tab.component"></component>
+            <details-panel :type="tab.type"></details-panel>
         </el-tab-pane>
     </el-tabs>
 </template>
 
 <script>
     import tabOptions from "./tabOptions";
-    import alarmLogs from "./components/alarm-logs.vue";
-    import deviceDetails from "./components/device-details.vue";
-    import remoteContrl from "./components/remote-contrl.vue";
-    import detailStatistics from "./components/detail-statistics.vue";
-    import alarmStatistics from "./components/alarm-statistics.vue";
+    import detailsPanel from "./components/details.vue";
 
 	export default {
 		components: {
-			alarmLogs,
-			deviceDetails,
-			remoteContrl,
-			detailStatistics,
-			alarmStatistics
+			detailsPanel
 		},
 		data() {
 			return {
@@ -49,13 +41,19 @@
 
 <style lang="less">
 .el-tabs {
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
 
     .el-tabs__header {
         padding: 0;
         margin: 0;
-        flex: 0 0 40px;
+        flex: 0 0 30px;
+
+        .el-tabs__item {
+            height: 30px;
+            line-height: 30px;
+        }
     }
     .el-tabs__content {
         position: relative;

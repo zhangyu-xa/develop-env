@@ -36,7 +36,7 @@
 
 <style lang="less">
     .summary {
-        padding: 0 40px 30px 40px !important;
+        padding: 30px 40px !important;
         overflow-y: auto;
 
         display: grid;
@@ -52,8 +52,11 @@
 
         section {
             cursor: pointer;
-            border-radius: 5px;
-            box-shadow: 0 3px 6px 0 rgba(0,0,0,.16);
+            .shadow();
+
+            &:last-child {
+                margin-bottom: 50px;
+            }
         }
 
         .device-count-all {

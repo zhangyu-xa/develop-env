@@ -5,27 +5,27 @@ export default function (routePath) {
 	return [{
 		label: "报警日志",
 		name: "alarm-logs",
-		component: "alarmLogs",
+		type: "alarmLogs",
 		isShow: routePathArr.includes('realAlarm') || routePathArr.includes('deviceList')
 	},{
 		label: "设备详情",
 		name: "device-details",
-		component: "deviceDetails",
+		type: "deviceDetails",
 		isShow: routePathArr.includes('realAlarm') || routePathArr.includes('deviceList')
 	},{
 		label: "远程控制",
 		name: "device-contrl",
-		component: "remoteContrl",
+		type: "remoteContrl",
 		isShow: routePathArr.includes('deviceList')
 	},{
 		label: "报警统计",
 		name: "alarm-statistics",
-		component: "alarmStatistics",
+		type: "alarmStatistics",
 		isShow: routePathArr.includes('statistic')
 	},{
 		label: "明细统计",
 		name: "detail-statistics",
-		component: "detailStatistics",
+		type: "detailStatistics",
 		isShow: routePathArr.includes('statistic')
 	}];
 }

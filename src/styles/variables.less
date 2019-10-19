@@ -1,1 +1,49 @@
 @primary: red;
+@shadow: 0 3px 6px 0 rgba(0,0,0,.16);
+@sectionBorderRadius: 5px;
+@normalColor: #67c23a;
+@alarmColor: #edb247;
+@faultColor: #ff5656;
+@offlineColor: #909399;
+
+.shadow {
+  border-radius: @sectionBorderRadius;
+  box-shadow: @shadow;
+}
+
+.normal-status {
+  background-color: #e9f8f2;
+  border-color: #d2f1e6;
+  color: @normalColor;
+}
+
+.alarm-status {
+  background-color: #fbf6ec;
+  border-color: #f7e7ca;
+  color: @alarmColor;
+}
+
+.fault-status {
+  background-color: #ffeded;
+  border-color: #ffdada;
+  color: @faultColor;
+}
+
+.offline-status {
+  background-color: #e2e4e8;
+  border-color: #d3d4d4;
+  color: @offlineColor;
+}
+
+.online-status {
+  background-color: #e9f8f2;
+  border-color: #d2f1e6;
+  color: @normalColor;
+}
+
+.status-style {
+  padding: 1px 4px;
+  border-radius: 2px;
+  border-style: solid;
+  border-width: 1px;
+}
