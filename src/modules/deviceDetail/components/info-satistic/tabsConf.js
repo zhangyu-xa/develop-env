@@ -1,0 +1,29 @@
+export default [{
+	label: "相电压",
+	type: "voltage",
+	name: "voltage"
+}, {
+	label: "相电流",
+	type: "current",
+	name: "current"
+}, {
+	label: "线缆温度",
+	type: "line-temperature",
+	name: "line-temperature"
+}, {
+	label: "剩余电流",
+	type: "remain-current",
+	name: "remain-current"
+}, {
+	label: "环境温度",
+	type: "env-temperature",
+	name: "env-temperature"
+}, {
+	label: "总电量",
+	type: "total-quantity",
+	name: "total-quantity"
+}/*, {
+	label: "告警故障类别统计图",
+	type: "category",
+	name: "category"
+}*/]

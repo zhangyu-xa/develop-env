@@ -1,5 +1,6 @@
 <template>
     <article class="device-details">
+        <query-conditions v-if="isShow('conditions')" v-model="timeRange" class="conditions"></query-conditions>
         <device-info v-if="isShow('info')" class="device-info"></device-info>
         <real-status v-if="isShow('status')" class="real-status"></real-status>
         <real-data v-if="isShow('data')" class="real-data"></real-data>
@@ -7,10 +8,11 @@
         <alarms-query v-if="isShow('alarmlist')" class="alarm-list">报警列表</alarms-query>
         <rate-set v-if="isShow('rateset')" class="rate-set"></rate-set>
         <open-close v-if="isShow('openclose')" class="open-close"></open-close>
-        <section v-if="isShow('infosta')" class="info-satistic">信息图表统计</section>
-        <section v-if="isShow('reportsta')" class="report-statistic">报表统计</section>
-        <section v-if="isShow('alarmsta')" class="alarm-satistic">报警统计分析图表</section>
-        <section v-if="isShow('faultsta')" class="fault-statistic">故障统计分析图表</section>
+        <info-statistic v-if="isShow('infosta')" :deviceId="deviceId" :time="timeRange" class="info-satistic">信息图表统计</info-statistic>
+        <category-statistic v-if="isShow('categorysta')" class="category-statistic"></category-statistic>
+        <report-statistic v-if="isShow('reportsta')" class="report-statistic">报表统计</report-statistic>
+        <alarm-statistic v-if="isShow('alarmsta')" :category="'alarm'" class="alarm-satistic">报警统计分析图表</alarm-statistic>
+        <alarm-statistic v-if="isShow('faultsta')" :category="'fault'" class="fault-statistic">故障统计分析图表</alarm-statistic>
     </article>
 </template>
 
@@ -23,10 +25,15 @@
     import openClose from "./openclose.vue";
     import rateSet from "./rate-set.vue";
     import alarmsQuery from "./alarm-query.vue";
+    import reportStatistic from "./report-statistic.vue";
+    import alarmStatistic from "./alarm-statistic/index.vue";
+    import infoStatistic from "./info-satistic/index.vue";
+    import queryConditions from "./conditions.vue";
+    import categoryStatistic from "./category-statistic/category-statistic.vue";
 
 	export default {
 		name: "details",
-        props: ['type'],
+        props: ['type', 'deviceId'],
         components: {
 	        deviceInfo,
 	        realStatus,
@@ -34,7 +41,17 @@
 	        discriptions,
 	        openClose,
             rateSet,
-	        alarmsQuery
+	        alarmsQuery,
+            reportStatistic,
+	        alarmStatistic,
+	        infoStatistic,
+	        queryConditions,
+	        categoryStatistic
+        },
+        data() {
+	        return {
+		        timeRange: []
+            };
         },
         methods: {
 	        isShow(section) {
@@ -57,6 +74,10 @@
             &+section {
                 margin-top: 20px;
             }
+        }
+
+        .conditions {
+            flex: 0 0 60px;
         }
 
         .device-info {
@@ -92,7 +113,7 @@
         }
 
         .report-statistic {
-            flex: 0 0 500px;
+            flex: 0 0 600px;
         }
 
         .alarm-satistic {
@@ -100,6 +121,10 @@
         }
 
         .fault-statistic {
+            flex: 0 0 400px;
+        }
+
+        .category-statistic {
             flex: 0 0 400px;
         }
     }

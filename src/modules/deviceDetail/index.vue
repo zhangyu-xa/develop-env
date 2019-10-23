@@ -1,12 +1,13 @@
 <template>
     <el-tabs type="card" v-model="activeName" @tab-click="handleClick">
         <el-tab-pane
+                lazy="true"
                 v-for="(tab, index) in tabs"
                 v-if="tab.isShow"
                 :key="index"
                 :label="tab.label"
                 :name="tab.name">
-            <details-panel :type="tab.type"></details-panel>
+            <details-panel :type="tab.type" :deviceId="deviceId"></details-panel>
         </el-tab-pane>
     </el-tabs>
 </template>

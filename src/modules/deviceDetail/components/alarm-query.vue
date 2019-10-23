@@ -34,7 +34,7 @@
 	        },
 	        selectChange(items) {
 		        this.selectedItems = items;
-	        },
+	        }
         }
 	}
 </script>

@@ -8,6 +8,11 @@
                 @selection-change="handleSelectionChange"
                 style="width: 100%">
             <el-table-column
+                    v-if="options.hasIndex"
+                    align="center"
+                    type="index">
+            </el-table-column>
+            <el-table-column
                     v-if="options.hasSelect"
                     align="center"
                     type="selection">

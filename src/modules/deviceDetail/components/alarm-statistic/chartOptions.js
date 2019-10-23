@@ -1,5 +1,3 @@
-const defaultxAxis = [];
-const defaultSeries = Array(10).fill(0);
 export default function (category) {
 	return {
 		title: {
@@ -20,7 +18,7 @@ export default function (category) {
 		},
 		xAxis: {
 			type: 'category',
-			data: category.keys.length === 0 ? defaultxAxis : category.keys.reverse()
+			data: category.keys.reverse()
 		},
 		yAxis: {
 			type: 'value'

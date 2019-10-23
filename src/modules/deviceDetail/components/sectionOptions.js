@@ -9,5 +9,7 @@ export default {
 	faultsta: ['alarmStatistics'],
 	infosta: ['detailStatistics'],
 	reportsta: ['detailStatistics'],
-	discrip: ['deviceDetails']
+	discrip: ['deviceDetails'],
+	conditions: ['alarmStatistics', 'detailStatistics'],
+	categorysta: ['detailStatistics']
 }
