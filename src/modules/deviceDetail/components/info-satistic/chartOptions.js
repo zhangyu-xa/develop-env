@@ -25,8 +25,7 @@ export default function (category) {
 			scale: true
 		},
 		dataZoom: [{
-
-			startValue: '0'    //只需要将这一项设置为0即可
+			startValue: '0'    // 只需要将这一项设置为0即可
 		}, {
 			type: 'inside'
 		}],

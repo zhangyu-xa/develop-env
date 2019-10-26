@@ -12,15 +12,25 @@
 
 <script>
     import reportOptions from "./reportOptions";
-    import Store from "../store";
+    import Store from "../../store";
 	export default {
 		name: "report-statistic",
+        props: ['deviceId', 'time'],
 		data() {
 			const optConfs = reportOptions(this);
 			return {
 				tableOptions: optConfs,
 				total: 0
 			};
+		},
+		watch: {
+			time: {
+				handler(val) {
+					console.log(val);
+					this.tableOptions.async.fresh = Date.now();
+				},
+				deep: true
+			}
 		},
 		computed: {
 			disableBtns() {
@@ -29,7 +39,10 @@
 		},
 		methods: {
 			getGeneralInfoList(params, callback) {
-				Store.getGeneralInfoListByParam({
+				Store.getReportStatistics({
+					deviceId: this.deviceId,
+					start: this.time[0],
+					end: this.time[1],
 					limit: params.pageSize,
 					pageNum: params.currentPage
 				}).then(data => {

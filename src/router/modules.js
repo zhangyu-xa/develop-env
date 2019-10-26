@@ -6,5 +6,5 @@ export default {
 	statisticsMain: () => import(/*webpackChunkName: 'deviceDetail'*/'../modules/statistics/main.vue'),
 	deviceList: () => import(/*webpackChunkName: 'deviceList'*/'../modules/devicelist/index.vue'),
 	listMain: () => import(/*webpackChunkName: 'deviceList'*/'../modules/devicelist/main.vue'),
-	deviceDetail: () => import(/*webpackChunkName: 'deviceDetail'*/'../modules/deviceDetail/index.vue'),
+	deviceDetail: () => import(/*webpackChunkName: 'deviceDetail'*/'../modules/deviceDetail/index.vue')
 };

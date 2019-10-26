@@ -8,7 +8,7 @@
                     <el-divider content-position="left">设备描述</el-divider>
                 </div>
                 <div class="text item">
-                    暂无
+                    {{data.deviceDetail}}
                 </div>
             </el-card>
         </div>
@@ -17,7 +17,20 @@
 
 <script>
 	export default {
-		name: "device-dicription"
+		name: "device-dicription",
+        data() {
+	        return {
+		        data: {
+			        "devicePhoto": "devicePhoto1",
+			        "deviceDetail": "用来探测宇宙"
+		        }
+	        }
+        },
+		methods: {
+			update(data) {
+                this.data = data;
+			}
+		}
 	}
 </script>
 

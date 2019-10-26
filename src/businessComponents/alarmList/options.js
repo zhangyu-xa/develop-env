@@ -37,12 +37,15 @@ export default function (context) {
 		},
 		filterOptions: {
 			params: {
-				alarmStatus: '',
+				processingSts: '',
 				alarmDetail: '',
-				timeRange: ''
+				timeRange: [
+					$tools.getCurDate().startTime,
+					$tools.getCurDate().endTime
+				]
 			},
 			fields: [{
-				prop: 'alarmStatus',
+				prop: 'processingSts',
 				type: 'el-select',
 				placeholder: '处理状态',
 				selOptions: Object.keys(Dict.alarmStatus).map(k => {

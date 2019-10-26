@@ -5,9 +5,9 @@ const URLS = {
 };
 
 export default {
-	getGeneralInfoListByParam(params) {
+	getGeneralInfoByDeviceId(params, url = "") {
 		return $http({
-			url: URLS.getGeneralInfo,
+			url: `${URLS.getGeneralInfo}/${params.deviceId}${url !== "" ? url : ""}`,
 			type: 'query',
 			data: params
 		});
@@ -16,10 +16,35 @@ export default {
 		return $http({
 			url: `${URLS.getStatistics}/${params.deviceId}/${url}`,
 			type: 'query',
-			data: Object.assign({
-				start: '2019-10-22 20:10:19',
-				end: '2019-10-23 20:10:19'
-			}, params)
+			data: params
+		});
+	},
+	getReportStatistics(params) {
+		return $http({
+			url: `${URLS.getGeneralInfo}/${params.deviceId}/generalTrail`,
+			type: 'query',
+			data: params
+		});
+	},
+	getAlarmOrFaultReports(params, url) {
+		return $http({
+			url: `${URLS.getStatistics}/${params.deviceId}/${url}`,
+			type: 'query',
+			data: params
+		});
+	},
+	getAlarmPie(params) {
+		return $http({
+			url: `${URLS.getStatistics}/${params.deviceId}/alarmCount`,
+			type: 'query',
+			data: params
+		});
+	},
+	getFaultPie(params) {
+		return $http({
+			url: `${URLS.getStatistics}/${params.deviceId}/faultCount`,
+			type: 'query',
+			data: params
 		});
 	}
 }

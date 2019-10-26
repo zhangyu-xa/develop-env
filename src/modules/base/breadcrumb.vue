@@ -1,6 +1,6 @@
 <template>
     <el-breadcrumb v-if="isShowBread" class="bread-crumb" separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item v-for="(crumb, index) in breadCrumb" :to="{name: `${crumb.name}`}">{{crumb.label}}</el-breadcrumb-item>
+        <el-breadcrumb-item v-for="(crumb, index) in breadCrumb" :key="index" :to="{name: `${crumb.name}`}">{{crumb.label}}</el-breadcrumb-item>
     </el-breadcrumb>
 </template>
 
@@ -30,7 +30,7 @@
 		const curPathArr = to.path.split("/").filter(v => v);
 
 		curPathArr.reduce((res, v) => {
-			let temp = res.filter(r => r.name === v)[0];
+			const temp = res.filter(r => r.name === v)[0];
 			if (!temp) {
 				if (v === "deviceDetail") {
 					toPathArr.push({
@@ -39,10 +39,12 @@
 					});
 					return [{}];
 				}
-				if (to.path.indexOf(`/deviceList/${v}/`) >= 0) toPathArr.push({
-					name: "deviceList",
-					label: routeParams[to.params.type]
-				});
+				if (to.path.indexOf(`/deviceList/${v}/`) >= 0) {
+					toPathArr.push({
+						name: "deviceList",
+						label: routeParams[to.params.type]
+					});
+				}
 				return [{}];
 			}
 			if (temp.name === "deviceDetail") {

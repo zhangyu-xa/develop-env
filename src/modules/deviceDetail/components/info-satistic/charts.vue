@@ -26,12 +26,11 @@
         },
 		mounted() {
             this.myChart = echarts.init(document.getElementById(this.category));
-            if(this.time.length === 0) return;
-            this.updateChart(this.time);
 		},
         methods: {
 	        updateChart(time) {
-		        let url = "", prop = "";
+		        let url = "";
+                let prop = "";
 		        switch (this.category) {
 			        case "voltage":
 			        case "current":

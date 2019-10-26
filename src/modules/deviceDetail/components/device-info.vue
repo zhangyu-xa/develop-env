@@ -4,34 +4,72 @@
             <el-col class="title" :span="24">
                 <div class="dev-icon fa fa-photo fa-4x"></div>
                 <div class="dev-id">
-                    设备ID：gzab49fA
-                    <span>在线</span>
-                    <span>告警</span>
+                    设备ID：{{deviceInfo.deviceId}}
+                    <span :class="deviceInfo.netStatus">{{deviceInfo.netStatus | netStatus}}</span>
+                    <span :class="deviceInfo.currentStatus">{{deviceInfo.currentStatus | currentSts}}</span>
                 </div>
-                <div class="dev-name">设备名称：二楼配电房</div>
+                <div class="dev-name">设备名称：{{deviceInfo.deviceName}}</div>
             </el-col>
         </el-row>
         <el-row>
-            <el-col :span="6"><label>设备编号:</label> 123467</el-col>
-            <el-col :span="6"><label>设备注册码:</label>55cd52393b0240139ee17fdb2ef9939f</el-col>
+            <el-col :span="6"><label>设备编号:</label> {{deviceInfo.deviceSerialId}}</el-col>
+            <el-col :span="6"><label>设备注册码:</label>{{deviceInfo.deviceRegNo}}</el-col>
             <el-col :span="6"><label>SIM卡串码:</label>-</el-col>
             <el-col :span="6"><label>模组串码:</label>-</el-col>
         </el-row>
         <el-row>
             <el-col :span="6"><label>信号强度:</label>-</el-col>
-            <el-col :span="6"><label>所属单位:</label>工厂测试</el-col>
-            <el-col :span="6"><label>所属账号:</label>13971220066</el-col>
-            <el-col :span="6"><label>安装位置:</label>9魅二楼配电房</el-col>
+            <el-col :span="6"><label>所属单位:</label>{{deviceInfo.belongedCorporation}}</el-col>
+            <el-col :span="6"><label>所属账号:</label>{{deviceInfo.responsibleAcct}}</el-col>
+            <el-col :span="6"><label>安装位置:</label>{{deviceInfo.deviceLocation}}</el-col>
         </el-row>
         <el-row>
-            <el-col :span="24"><label>安装地址:</label>湖北省武汉市东西湖区将军路街道双福大楼</el-col>
+            <el-col :span="24"><label>安装地址:</label>{{deviceInfo.deviceAddress}}</el-col>
         </el-row>
     </section>
 </template>
 
 <script>
+    import Store from "../store";
 	export default {
-		name: "device-info"
+		name: "device-info",
+        props: ['deviceId'],
+        data() {
+	        return {
+	        	deviceInfo: {
+			        belongedCorporation: "大道科技公司",
+			        bindStatus: "1",
+			        corporationId: 1,
+			        createdTime: "2019-08-31 22:09:54",
+			        currentStatus: "normal",
+			        deviceAddress: "科技路",
+			        deviceDesc: "航天设备",
+			        deviceDetail: "用来探测宇宙",
+			        deviceId: 1,
+			        deviceLocation: "西三环西安软件园二期 阿里巴巴 百度",
+			        deviceName: "神州六号",
+			        devicePhoto: "devicePhoto1",
+			        deviceRegNo: "N/A",
+			        deviceSerialId: "F528455A0062F3",
+			        deviceType: "eleDevice",
+			        isObsolete: "0",
+			        modRegNo: "N/A",
+			        netStatus: "online",
+			        responsibleAcct: 1,
+			        simCode: "N/A",
+			        singalStrength: "N/A",
+			        updatedTime: "2019-09-07 15:09:02"
+		        }
+            };
+        },
+        mounted() {
+	        Store.getGeneralInfoByDeviceId({
+		        deviceId: this.deviceId
+            }).then(res => {
+                this.deviceInfo = res;
+                this.$emit("discription", this.deviceInfo);
+            });
+        }
 	}
 </script>
 
@@ -75,11 +113,17 @@
                 font-size: 14px;
                 .status-style();
                 &+span {margin-left: 5px;}
-                &:first-child {
-                    .online-status();
+                &.offline {
+                    .offline-status();
                 }
-                &:last-child {
+                &.online, &.normal {
+                    .normal-status();
+                }
+                &.alarm {
                     .alarm-status();
+                }
+                &.fault {
+                    .fault-status();
                 }
             }
         }

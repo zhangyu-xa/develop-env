@@ -3,45 +3,46 @@ export default function (context) {
 		hasIndex: true,
 		columns: [{
 			label: "时间",
-			prop: "deviceSerialId"
+			prop: "createdTime"
 		}, {
 			label: "A相电压",
-			prop: "deviceName"
+			prop: "phAVolt"
 		}, {
 			label: "B相电压",
-			prop: "updatedTime"
+			prop: "phBVolt"
 		}, {
 			label: "C相电压",
-			prop: "deviceName"
+			prop: "phCVolt"
 		}, {
 			label: "A相电流",
-			prop: "deviceName"
+			prop: "phACurr"
 		}, {
 			label: "B相电流",
-			prop: "deviceName"
+			prop: "phBCurr"
 		}, {
 			label: "C相电流",
-			prop: "deviceName"
+			prop: "phCCurr"
 		}, {
 			label: "A相线缆温度",
-			prop: "deviceName"
+			prop: "phACableTemp"
 		}, {
 			label: "B相线缆温度",
-			prop: "deviceName"
+			prop: "phBCableTemp"
 		}, {
 			label: "C相线缆温度",
-			prop: "deviceName"
+			prop: "phCCableTemp"
 		}, {
 			label: "剩余电流",
-			prop: "deviceName"
+			prop: "leftCurr"
 		}, {
 			label: "环境温度",
-			prop: "deviceName"
+			prop: "envTemp"
 		}, {
 			label: "总电量",
-			prop: "deviceName"
+			prop: "totalPower"
 		}],
 		async: {
+			notAutoAjax: true,
 			fresh: "",
 			pagination: true,
 			pageSize: 10,

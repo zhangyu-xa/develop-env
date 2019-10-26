@@ -1,18 +1,18 @@
 <template>
     <article class="device-details">
         <query-conditions v-if="isShow('conditions')" v-model="timeRange" class="conditions"></query-conditions>
-        <device-info v-if="isShow('info')" class="device-info"></device-info>
-        <real-status v-if="isShow('status')" class="real-status"></real-status>
-        <real-data v-if="isShow('data')" class="real-data"></real-data>
-        <discriptions v-if="isShow('discrip')" class="discriptions"></discriptions>
-        <alarms-query v-if="isShow('alarmlist')" class="alarm-list">报警列表</alarms-query>
+        <device-info v-if="isShow('info')" :deviceId="deviceId" class="device-info" @discription="setDiscription"></device-info>
+        <real-status v-if="isShow('status')" :data="realData" class="real-status"></real-status>
+        <real-data v-if="isShow('data')" :data="realData" class="real-data"></real-data>
+        <discriptions v-if="isShow('discrip')" ref="discrpt" class="discriptions"></discriptions>
+        <alarms-query v-if="isShow('alarmlist')" :deviceId="deviceId" class="alarm-list">报警列表</alarms-query>
         <rate-set v-if="isShow('rateset')" class="rate-set"></rate-set>
         <open-close v-if="isShow('openclose')" class="open-close"></open-close>
         <info-statistic v-if="isShow('infosta')" :deviceId="deviceId" :time="timeRange" class="info-satistic">信息图表统计</info-statistic>
-        <category-statistic v-if="isShow('categorysta')" class="category-statistic"></category-statistic>
-        <report-statistic v-if="isShow('reportsta')" class="report-statistic">报表统计</report-statistic>
-        <alarm-statistic v-if="isShow('alarmsta')" :category="'alarm'" class="alarm-satistic">报警统计分析图表</alarm-statistic>
-        <alarm-statistic v-if="isShow('faultsta')" :category="'fault'" class="fault-statistic">故障统计分析图表</alarm-statistic>
+        <category-statistic v-if="isShow('categorysta')" :deviceId="deviceId" :time="timeRange" class="category-statistic">告警故障类别统计图</category-statistic>
+        <report-statistic v-if="isShow('reportsta')" :deviceId="deviceId" :time="timeRange" class="report-statistic">报表统计</report-statistic>
+        <alarm-statistic v-if="isShow('alarmsta')" :category="'alarm'" :deviceId="deviceId" :time="timeRange" class="alarm-satistic">报警统计分析图表</alarm-statistic>
+        <alarm-statistic v-if="isShow('faultsta')" :category="'fault'" :deviceId="deviceId" :time="timeRange" class="fault-statistic">故障统计分析图表</alarm-statistic>
     </article>
 </template>
 
@@ -25,11 +25,13 @@
     import openClose from "./openclose.vue";
     import rateSet from "./rate-set.vue";
     import alarmsQuery from "./alarm-query.vue";
-    import reportStatistic from "./report-statistic.vue";
+    import reportStatistic from "./report-statistic/report-statistic.vue";
     import alarmStatistic from "./alarm-statistic/index.vue";
     import infoStatistic from "./info-satistic/index.vue";
     import queryConditions from "./conditions.vue";
     import categoryStatistic from "./category-statistic/category-statistic.vue";
+
+    import Store from "../store";
 
 	export default {
 		name: "details",
@@ -50,12 +52,70 @@
         },
         data() {
 	        return {
-		        timeRange: []
+		        timeRange: [],
+                realData: {
+	                "deviceDetailId": 3,
+	                "deviceId": 3,
+	                "phAVoltSts": "normal",
+	                "phBVoltSts": "normal",
+	                "phCVoltSts": "normal",
+	                "phACurrSts": "normal",
+	                "phBCurrSts": "normal",
+	                "phCCurrSts": "normal",
+	                "phACableTempSts": "normal",
+	                "phBCableTempSts": "normal",
+	                "phCCableTempSts": "normal",
+	                "envTempSts": "normal",
+	                "leftCurrSts": "normal",
+	                "phLossAlarmSts": "normal",
+	                "fireSignalAlarmSts": "N/A",
+	                "phACableTempSensorSts": "normal",
+	                "phBCableTempSensorSts": "normal",
+	                "phCCableTempSensorSts": "normal",
+	                "envTempSensorSts": "normal",
+	                "leftCurrSensorSts": "normal",
+	                "powerSupplySts": "0",
+	                "phAVolt": "225.0",
+	                "phBVolt": "225.3",
+	                "phCVolt": "225.4",
+	                "phACurr": "4.8",
+	                "phBCurr": "4.8",
+	                "phCCurr": "0.0",
+	                "phACableTemp": "0.0",
+	                "phBCableTemp": "0.0",
+	                "phCCableTemp": "0.0",
+	                "envTemp": "0.0",
+	                "leftCurr": "253.3",
+	                "thPhVoltOverThreshhold": "264",
+	                "thPhVoltUnderThreshhold": "176",
+	                "thPhCurrOverThreshhold": "6",
+	                "thPhCableTempOverThreshhold": "100",
+	                "leftCurrOverThreshhold": "500",
+	                "envTempOverThreshhold": "80",
+	                "createdTime": "2019-10-22 00:51:34",
+	                "updatedTime": "2019-10-26 10:25:52",
+	                "totalPower": "256"
+                }
             };
+        },
+        mounted() {
+            if(this.type === "info") {
+                this.getDeviceDataAndStatus();
+            }
         },
         methods: {
 	        isShow(section) {
-                return sectionsConf[section].includes(this.type);
+		        return sectionsConf[section].includes(this.type);
+	        },
+	        getDeviceDataAndStatus() {
+		        Store.getGeneralInfoByDeviceId({
+			        deviceId: this.deviceId
+		        }, "/deviceDetail").then(res => {
+                    this.realData = res;
+		        });
+	        },
+	        setDiscription(data) {
+		        this.$refs.discrpt && this.$refs.discrpt.methods.update(data);
 	        }
         }
 	}

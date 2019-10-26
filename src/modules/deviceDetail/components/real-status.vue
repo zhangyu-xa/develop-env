@@ -6,7 +6,7 @@
                 <el-divider content-position="center">A相状态</el-divider>
             </div>
             <div v-for="o in abcStatusConf" :key="o" class="text item">
-                <label>{{`A相${o.label}`}}</label><span>{{o.prop}}</span>
+                <label>{{`A相${o.label}`}}</label><span :class="data[o.prop[0]]">{{data[o.prop[0]] | deviceStatus}}</span>
             </div>
         </el-card>
         <el-card class="box-card bstatus" shadow="hover">
@@ -14,7 +14,7 @@
                 <el-divider content-position="center">B相状态</el-divider>
             </div>
             <div v-for="o in abcStatusConf" :key="o" class="text item">
-                <label>{{`B相${o.label}`}}</label><span>{{o.prop}}</span>
+                <label>{{`B相${o.label}`}}</label><span :class="data[o.prop[1]]">{{data[o.prop[1]] | deviceStatus}}</span>
             </div>
         </el-card>
         <el-card class="box-card cstatus" shadow="hover">
@@ -22,21 +22,21 @@
                 <el-divider content-position="center">C相状态</el-divider>
             </div>
             <div v-for="o in abcStatusConf" :key="o" class="text item">
-                <label>{{`C相${o.label}`}}</label><span>{{o.prop}}</span>
+                <label>{{`C相${o.label}`}}</label><span :class="data[o.prop[2]]">{{data[o.prop[2]] | deviceStatus}}</span>
             </div>
         </el-card>
         <div class="other-status">
             <el-divider content-position="center">其他实时状态</el-divider>
             <el-row>
-                <el-col :span="6"><label>环境温度状态:</label>无故障</el-col>
-                <el-col :span="6"><label>剩余电流状态:</label>无故障</el-col>
-                <el-col :span="6"><label>缺相状态:</label>无故障</el-col>
-                <el-col :span="6"><label>消防信号报警:</label>无故障</el-col>
+                <el-col :span="6"><label>环境温度状态:</label><span :class="data.envTempSts">{{data.envTempSts | deviceStatus}}</span></el-col>
+                <el-col :span="6"><label>剩余电流状态:</label><span :class="data.leftCurrSts">{{data.leftCurrSts | deviceStatus}}</span></el-col>
+                <el-col :span="6"><label>缺相状态:</label><span :class="data.phLossAlarmSts">{{data.phLossAlarmSts | deviceStatus}}</span></el-col>
+                <el-col :span="6"><label>消防信号报警:</label><span :class="data.fireSignalAlarmSts">{{data.fireSignalAlarmSts | deviceStatus}}</span></el-col>
             </el-row>
             <el-row>
-                <el-col :span="6"><label>环境温度传感器故障:</label>无故障</el-col>
-                <el-col :span="6"><label>剩余电流互感器故障:</label>无故障</el-col>
-                <el-col :span="6"><label>供电状态:</label>供电中断故障</el-col>
+                <el-col :span="6"><label>环境温度传感器故障:</label><span :class="data.envTempSensorSts">{{data.envTempSensorSts | deviceStatus}}</span></el-col>
+                <el-col :span="6"><label>剩余电流互感器故障:</label><span :class="data.leftCurrSensorSts">{{data.leftCurrSensorSts | deviceStatus}}</span></el-col>
+                <el-col :span="6"><label>供电状态:</label><span :class="data.powerSupplySts">{{data.powerSupplySts | deviceStatus}}</span></el-col>
             </el-row>
         </div>
     </section>
@@ -45,21 +45,22 @@
 <script>
 	export default {
 		name: "real-status",
+        props: ['data'],
         data() {
             return {
 	            abcStatusConf: [{
 		            label: "电压状态：",
-		            prop: "正常"
+		            prop: ['phAVoltSts', 'phBVoltSts', 'phCVoltSts']
 	            }, {
 		            label: "电流状态：",
-		            prop: "正常"
+		            prop: ['phACurrSts', 'phBCurrSts', 'phCCurrSts']
 	            }, {
 		            label: "线缆温度状态：",
-		            prop: "正常"
+		            prop: ['phACableTempSts', 'phBCableTempSts', 'phCCableTempSts']
 	            }, {
-	            	label: "线缆温度传感器故障：",
-                    prop: "无故障"
-                }]
+		            label: "线缆温度传感器故障：",
+		            prop: ['phACableTempSensorSts', 'phBCableTempSensorSts', 'phCCableTempSensorSts']
+	            }]
             };
         }
 	}
@@ -93,8 +94,11 @@
                     width: 180px;
                     text-align: right;
                 }
-                span {
+                span.normal {
                     color: @normalColor;
+                }
+                span:not(.normal) {
+                    color: @faultColor;
                 }
             }
         }
@@ -135,6 +139,12 @@
 
                 label {
                     margin-right: 10px;
+                }
+                span.normal {
+                    color: @normalColor;
+                }
+                span:not(.normal) {
+                    color: @faultColor;
                 }
             }
             .row-bg {

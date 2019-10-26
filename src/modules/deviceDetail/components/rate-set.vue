@@ -58,9 +58,9 @@
             onSet() {
                 this.inputDisabled = false;
             },
-			onCancel(){
+			onCancel() {
 				this.inputDisabled = true;
-            }
+			}
 		}
 	}
 </script>

@@ -1,11 +1,11 @@
 const URLS = {
-	getGeneralInfo: '/dadaoapi/v1/generalInfo'
+	getDeviceAlertTrailByParam: '/dadaoapi/v1/generalInfo'
 };
 
 export default {
-	getGeneralInfoListByParam(params) {
+	getDeviceAlertTrailByParam(params) {
 		return $http({
-			url: URLS.getGeneralInfo,
+			url: `${URLS.getDeviceAlertTrailByParam}/${params.deviceId}/alertTrail`,
 			type: 'query',
 			data: params
 		});

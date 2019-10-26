@@ -9,47 +9,78 @@
 </template>
 
 <script>
+	import Store from '../../store';
     import options from "./chartsOptions";
     const dataList = {
     	alarm: {
     		title: "报警统计",
-		    legendData: ["漏电流报警", "设备离线警告", "缺相报警"],
-            selected: ["漏电流报警", "设备离线警告", "缺相报警"],
-		    seriesData: [{
-		    	name: "漏电流报警",
-                value: 1000
-            }, {
-			    name: "设备离线警告",
-			    value: 2000
-		    }, {
-			    name: "缺相报警",
-			    value: 3000
-		    }]
+		    legendData: [],
+		    seriesData: []
         },
 	    fault: {
 		    title: "故障统计",
-		    legendData: ["漏电流报警", "设备离线警告", "缺相报警"],
-		    selected: ["漏电流报警", "设备离线警告", "缺相报警"],
-		    seriesData: [{
-			    name: "漏电流报警",
-			    value: 3000
-		    }, {
-			    name: "设备离线警告",
-			    value: 2000
-		    }, {
-			    name: "缺相报警",
-			    value: 1000
-		    }]
+		    legendData: [],
+		    seriesData: []
 	    }
-    }
+    };
 	export default {
 		name: "category-statistic",
+        props: ['deviceId', 'time'],
+        data() {
+	        return {
+		        alarmChart: null,
+		        faultChart: null
+            };
+        },
+		watch: {
+			time: {
+				handler(val) {
+					console.log(val);
+					this.updateAlarmChart();
+					this.updateFaultChart();
+				},
+				deep: true
+			}
+		},
         mounted() {
-            let alarmChart = echarts.init(document.getElementById("alarm-chart"));
-	        let faultChart = echarts.init(document.getElementById("fault-chart"));
+            this.alarmChart = echarts.init(document.getElementById("alarm-chart"));
+	        this.faultChart = echarts.init(document.getElementById("fault-chart"));
+        },
+        methods: {
+	        updateAlarmChart() {
+		        Store.getAlarmPie({
+			        deviceId: this.deviceId,
+			        start: this.time[0],
+			        end: this.time[1]
+		        }).then(res => {
+			        dataList.alarm.seriesData = res.map(item => {
+				        dataList.alarm.legendData.push(item.alarmDescription);
+			        	return {
+					        name: item.alarmDescription,
+					        value: item.percentage
+                        };
+                    });
 
-	        alarmChart.setOption(options(dataList.alarm));
-	        faultChart.setOption(options(dataList.fault));
+			        this.alarmChart.setOption(options(dataList.alarm));
+		        });
+	        },
+	        updateFaultChart() {
+		        Store.getFaultPie({
+			        deviceId: this.deviceId,
+			        start: this.time[0],
+			        end: this.time[1]
+		        }).then(res => {
+			        dataList.fault.seriesData = res.map(item => {
+			        	dataList.fault.legendData.push(item.alarmDescription);
+				        return {
+					        name: item.alarmDescription,
+					        value: item.percentage
+				        };
+			        });
+
+			        this.faultChart.setOption(options(dataList.fault));
+		        });
+	        }
         }
 	}
 </script>

@@ -20,7 +20,8 @@ module.exports = {
     $http: true,
     echarts: true,
     AMap: true,
-    Dict: true
+    Dict: true,
+    $tools: true
   },
   env: {
     browser: true,
@@ -50,6 +51,9 @@ module.exports = {
     'no-mixed-spaces-and-tabs': 0,
     'standard/no-callback-literal': 0,
     'no-mixed-operators': 0,
+    'object-property-newline': 0,
+    'object-curly-newline': 0,
+    'no-multi-spaces': 0,
     // 要求使用 === 和 !==
     'eqeqeq': 2,
     // 禁用 arguments.caller 或 arguments.callee

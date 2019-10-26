@@ -1,5 +1,5 @@
 <template>
-    <alarm-list @select="selectChange">
+    <alarm-list @select="selectChange" :deviceId="deviceId">
         <template v-slot:toolbar="props">
             <div class="toolbar">
                 <div class="tips">报警列表</div>
@@ -15,27 +15,28 @@
     import alarmList from "src/businessComponents/alarmList/index.vue"
 	export default {
 		name: "alarm-query",
-        components: {
-	        alarmList
-        },
-        data(){
+		props: ["deviceId"],
+		components: {
+			alarmList
+		},
+		data() {
 			return {
 				selectedItems: []
-            };
-        },
+			};
+		},
 		computed: {
 			disableBtns() {
 				return this.selectedItems.length <= 0;
 			}
 		},
-        methods: {
-	        dealBatchAlarms() {
+		methods: {
+			dealBatchAlarms() {
 
-	        },
-	        selectChange(items) {
-		        this.selectedItems = items;
-	        }
-        }
+			},
+			selectChange(items) {
+				this.selectedItems = items;
+			}
+		}
 	}
 </script>
 

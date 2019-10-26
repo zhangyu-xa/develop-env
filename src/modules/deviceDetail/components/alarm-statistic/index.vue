@@ -25,23 +25,41 @@
     import options from './chartOptions';
 	export default {
 		name: "alarm-statistic",
-		props: ['category'],
-        data() {
-	        return {
-	        	title: categoryInfo[this.category].title
-            };
-        },
+		props: ['category', 'deviceId', 'time'],
+		data() {
+			return {
+				title: categoryInfo[this.category].title,
+				myChart: null
+			};
+		},
+		watch: {
+			time: {
+				handler(val) {
+					console.log(val);
+					this.updateChart();
+				},
+				deep: true
+			}
+		},
 		mounted() {
-			const myChart = echarts.init(document.getElementById(`${this.category}StatisticChart`));
+			this.myChart = echarts.init(document.getElementById(`${this.category}StatisticChart`));
+		},
+		methods: {
+			updateChart() {
+				const url = this.category === "alarm" ? "alarmRpt" : "faultRpt"
+				Store.getAlarmOrFaultReports({
+					deviceId: this.deviceId,
+					start: this.time[0],
+					end: this.time[1]
+				}, url).then(res => {
+					res.map(item => {
+						categoryInfo[this.category].keys.push(item.occurredDate);
+						categoryInfo[this.category].values.push(item.occurredDeviceAmount);
+					});
 
-			Store.getGeneralTrailTrend({currentSts: this.category}).then(res => {
-				res.map(item => {
-					categoryInfo[this.category].keys.push(item.occurredDate.substr(0, 10));
-					categoryInfo[this.category].values.push(item.totalCount);
+					this.myChart.setOption(options(categoryInfo[this.category]));
 				});
-
-				myChart.setOption(options(categoryInfo[this.category]));
-			});
+			}
 		}
 	}
 </script>

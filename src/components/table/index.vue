@@ -83,6 +83,7 @@
         },
 		mounted() {
 			// 默认读取
+			if (this.options.async.notAutoAjax) return;
 			this.freshData();
 		},
 		methods: {
@@ -114,6 +115,7 @@
     .ele-table {
         display: flex;
         flex-direction: column;
+        flex-wrap: wrap;
 
         .el-table, .ele-map {
             flex: 1 1 auto;

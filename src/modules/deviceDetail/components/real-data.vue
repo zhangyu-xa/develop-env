@@ -6,13 +6,13 @@
                 <el-divider content-position="center">电压</el-divider>
             </div>
             <div class="text item">
-                <label>A相电压:</label><span>233.0 V</span>
+                <label>A相电压:</label><span>{{data.phAVolt}} V</span>
             </div>
             <div class="text item">
-                <label>B相电压:</label><span>233.0 V</span>
+                <label>B相电压:</label><span>{{data.phBVolt}} V</span>
             </div>
             <div class="text item">
-                <label>C相电压:</label><span>233.0 V</span>
+                <label>C相电压:</label><span>{{data.phCVolt}} V</span>
             </div>
         </el-card>
         <el-card class="box-card bdata" shadow="never">
@@ -20,13 +20,13 @@
                 <el-divider content-position="center">电流</el-divider>
             </div>
             <div class="text item">
-                <label>A相电流:</label><span>44.8 A</span>
+                <label>A相电流:</label><span>{{data.phACurr}} A</span>
             </div>
             <div class="text item">
-                <label>B相电流:</label><span>44.8 A</span>
+                <label>B相电流:</label><span>{{data.phBCurr}} A</span>
             </div>
             <div class="text item">
-                <label>C相电流:</label><span>44.8 A</span>
+                <label>C相电流:</label><span>{{data.phCCurr}} A</span>
             </div>
         </el-card>
         <el-card class="box-card cdata" shadow="never">
@@ -34,13 +34,13 @@
                 <el-divider content-position="center">线缆温度</el-divider>
             </div>
             <div class="text item">
-                <label>A相线缆温度:</label><span>21.7 °C</span>
+                <label>A相线缆温度:</label><span>{{data.phACableTemp}} °C</span>
             </div>
             <div class="text item">
-                <label>B相线缆温度:</label><span>21.7 °C</span>
+                <label>B相线缆温度:</label><span>{{data.phBCableTemp}} °C</span>
             </div>
             <div class="text item">
-                <label>C相线缆温度:</label><span>21.7 °C</span>
+                <label>C相线缆温度:</label><span>{{data.phCCableTemp}} °C</span>
             </div>
         </el-card>
         <el-card class="box-card other-data" shadow="never">
@@ -48,10 +48,10 @@
                 <el-divider content-position="center">其他数据</el-divider>
             </div>
             <div class="text item">
-                <label>剩余电流:</label><span>718.0 mA</span>
+                <label>剩余电流:</label><span>{{data.leftCurr}} mA</span>
             </div>
             <div class="text item">
-                <label>环境温度:</label><span>23.7 °C</span>
+                <label>环境温度:</label><span>{{data.envTemp}} °C</span>
             </div>
         </el-card>
     </section>
@@ -59,7 +59,8 @@
 
 <script>
 	export default {
-		name: "real-data"
+		name: "real-data",
+        props: ['data']
 	}
 </script>
 
