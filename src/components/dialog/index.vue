@@ -3,6 +3,7 @@
             :title="options.title"
             :visible.sync="centerDialogVisible"
             :custom-class="options['custom-class']"
+            :top="options.top"
             :width="options.width">
         <slot></slot>
         <span slot="footer" class="dialog-footer" v-if="options.showFooter">

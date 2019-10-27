@@ -19,6 +19,7 @@
             <rate-set v-if="operatype === 'rateset'" :notShowHeader="true" :data="selectedItems"></rate-set>
             <bind-user v-if="operatype === 'binduser'" :data="selectedItems"></bind-user>
             <send-config v-if="operatype === 'alarmsend'" :deviceId="deviceId"></send-config>
+            <edit-device v-if="operatype === 'edit'" :deviceId="deviceId" @onEdited="editSuccess"></edit-device>
         </comps-dialog>
     </device-list>
 </template>
@@ -28,6 +29,7 @@
     import rateSet from "src/businessComponents/rateSet/index.vue";
     import bindUser from "src/businessComponents/userList/index.vue";
     import sendConfig from "./components/sendConfig.vue";
+    import editDevice from "./components/editDevice.vue";
     import options from './options';
     import Store from './store';
 
@@ -44,7 +46,8 @@
 			deviceList,
 			rateSet,
 			bindUser,
-			sendConfig
+			sendConfig,
+			editDevice
 		},
 		data() {
 			return {
@@ -77,13 +80,19 @@
 				this.operatype = type;
 				switch (type) {
 					case "rateset":
-					case "binduser":
 						this.$refs.dialog.open({
 							showFooter: false,
 							"custom-class": type,
 							title: DialogTitles[type],
 							width: '70%'
-                        });
+						});
+					case "binduser":
+						this.$refs.dialog.open({
+							showFooter: false,
+							"custom-class": type,
+							title: DialogTitles[type],
+							width: '50%'
+						});
 						break;
 
 					case "batchunbind":
@@ -95,13 +104,13 @@
 							Store.batchUnbindUser({
 								deviceIds: this.selectedItems.map(i => i.deviceId),
 								responsibleAcct: ""// TODO，取消绑定当前用户
-                            }).then(res => {
-								if(res) {
+							}).then(res => {
+								if (res) {
 									this.$message.success("批量解除绑定成功");
 								} else {
 									this.$message.error("批量解除绑定失败");
 								}
-                            });
+							});
 						})
 						break;
 					default:
@@ -109,8 +118,8 @@
 							exportVo: {
 								deviceIdList: this.selectedItems.map(i => i.deviceId)
 							}
-                        }).then(res => {
-							if(res) {
+						}).then(data => {
+							if (data) {
 								this.$message.success("导出成功");
 							} else {
 								this.$message.error("导出失败");
@@ -123,6 +132,14 @@
 				this.deviceId = data.deviceId;
 				switch (type) {
 					case "edit":
+						this.$refs.dialog.open({
+							showFooter: false,
+							"custom-class": type,
+							title: DialogTitles[type],
+							width: '30%',
+							top: '5vh'
+						});
+						break;
 					case "alarmsend":
 						this.$refs.dialog.open({
 							showFooter: false,
@@ -140,11 +157,19 @@
 							}
 						})
 				}
+			},
+			editSuccess() {
+				this.$refs.deviceList.tableOptions.async.fresh = Date.now();
+				this.$refs.dialog.close();
 			}
 		}
 	}
 </script>
 
 <style lang="less">
-
+    .rateset {
+        .el-input-number {
+            line-height: 35px;
+        }
+    }
 </style>

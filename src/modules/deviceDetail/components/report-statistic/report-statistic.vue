@@ -59,6 +59,17 @@
 	                start: this.time[0],
 	                end: this.time[1]
                 }).then(res => {
+                	console.log(res);
+	                const blob = new Blob([res], { type: 'application/vnd.ms-excel,charset=utf-8' });
+	                const fileName = '统计.xlsx';
+	                const elink = document.createElement('a');
+	                elink.download = fileName;
+	                elink.style.display = 'none';
+	                elink.href = URL.createObjectURL(blob);
+	                document.body.appendChild(elink);
+	                elink.click();
+	                URL.revokeObjectURL(elink.href); // 释放URL 对象
+	                document.body.removeChild(elink);
 	                this.$message({
 		                type: res ? 'success' : 'error',
 		                message: res ? "导出成功" : "导出失败"

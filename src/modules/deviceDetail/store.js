@@ -88,7 +88,8 @@ export default {
 		return $http({
 			url: `${URLS.getGeneralInfo}/${params.deviceId}/generalTrail/export`,
 			type: 'query',
-			data: params
+			data: params,
+			responseType: 'arraybuffer'
 		});
 	}
 }

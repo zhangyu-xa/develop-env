@@ -25,6 +25,7 @@ httpRequest.interceptors.request.use(
 // 请求之后拦截动作
 httpRequest.interceptors.response.use(
 	response => {
+		console.log("response:", response);
 		return response.data;
 	},
 	function httpUtilErrorRequest(error) {
@@ -42,7 +43,7 @@ httpRequest.interceptors.response.use(
 	}
 );
 
-export const $http = function({ url, type, data, method, headers, cancelHttp = false, isMultiPart = false }) {
+export const $http = function({ url, type, data, method, headers, cancelHttp = false, isMultiPart = false, responseType}) {
 	const token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyTmFtZSI6ImF3ZWkiLCJleHAiOjE1NzQ3ODE0MjR9.ea9bhddi30BVeO6hTLC4HfV4WH5Fu0ZVe8Jjlv7jCJg";//Utils.getCache("token", "session");
 	//组装请求参数
 	const options = {
@@ -56,6 +57,9 @@ export const $http = function({ url, type, data, method, headers, cancelHttp = f
 	if (isMultiPart) {
 		options.headers["Content-Type"] = "multipart/form-data";
 		options.headers["Accept"] = "";
+	}
+	if(responseType) {
+		options.responseType = responseType;
 	}
 	console.log("options:", options);
 	return httpRequest(options);

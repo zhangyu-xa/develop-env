@@ -5,7 +5,7 @@
         <slot></slot>
         <comps-table ref="table" :options="tableOptions" :displayMode="displayMode" class="data-content" @select="selectChange">
             <template v-slot:elemap="props">
-                <ele-map v-show="displayMode==='map'" :container="'alarm'" :class="props.slotClass"></ele-map>
+                <comps-map v-show="displayMode==='map'" :container="'alarm'" :class="props.slotClass"></comps-map>
             </template>
         </comps-table>
     </div>
@@ -13,12 +13,8 @@
 
 <script>
     import Store from './store';
-    import eleMap from '../../components/map/index.vue';
 	export default {
 		props: ['options', 'displayMode'],
-        components: {
-			eleMap
-        },
 		data() {
 			const curOpts = this.options(this);
 			return {

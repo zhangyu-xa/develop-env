@@ -46,5 +46,19 @@ export default {
 			data: params,
 			responseType: 'blob'
 		});
+	},
+	getGeneralInfoByDeviceId(params) {
+		return $http({
+			url: `${URLS.generalInfo}/${params.deviceId}`,
+			type: 'query',
+			data: params
+		});
+	},
+	updateGeneralInfoByDeviceId(params) {
+		return $http({
+			url: `${URLS.generalInfo}/${params.deviceId}`,
+			method: 'put',
+			data: params
+		});
 	}
 }
