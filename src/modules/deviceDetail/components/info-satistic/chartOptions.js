@@ -32,7 +32,7 @@ export default function (category) {
 		series: category.values.map((item, i) => {
 			return {
 				name: category.legendData[i],
-				data: category.values[i].reverse(),
+				data: category.values[i],
 				type: 'line',
 				smooth: true,
 				itemStyle: {
