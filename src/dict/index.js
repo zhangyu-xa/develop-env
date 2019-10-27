@@ -12,7 +12,7 @@ export default {
 		'0': '未绑定',
 		'1': '绑定'
 	},
-	alarmStatus: {
+	processingSts: {
 		'0': '未处理',
 		'1': '已处理'
 	},
@@ -27,5 +27,9 @@ export default {
 		underTemperature: '低温',
 		normal: '正常',
 		missingPhase: '缺相'
+	},
+	processingMethod: {
+		'0': '方式1',
+		'1': '方式2'
 	}
 }

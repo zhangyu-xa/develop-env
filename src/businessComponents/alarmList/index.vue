@@ -2,19 +2,19 @@
     <section class="alarms-list-query">
         <comps-filter :options="filterOptions" class="filter" @trigger="filterChange"></comps-filter>
         <slot name="toolbar" :total="total"/>
-        <comps-table ref="table" :options="tableOptions" class="data-content" @select="selectChange"></comps-table>
+        <comps-table :options="tableOptions" class="data-content" @select="selectChange"></comps-table>
     </section>
 </template>
 
 <script>
     import Store from './store';
     import options from './options';
+    //import data from './deviceAlertTrail_mock.json';
 	export default {
 		props: ["deviceId"],
+        components: {},
 		data() {
 			const curOpts = options(this);
-
-			console.log("curOpts:", curOpts);
 			return {
 				tableOptions: curOpts.tableOptions,
                 filterOptions: curOpts.filterOptions,
@@ -35,13 +35,19 @@
 					});
 				});
 			},
+
 			filterChange() {
 				this.tableOptions.async.fresh = Date.now();
 			},
 			selectChange(items) {
-				this.$emit("select", items);
+                this.$emit("select", items);
 			},
-			operators(type, data) {},
+			operators(type, data) {
+				this.$emit("operators", {type, data});
+			},
+			getProcessDetails(data, column) {
+				this.$emit("cellclick", {data, column})
+			},
             getQueryParamTimeRange () {
 	            return {
 		            start: this.filterOptions.params.timeRange ? this.filterOptions.params.timeRange[0] : undefined,
@@ -81,6 +87,20 @@
 
         .data-content {
             flex: 1 1 auto;
+        }
+
+        .process {
+            .el-form-item__content {
+                display: inline-block;
+            }
+            .el-input__inner, .el-textarea__inner {
+                width: 300px;
+            }
+            .el-form {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+            }
         }
     }
 </style>

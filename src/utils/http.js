@@ -43,7 +43,7 @@ httpRequest.interceptors.response.use(
 );
 
 export const $http = function({ url, type, data, method, headers, cancelHttp = false, isMultiPart = false }) {
-	const token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyTmFtZSI6ImF3ZWkiLCJleHAiOjE1NzIxMDA2MDh9.3MAt1JRD3z6fX5urm1mjVo-aMHEnxZ94puiWJ6lQlw4";//Utils.getCache("token", "session");
+	const token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyTmFtZSI6ImF3ZWkiLCJleHAiOjE1NzQ3ODE0MjR9.ea9bhddi30BVeO6hTLC4HfV4WH5Fu0ZVe8Jjlv7jCJg";//Utils.getCache("token", "session");
 	//组装请求参数
 	const options = {
 		url,

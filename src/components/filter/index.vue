@@ -1,10 +1,11 @@
 <template>
-    <el-form :inline="true" :model="options.params" class="demo-form-inline">
-        <el-form-item v-for="(field, index) in options.fields" :key="index" label="">
+    <el-form :inline="!options.notInline" :model="options.params">
+        <el-form-item v-for="(field, index) in options.fields" :key="index" :label="field.label">
             <component v-if="field.type !=='el-date-picker'" :is="`${field.type}`"
                        v-show="field.isShow || field.isShow===undefined"
                        v-model="options.params[field.prop]"
                        :placeholder="field.placeholder"
+                       :type="field.subType"
                        clearable>
                 <el-option v-if="field.type === 'el-select'"
                            v-for="(opt, index) in field.selOptions" :key="index"
@@ -22,7 +23,7 @@
             </el-date-picker>
         </el-form-item>
         <el-form-item>
-            <el-button type="primary" @click="onSubmit">查询</el-button>
+            <el-button type="primary" @click="onSubmit">{{submitBtnTitle}}</el-button>
         </el-form-item>
     </el-form>
 </template>
@@ -34,6 +35,11 @@
 		data() {
 			return {};
 		},
+        computed: {
+	        submitBtnTitle() {
+		        return this.options.submitBtnText || "查询"
+	        }
+        },
 		methods: {
 			onSubmit() {
 				this.$emit("trigger", this.options.params);

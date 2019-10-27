@@ -9,5 +9,6 @@ export default {
 			type: 'query',
 			data: params
 		});
-	}
+	},
+
 }

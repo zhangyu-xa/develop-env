@@ -11,7 +11,7 @@ export default function (routePath) {
 		type: "deviceDetails",
 		isShow: routePathArr.includes('realAlarm') || routePathArr.includes('deviceList')
 	}, {
-		label: "远程控制",
+		label: "远程设置",
 		name: "device-contrl",
 		type: "remoteContrl",
 		isShow: routePathArr.includes('deviceList')

@@ -1,0 +1,49 @@
+{
+  "totalCount": 4,
+  "dataResultList": [
+    {
+      "createdTime": "2019-10-26 07:18:30.51",
+      "deviceAlertTrailId": "0",
+      "deviceGeneralTrailId": 0,
+      "faultDetails": "漏电报警",
+      "processingDetails": "string",
+      "processingMethod": "string",
+      "processingPerson": "string",
+      "processingSts": "0",
+      "updatedTime": "2019-10-26 07:18:30.51"
+    },
+    {
+      "createdTime": "2019-10-26 07:18:30.51",
+      "deviceAlertTrailId": "0",
+      "deviceGeneralTrailId": 0,
+      "faultDetails": "漏电报警",
+      "processingDetails": "string",
+      "processingMethod": "string",
+      "processingPerson": "string",
+      "processingSts": "1",
+      "updatedTime": "2019-10-26 07:18:30.51"
+    },
+    {
+      "createdTime": "2019-10-26 07:18:30.51",
+      "deviceAlertTrailId": "0",
+      "deviceGeneralTrailId": 0,
+      "faultDetails": "漏电报警",
+      "processingDetails": "string",
+      "processingMethod": "string",
+      "processingPerson": "string",
+      "processingSts": "1",
+      "updatedTime": "2019-10-26 07:18:30.51"
+    },
+    {
+      "createdTime": "2019-10-26 07:18:30.51",
+      "deviceAlertTrailId": "0",
+      "deviceGeneralTrailId": 0,
+      "faultDetails": "漏电报警",
+      "processingDetails": "",
+      "processingMethod": "",
+      "processingPerson": "",
+      "processingSts": "0",
+      "updatedTime": "2019-10-26 07:18:30.51"
+    }
+  ]
+}

@@ -3,7 +3,7 @@
         <div class="title">
             <div class="tips">报表统计</div>
             <div class="btns">
-                <el-button :disabled="disableBtns">导出报表</el-button>
+                <el-button :disabled="disableBtns" @click="exportStatistics">导出报表</el-button>
             </div>
         </div>
         <comps-table ref="table" :options="tableOptions" class="data-content"></comps-table>
@@ -52,6 +52,18 @@
 						total: data.totalCount
 					});
 				});
+			},
+			exportStatistics() {
+                Store.exportGeneralTrailsIntoExcel({
+	                deviceId: this.deviceId,
+	                start: this.time[0],
+	                end: this.time[1]
+                }).then(res => {
+	                this.$message({
+		                type: res ? 'success' : 'error',
+		                message: res ? "导出成功" : "导出失败"
+	                })
+                })
 			}
 		}
 	}

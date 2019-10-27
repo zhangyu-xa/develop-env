@@ -2,6 +2,7 @@
     <div class="device-list">
         <comps-filter :options="filterOptions" class="filter" @trigger="filterChange"></comps-filter>
         <slot name="toolbar" :total="total"/>
+        <slot></slot>
         <comps-table ref="table" :options="tableOptions" :displayMode="displayMode" class="data-content" @select="selectChange">
             <template v-slot:elemap="props">
                 <ele-map v-show="displayMode==='map'" :container="'alarm'" :class="props.slotClass"></ele-map>

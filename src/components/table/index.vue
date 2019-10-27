@@ -5,6 +5,7 @@
                 :data="data"
                 height="1"
                 stripe="true"
+                @cell-click="options.cellClick"
                 @selection-change="handleSelectionChange"
                 style="width: 100%">
             <el-table-column
@@ -144,6 +145,26 @@
 
             .online {
                 .online-status();
+            }
+
+            .not-process {
+                color: @faultColor;
+            }
+
+            .already-process {
+                color: @normalColor;
+            }
+
+            .click-to-see {
+                cursor: pointer;
+                color: #409eff;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            .no-data {
+                color: darkgrey;
             }
         }
 

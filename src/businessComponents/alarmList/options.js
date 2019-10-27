@@ -2,30 +2,34 @@ export default function (context) {
 	return {
 		tableOptions: {
 			hasSelect: true,
+			cellClick: context.getProcessDetails,
 			columns: [{
 				label: "处理状态",
-				prop: "deviceSerialId"
+				prop: "processingSts"
 			}, {
 				label: "告警故障详情",
-				prop: "deviceName",
+				prop: "faultDetails",
 				tips: true
 			}, {
 				label: "最近告警时间",
 				prop: "updatedTime"
+			}, {
+				label: "处理日志",
+				prop: "processingDetails"
 			}],
 			operators: {
 				label: "操作",
 				prop: "deviceId",
-				width: 150,
 				operas: [{
 					title: "推送记录",
-					icon: "el-icon-s-custom"
-				}, {
-					title: "处理日志",
-					icon: "el-icon-tickets"
+					icon: "el-icon-document",
+					operaType: "send-log",
+					operator: context.operators
 				}, {
 					title: "告警处理",
-					icon: "el-icon-document"
+					icon: "el-icon-document",
+					operaType: "process",
+					operator: context.operators
 				}]
 			},
 			async: {
@@ -48,9 +52,9 @@ export default function (context) {
 				prop: 'processingSts',
 				type: 'el-select',
 				placeholder: '处理状态',
-				selOptions: Object.keys(Dict.alarmStatus).map(k => {
+				selOptions: Object.keys(Dict.processingSts).map(k => {
 					return {
-						label: Dict.alarmStatus[k],
+						label: Dict.processingSts[k],
 						val: k
 					};
 				})

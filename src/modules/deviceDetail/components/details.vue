@@ -6,7 +6,7 @@
         <real-data v-if="isShow('data')" :data="realData" class="real-data"></real-data>
         <discriptions v-if="isShow('discrip')" ref="discrpt" class="discriptions"></discriptions>
         <alarms-query v-if="isShow('alarmlist')" :deviceId="deviceId" class="alarm-list">报警列表</alarms-query>
-        <rate-set v-if="isShow('rateset')" class="rate-set"></rate-set>
+        <rate-set v-if="isShow('rateset')" :data="realData" class="rate-set"></rate-set>
         <open-close v-if="isShow('openclose')" class="open-close"></open-close>
         <info-statistic v-if="isShow('infosta')" :deviceId="deviceId" :time="timeRange" class="info-satistic">信息图表统计</info-statistic>
         <category-statistic v-if="isShow('categorysta')" :deviceId="deviceId" :time="timeRange" class="category-statistic">告警故障类别统计图</category-statistic>
@@ -23,8 +23,8 @@
     import realData from "./real-data.vue";
     import discriptions from "./dicriptions.vue";
     import openClose from "./openclose.vue";
-    import rateSet from "./rate-set.vue";
-    import alarmsQuery from "./alarm-query.vue";
+    import rateSet from "src/businessComponents/rateSet/index.vue";
+    import alarmsQuery from "./alarm-query/alarm-query.vue";
     import reportStatistic from "./report-statistic/report-statistic.vue";
     import alarmStatistic from "./alarm-statistic/index.vue";
     import infoStatistic from "./info-satistic/index.vue";
@@ -99,7 +99,7 @@
             };
         },
         mounted() {
-            if(this.type === "info") {
+            if(this.type === "deviceDetails" || this.type === "remoteContrl") {
                 this.getDeviceDataAndStatus();
             }
         },
