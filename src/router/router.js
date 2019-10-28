@@ -2,7 +2,9 @@ import VueRouter from "vue-router";
 import modules from './modules';
 
 export const routes = [
-	{ name: 'default', path: '/', redirect: '/summary' },
+	{ name: 'default', path: '/', redirect: '/login' },
+	{ name: 'login', path: '/login', component: modules.login },
+	{ name: 'index', path: '/index', component: modules.index },
 	{ name: 'summary', path: '/summary', component: modules.summary },
 	{ name: 'deviceList', path: '/deviceList/:type', component: modules.deviceList, redirect: '/deviceList/:type/', label: "设备列表",
 		children: [

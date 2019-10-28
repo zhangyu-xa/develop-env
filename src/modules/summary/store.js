@@ -1,7 +1,8 @@
 const URLS = {
 	getDeviceCount: '/dadaoapi/v1/generalInfo/count',
 	generalTrail: '/dadaoapi/v1/generalTrail',
-	generalTrailTrend: '/dadaoapi/v1/generalTrail/trend'
+	generalTrailTrend: '/dadaoapi/v1/generalTrail/trend',
+	getCoordinate: '/dadaoapi/v1/coordinateAxis'
 };
 
 export default {
@@ -28,6 +29,19 @@ export default {
 			data: Object.assign({
 				limit: 10
 			}, params)
+		});
+	},
+	getCoordinate() {
+		return $http({
+			url: URLS.getCoordinate,
+			type: 'query'
+		});
+	},
+	getGeneralDeviceInfo(params) {
+		return $http({
+			url: `${URLS.generalTrail}/${params.deviceId}`,
+			type: 'query',
+			data: params
 		});
 	}
 }

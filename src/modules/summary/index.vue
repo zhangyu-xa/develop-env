@@ -5,7 +5,7 @@
         <device-count class="device-count-alarm" :dev-type="'alarm'" @click="clickHandler"></device-count>
         <device-count class="device-count-fault" :dev-type="'fault'" @click="clickHandler"></device-count>
         <device-count class="device-count-offline" :dev-type="'offline'" @click="clickHandler"></device-count>
-        <comps-map class="device-map" :container="'summary'"></comps-map>
+        <comps-map ref="map" class="device-map" :container="'summary'"></comps-map>
         <alarm-list class="alarm-list"></alarm-list>
         <trend-analysis :category="'alarm'" class="analysis-alarm"></trend-analysis>
         <trend-analysis :category="'fault'" class="analysis-fault"></trend-analysis>
@@ -17,12 +17,33 @@
     import alarmList from "./components/alarmList.vue";
     import trendAnalysis from "./components/trendAnalysis.vue";
 
+    import Store from './store';
+
 	export default {
 		name: "summary",
         components: {
 			deviceCount,
 	        alarmList,
 	        trendAnalysis
+        },
+        mounted() {
+	        Store.getCoordinate().then(res => {
+		        res.forEach(dev => {
+                    this.$refs.map.addMarker({
+	                    position: dev.point.split("|"),
+	                    async: {
+		                    getContentData(deviceId, callback) {
+                                Store.getGeneralDeviceInfo({deviceId}).then(data => {
+	                                callback && callback(data);
+                                });
+		                    }
+	                    },
+	                    contentFormat(data) {
+                            return dev.content;
+	                    }
+                    });
+                });
+	        });
         },
         methods: {
 	        clickHandler(type) {

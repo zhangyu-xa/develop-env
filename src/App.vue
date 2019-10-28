@@ -1,9 +1,9 @@
 <template>
-    <section class="main-container" :class="{'no-crumb': !isShowCrumnb}">
-        <nav-header class="header" />
-        <menu-list class="menu" />
+    <section class="main-container" :class="{'no-crumb': !isShowCrumnb, 'no-menus': !showMenus, 'no-header': !showHeader}">
+        <nav-header v-if="showHeader" class="header" :user="user" />
+        <menu-list v-if="showMenus && showHeader" class="menu" />
         <bread-crumb class="bread-crumb" v-show="isShowCrumnb"></bread-crumb>
-        <router-view class="content"></router-view>
+        <router-view class="content" @login-success="loginSuccess"></router-view>
     </section>
 </template>
 
@@ -24,22 +24,36 @@
 			$route(to, from) {
 				if (to.name === "summary") {
 					this.isShowCrumnb = false;
+					this.showHeader = true;
+					this.showMenus = true;
+				} else if (to.name === "index") {
+					this.isShowCrumnb = false;
+					this.showMenus = false;
+					this.showHeader = true;
+				} else if (to.name === "login") {
+					this.isShowCrumnb = false;
+					this.showMenus = false;
+					this.showHeader = false;
 				} else {
 					this.isShowCrumnb = true;
-                }
+					this.showHeader = true;
+					this.showMenus = true;
+				}
 			}
 		},
 		data() {
 			return {
-				isShowCrumnb: true
-            }
+				isShowCrumnb: true,
+				showMenus: false,
+				showHeader: false,
+				user: {}
+			}
 		},
-        mounted() {
-			if(this.$route.name === "summary") {
-				this.isShowCrumnb = false;
-			} else {
-				this.isShowCrumnb = true;
-            }
+        mounted() {},
+        methods: {
+	        loginSuccess(user) {
+                this.user = user;
+	        }
         }
 	}
 </script>
@@ -65,7 +79,46 @@
             grid-template-rows: 60px 1fr;
             grid-template-columns: 280px 1fr;
             grid-template-areas: "header header"
-                                 "menu content";
+            "menu content";
+        }
+
+        &.no-menus.no-header {
+            grid-template-rows: 1fr;
+            grid-template-columns: 1fr;
+            grid-template-areas: "content";
+
+            .content {
+                grid-area: content;
+                background-color: #efefef;
+
+                padding: 0;
+                margin: 0;
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        &.no-menus {
+            grid-template-rows: 60px 1fr;
+            grid-template-columns: 1fr;
+            grid-template-areas: "header"
+                                 "content";
+
+            .content {
+                grid-area: content;
+                background-color: #efefef;
+
+                padding: 0;
+                margin: 0;
+
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+            }
         }
 
         .header {

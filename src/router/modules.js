@@ -1,4 +1,6 @@
 export default {
+	login: () => import(/*webpackChunkName: 'login'*/'../modules/login/index.vue'),
+	index: () => import(/*webpackChunkName: 'index'*/'../modules/index/index.vue'),
 	summary: () => import(/*webpackChunkName: 'summary'*/'../modules/summary/index.vue'),
 	realAlarm: () => import(/*webpackChunkName: 'realAlarm'*/'../modules/realalarm/index.vue'),
 	alarmMain: () => import(/*webpackChunkName: 'realAlarm'*/'../modules/realalarm/main.vue'),

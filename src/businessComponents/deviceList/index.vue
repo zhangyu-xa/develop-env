@@ -5,7 +5,7 @@
         <slot></slot>
         <comps-table ref="table" :options="tableOptions" :displayMode="displayMode" class="data-content" @select="selectChange">
             <template v-slot:elemap="props">
-                <comps-map v-show="displayMode==='map'" :container="'alarm'" :class="props.slotClass"></comps-map>
+                <comps-map ref="map" v-show="displayMode==='map'" :container="'alarm'" :class="props.slotClass"></comps-map>
             </template>
         </comps-table>
     </div>
@@ -39,6 +39,8 @@
 						data: data.dataResultList,
 						total: data.totalCount
 					});
+					// 初始化地图上的点
+					this.initMarkers(data.dataResultList);
 				});
 			},
 			filterChange() {
@@ -57,6 +59,32 @@
 					type,
                     data
                 })
+			},
+			initMarkers(data) {
+				data.forEach(dev => {
+					let devPointInfo = {};
+					try {
+						devPointInfo = JSON.parse(dev.coordinateAxis);
+					} catch (e) {
+						devPointInfo = {}
+					}
+					if (devPointInfo.title) {
+						this.$refs.map.addMarker({
+							data: dev,
+							contentFormat: (data) => {
+                                let content = ["<div class='device-info'>"];
+                                content.push(`<div>设备名称：${data.deviceName}</div>`);
+								content.push(`<div>设备状态：${Dict.currentStatus[data.currentStatus]}</div>`);
+								content.push(`<div>设备地址：${data.deviceAddress}</div>`);
+								content.push(`<div>安装位置：${data.deviceLocation}</div>`);
+								content.push(`<div>所属公司：${data.belongedCorporation}</div>`);
+								content.push("</div>")
+                                return content.join("");
+                            },
+							position: devPointInfo.point.split("|").map(coord => coord - 0)
+						});
+					}
+				});
 			}
 		}
 	}
@@ -83,6 +111,7 @@
                 font-size: 14px;
                 color: darkgrey;
             }
+
             .btns {
                 flex: 1 1 auto;
                 text-align: right;
@@ -91,6 +120,15 @@
 
         .data-content {
             flex: 1 1 auto;
+        }
+
+        .device-info {
+            width: 300px;
+            padding: 10px;
+
+            div + div {
+                margin-top: 10px;
+            }
         }
     }
 </style>
