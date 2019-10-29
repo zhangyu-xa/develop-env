@@ -1,5 +1,5 @@
 <template>
-    <alarm-list @select="selectChange" :deviceId="deviceId" @operators="operators" @cellclick="getProcessDetails">
+    <alarm-list ref="alarmList" @select="selectChange" :deviceId="deviceId" @operators="operators" @cellclick="getProcessDetails">
         <template v-slot:toolbar="props">
             <div class="toolbar">
                 <div class="tips">报警列表</div>
@@ -60,8 +60,12 @@
 				params.deviceAlertTrailIds = this.deviceAlertTrailId;
 				params.alertTrailId = this.deviceAlertTrailId;
 				Store.updateAlertTrail(params).then(res => {
-					this.$message.success("报警处理成功");
-					this.$refs.dialog.close();
+					this.$message({
+						type: res ? "success" : "error",
+						message: `报警处理${res ? "成功" : "失败"}`
+					});
+					res && this.$refs.dialog.close();
+                    this.$refs.alarmList.filterChange();
 				});
 			},
 			getProcessDetails({data, column}) {

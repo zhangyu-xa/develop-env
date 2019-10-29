@@ -1,17 +1,22 @@
 <template>
     <section class="login">
+        <div class="masker"></div>
         <el-card class="box-card">
-            <div slot="header" style="font-size: 16px; font-weight: bold">
-               登录
+            <div slot="header" style="font-size: 24px; font-weight: bold">
+               大道智联
             </div>
             <div class="text item">
-                <label>用户名:</label><el-input v-model="params.userName" placeholder="请输入用户名"></el-input>
+                <el-input v-model="params.userName" placeholder="请输入用户名">
+                    <i slot="prefix" class="fa fa-user"></i>
+                </el-input>
             </div>
             <div class="text item">
-                <label>密&nbsp;&nbsp;&nbsp;码:</label><el-input v-model="params.password" placeholder="请输入密码" type="password"></el-input>
+                <el-input v-model="params.password" placeholder="请输入密码" type="password">
+                    <i slot="prefix" class="fa fa-lock"></i>
+                </el-input>
             </div>
             <div class="text item">
-                <el-button type="primary" @click="login">登录</el-button>
+                <el-button type="primary" @click="login">登&nbsp;&nbsp;&nbsp;&nbsp;录</el-button>
             </div>
         </el-card>
     </section>
@@ -38,12 +43,11 @@
                     })
 					return;
                 }
-				Store.login(this.params).then(data => {
-
+				Store.login({...this.params}).then(data => {
+					this.$router.push({name: "index"});
+					this.$emit("login-success", this.params);
+					window.sessionStorage.setItem("user", JSON.stringify(data));
                 });
-				this.$router.push({name: "index"});
-				this.$emit("login-success", this.params);
-				window.sessionStorage.setItem("user", JSON.stringify(this.params));
 			}
 		}
 	}
@@ -52,24 +56,53 @@
 <style lang="less">
     .login {
         background-color: #c3c2c2 !important;
+        background: url("../../assets/login/bg2.jpeg") no-repeat;
+        background-size: 100% 100%;
+
+        .masker {
+            position: fixed;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background-color: #000;
+            opacity: 0.5;
+        }
         .box-card {
-            width: 300px;
+            width: 400px;
+            padding: 20px 0 0;
             position: relative;
+            z-index: 10;
             top: -10%;
 
             .item {
-                margin-bottom: 20px;
+                margin-bottom: 25px;
+            }
+
+            .el-card__body {
+                padding: 40px 20px 20px;
             }
 
             .el-input {
-                width: 210px;
-                margin-left: 10px;
-
-                font-size: 12px;
+                i {
+                    font-size: 20px;
+                    margin-top: 12px;
+                    color: #767474;
+                }
+                .el-input__inner {
+                    height: 45px;
+                    line-height: 45px;
+                    text-indent: 10px;
+                }
             }
 
             .el-button {
                 width: 100%;
+
+                span {
+                    font-size: 16px;
+                }
             }
         }
     }

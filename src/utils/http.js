@@ -43,13 +43,12 @@ httpRequest.interceptors.response.use(
 	}
 );
 
-export const $http = function({ url, type, data, method, headers, cancelHttp = false, isMultiPart = false, responseType}) {
-	const token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyTmFtZSI6ImF3ZWkiLCJleHAiOjE1NzQ3ODE0MjR9.ea9bhddi30BVeO6hTLC4HfV4WH5Fu0ZVe8Jjlv7jCJg";//Utils.getCache("token", "session");
-	//组装请求参数
+export const $http = function({ url, type, data, method, headers, cancelHttp = false, isMultiPart = false, responseType, isLogin}) {
+	const token = isLogin ? undefined : JSON.parse(window.sessionStorage.getItem("user")).jwtToken;	//组装请求参数
 	const options = {
 		url,
 		method: method || "get",
-		headers: Object.assign({}, {Authorization: token}, headers),
+		headers: Object.assign({}, {Authorization: `Bearer ${token}`}, headers),
 		...(type === "query" ? {params: data || {}} : {data: data || {}}),
 		...(cancelHttp ? {cancelToken: new CancelToken(cancelHttp)} : {})
 	};

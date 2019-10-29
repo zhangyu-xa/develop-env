@@ -17,7 +17,7 @@
         </template>
         <comps-dialog ref="dialog">
             <rate-set v-if="operatype === 'rateset'" :notShowHeader="true" :data="selectedItems"></rate-set>
-            <bind-user v-if="operatype === 'binduser'" :data="selectedItems"></bind-user>
+            <bind-user v-if="operatype === 'binduser'" :data="selectedItems" @onBinded="editSuccess"></bind-user>
             <send-config v-if="operatype === 'alarmsend'" :deviceId="deviceId"></send-config>
             <edit-device v-if="operatype === 'edit'" :deviceId="deviceId" @onEdited="editSuccess"></edit-device>
         </comps-dialog>
@@ -103,7 +103,7 @@
 						}).then(() => {
 							Store.batchUnbindUser({
 								deviceIds: this.selectedItems.map(i => i.deviceId),
-								responsibleAcct: ""// TODO，取消绑定当前用户
+								responsibleAcct: 0
 							}).then(res => {
 								if (res) {
 									this.$message.success("批量解除绑定成功");

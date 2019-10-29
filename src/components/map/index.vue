@@ -29,7 +29,7 @@
 					click: (e) => {
 						if (opts.async) {
 							// 请求数据
-							opts.async.getContentData("", () => {
+							opts.async.getContentData(opts.deviceId, data => {
 								// 组装信息窗体
 								this.infoWindow.setContent(opts.contentFormat(data));
 								// 打开信息窗体

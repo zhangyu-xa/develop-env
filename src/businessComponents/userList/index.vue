@@ -35,20 +35,19 @@
 		        this.tableOptions.async.fresh = Date.now();
 	        },
 	        selectUserForBind(data, column) {
-                if(column.property === "selectUser") {
-                    Store.bindBatchGeneralInfoResponsibleAccts({
-	                    updateResponsibleAcctForGeneralInfosVO: {
-		                    responsibleAcct: data.userId,
-		                    deviceIds: this.data.map(d => d.deviceId)
-                        }
-                    }).then(res => {
-                    	if(res) {
-                    		this.$message.success("批量绑定用户成功");
-	                    } else {
-		                    this.$message.error("批量绑定用户失败");
-                        }
-                    });
-                }
+		        if (column.property === "selectUser") {
+			        Store.bindBatchGeneralInfoResponsibleAccts({
+				        responsibleAcct: data.userId,
+				        deviceIds: this.data.map(d => d.deviceId)
+			        }).then(res => {
+				        if (res) {
+					        this.$message.success("批量绑定用户成功");
+					        this.$emit("onBinded");
+				        } else {
+					        this.$message.error("批量绑定用户失败");
+				        }
+			        });
+		        }
 	        }
         }
 	}

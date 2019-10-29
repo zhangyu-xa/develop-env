@@ -35,7 +35,8 @@
 					deviceAddress: "",
 					deviceLocation: "",
 					deviceDesc: ""
-                }
+				},
+				curCoordinate: []
 			};
 		},
         watch: {
@@ -57,18 +58,19 @@
 			this.initForm();
 		},
         methods: {
-			initForm() {
-				Store.getGeneralInfoByDeviceId({
-					deviceId: this.deviceId
-				}).then(res => {
-					this.data = res;
-				});
-			},
+	        initForm() {
+		        Store.getGeneralInfoByDeviceId({
+			        deviceId: this.deviceId
+		        }).then(res => {
+			        this.data = res;
+		        });
+	        },
 	        onSubmit() {
-	        	Store.updateGeneralInfoByDeviceId({
+		        Store.updateGeneralInfoByDeviceId({
 			        deviceId: this.deviceId,
-			        deviceGeneralInfoVO: this.data
-                }).then(res => {
+			        deviceGeneralInfoVO: this.data,
+			        coordinateAxis: `{"content":"N/A","icon":{"h":0,"l":0,"lb":0,"t":0,"w":0,"x":0},"isOpen":0,"point":"${this.curCoordinate.join("|")}","title":"${this.deviceId}"}`
+		        }).then(res => {
 			        this.$message({
 				        type: res ? "success" : "error",
 				        message: res ? "编辑成功" : "编辑失败"
@@ -76,18 +78,19 @@
 			        this.$emit("onEdited");
 		        });
 	        },
-            triggerMapService(val) {
-	            MapTools.getSearchHandler().search(val, (status, result) => {
-		            // 搜索成功时，result即是对应的匹配数据
-		            if (status === "complete" && result.poiList.pois.length > 0) {
-			            this.$refs.map.addMarkerEx({
-				            position: [result.poiList.pois[0].location.lng, result.poiList.pois[0].location.lat]
-			            });
-		            } else {
-		            	console.warn(`没有和“${val}”匹配的地名地址信息`)
-                    }
-	            });
-            }
+	        triggerMapService(val) {
+		        MapTools.getSearchHandler().search(val, (status, result) => {
+			        // 搜索成功时，result即是对应的匹配数据
+			        if (status === "complete" && result.poiList.pois.length > 0) {
+                        this.curCoordinate = [result.poiList.pois[0].location.lng, result.poiList.pois[0].location.lat];
+				        this.$refs.map.addMarkerEx({
+					        position: this.curCoordinate
+				        });
+			        } else {
+				        console.warn(`没有和“${val}”匹配的地名地址信息`)
+			        }
+		        });
+	        }
         }
 	}
 </script>

@@ -35,7 +35,6 @@
 					});
 				});
 			},
-
 			filterChange() {
 				this.tableOptions.async.fresh = Date.now();
 			},

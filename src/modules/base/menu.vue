@@ -39,8 +39,8 @@
             line-height: 46px;
             margin-bottom: 10px;
             border-radius: 5px;
-            color: #000000;
-            .fa { color: #000000; }
+            color: #3f3f3f;
+            .fa { color: #646363; }
 
             &:hover {
                 background-color: #a0b9df;

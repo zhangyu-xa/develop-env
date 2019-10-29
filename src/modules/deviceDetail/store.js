@@ -57,16 +57,15 @@ export default {
 		});
 	},
 	updateAlertTrail({alertTrailId, deviceAlertTrailIds, ...rest}) {
-		const urlExtra = typeof deviceAlertTrailIds === "string" ? `/${alertTrailId}` : ``;
+		const urlExtra = typeof deviceAlertTrailIds === "number" ? `/${alertTrailId}` : ``;
 		return $http({
 			url: `${URLS.getAlertTrail}${urlExtra}`,
 			method: 'put',
 			data: {
-				...(urlExtra !== '' ? {alertTrailId} : {}),
-				deviceAlertTrailVO: {
-					...(urlExtra === "" ? {deviceAlertTrailIds} : {}),
-					...rest
-				}
+				...(urlExtra === "" ? {deviceAlertTrailIds} : {}),
+				updatedTime: $tools.dateFormat("YYYY-mm-dd HH:MM:SS", new Date()),
+				processingSts: "solved",
+				...rest
 			}
 		});
 	},

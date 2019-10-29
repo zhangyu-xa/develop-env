@@ -22,12 +22,12 @@ export default function (context) {
 				prop: "deviceId",
 				operas: [{
 					title: "推送记录",
-					icon: "el-icon-document",
+					icon: "fa fa-list-ul",
 					operaType: "send-log",
 					operator: context.operators
 				}, {
 					title: "告警处理",
-					icon: "el-icon-document",
+					icon: "fa fa-check-square-o",
 					operaType: "process",
 					operator: context.operators
 				}]

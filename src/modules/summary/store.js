@@ -2,7 +2,8 @@ const URLS = {
 	getDeviceCount: '/dadaoapi/v1/generalInfo/count',
 	generalTrail: '/dadaoapi/v1/generalTrail',
 	generalTrailTrend: '/dadaoapi/v1/generalTrail/trend',
-	getCoordinate: '/dadaoapi/v1/coordinateAxis'
+	getCoordinate: '/dadaoapi/v1/coordinateAxis',
+	getGeneralInfo: '/dadaoapi/v1/generalInfo',
 };
 
 export default {
@@ -39,7 +40,7 @@ export default {
 	},
 	getGeneralDeviceInfo(params) {
 		return $http({
-			url: `${URLS.generalTrail}/${params.deviceId}`,
+			url: `${URLS.getGeneralInfo}/${params.deviceId}`,
 			type: 'query',
 			data: params
 		});

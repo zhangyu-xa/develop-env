@@ -1,8 +1,8 @@
 const getTableCellClass = function (key, val) {
 	switch (key) {
 		case "processingSts":
-			if (val === "0") return "not-process";
-			else return "already-process";
+			if (val === "solved") return "already-process";
+			else return "not-process";
 		case "processingDetails":
 			if (!val) return "no-data";
 			else return "click-to-see";
@@ -22,13 +22,16 @@ const filters = {
 	},
 	tableFilter(val, key) {
 		if (Dict[key] && Dict[key][val]) {
-			return `<span class='${getTableCellClass(key, val)}'>${Dict[key][val]}</span>`
+			return `<span class='${getTableCellClass(key, val)}'>${Dict[key][val]}</span>`;
 		}
 		if (key === "processingDetails") {
-			return `<span class='${getTableCellClass(key, val)}'>${!val ? '无' : '查看'}</span>`
+			return `<span class='${getTableCellClass(key, val)}'>${!val ? '无' : '查看'}</span>`;
 		}
 		if (key === "selectUser") {
-			return `<span class='${getTableCellClass(key, val)}'>选择</span>`
+			return `<span class='${getTableCellClass(key, val)}'>选择</span>`;
+		}
+		if (key === "processingSts") {
+			return `<span class='${getTableCellClass(key, val)}'>${Dict[key][val]}</span>`;
 		}
 		return val;
 	},

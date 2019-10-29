@@ -18,18 +18,31 @@ export default {
 			data: params
 		});
 	},
-	updateDevicePushInfo(params) {
+	updateDevicePushInfo({alertPushConfigId, ...params}) {
 		return $http({
-			url: `${URLS.alertPushCfg}/${params.alertPushCfgId}`,
+			url: `${URLS.alertPushCfg}/${alertPushConfigId}`,
 			method: 'put',
-			data: params
+			data: {
+				...params,
+				"alertPushConfigId": alertPushConfigId,
+				"contactType": "N/A",
+				"createdTime": $tools.dateFormat("YYYY-mm-dd HH:MM:SS", new Date()),
+				"updatedTime": $tools.dateFormat("YYYY-mm-dd HH:MM:SS", new Date())
+			}
 		});
 	},
-	addDevicePushInfo(params) {
+	addDevicePushInfo({deviceId, ...params}) {
 		return $http({
-			url: `${URLS.generalInfo}/${params.deviceId}/alertPushCfg`,
+			url: `${URLS.generalInfo}/${deviceId}/alertPushCfg`,
 			method: 'post',
-			data: params
+			data: {
+				...params,
+				"alertPushConfigId": 0,
+				"contactType": "",
+				"createdTime": $tools.dateFormat("YYYY-mm-dd HH:MM:SS", new Date()),
+				"deviceId": deviceId,
+				"updatedTime": $tools.dateFormat("YYYY-mm-dd HH:MM:SS", new Date())
+			}
 		});
 	},
 	delDevicePushInfo(params) {

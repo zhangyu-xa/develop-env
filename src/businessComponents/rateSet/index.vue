@@ -70,11 +70,14 @@
 				this.inputDisabled = true;
 				if(Object.prototype.toString.apply(this.data) === "[object Array]") {
 					Store.updateDevicesRate({
-						updateDeviceDetailsVO: Object.assign(this.params, {
+						...Object.assign(this.params, {
 							deviceIds: this.data.map(d => d.deviceId)
-                        })
+						})
 					}).then(res => {
-						this.$message.success("设置阈值成功");
+						this.$message({
+							type: res ? "success" : "error",
+							message: `设置阈值${res ? "成功" : "失败"}`
+						});
 					});
 					return;
 				}
@@ -82,7 +85,10 @@
 	                deviceDetailVO: this.params,
 	                deviceDetailId: this.deviceDetailId
                 }).then(res => {
-                	this.$message.success("设置阈值成功");
+	                this.$message({
+		                type: res ? "success" : "error",
+		                message: `设置阈值${res ? "成功" : "失败"}`
+	                });
                 });
 			},
             onSet() {

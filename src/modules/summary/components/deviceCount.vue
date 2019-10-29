@@ -39,7 +39,7 @@
 					: {netSts: this.devType}
 			}).then(res => {
 				this.count = res.filter(r => {
-					if (this.devType === "all") return r.name === 'total';
+					if (this.devType === "all") return r.name === 'others';
 					else return r.name === this.devType;
 				})[0].data;
 			});

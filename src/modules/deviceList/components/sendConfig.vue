@@ -50,8 +50,8 @@
         methods: {
 	        onUpdate(index) {
 		        Store.updateDevicePushInfo({
-			        alertPushCfgId: this.configs[index].alertPushConfigId,
-			        alertPushConfigVO: this.configs[index]
+			        deviceId: this.deviceId,
+                   ...this.configs[index]
 		        }).then(res => {
 			        if(res) {
 				        this.$message.success("更新成功");
@@ -62,12 +62,11 @@
 	        },
 	        onSubmit(index) {
 		        Store.addDevicePushInfo({
-			        alertPushConfigVO: {
-				        deviceId: this.deviceId,
-				        ...this.configs[index]
-			        }
+			        deviceId: this.deviceId,
+			        ...this.configs[index]
 		        }).then(res => {
-			        if(res) {
+			        if(res > 0) {
+			        	this.configs[index].alertPushConfigId = res;
 				        this.$message.success("添加成功");
 			        } else {
 				        this.$message.error("添加失败");
@@ -81,6 +80,7 @@
 				        alertPushCfgId: confId
 			        }).then(res => {
 				        if(res) {
+					        this.configs.splice(index, 1);
 					        this.$message.success("删除成功");
 				        } else {
 					        this.$message.error("删除失败");

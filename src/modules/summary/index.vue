@@ -29,19 +29,29 @@
         mounted() {
 	        Store.getCoordinate().then(res => {
 		        res.forEach(dev => {
-                    this.$refs.map.addMarker({
-	                    position: dev.point.split("|"),
-	                    async: {
-		                    getContentData(deviceId, callback) {
-                                Store.getGeneralDeviceInfo({deviceId}).then(data => {
-	                                callback && callback(data);
-                                });
-		                    }
-	                    },
-	                    contentFormat(data) {
-                            return dev.content;
-	                    }
-                    });
+		        	if(dev.point) {
+				        this.$refs.map.addMarker({
+					        position: dev.point.split("|"),
+					        deviceId: dev.title - 0,
+					        async: {
+						        getContentData(deviceId, callback) {
+							        Store.getGeneralDeviceInfo({deviceId}).then(data => {
+								        callback && callback(data);
+							        });
+						        }
+					        },
+					        contentFormat(data) {
+						        let content = ["<div class='device-info'>"];
+						        content.push(`<div>设备名称：${data.deviceName}</div>`);
+						        content.push(`<div>设备状态：${Dict.currentStatus[data.currentStatus]}</div>`);
+						        content.push(`<div>设备地址：${data.deviceAddress}</div>`);
+						        content.push(`<div>安装位置：${data.deviceLocation}</div>`);
+						        content.push(`<div>所属公司：${data.belongedCorporation}</div>`);
+						        content.push("</div>")
+						        return content.join("");
+					        }
+				        });
+			        }
                 });
 	        });
         },
@@ -109,6 +119,14 @@
         }
         .analysis-fault {
             grid-area: analysisfault;
+        }
+        .device-info {
+            width: 300px;
+            padding: 10px;
+
+            div + div {
+                margin-top: 10px;
+            }
         }
     }
 </style>

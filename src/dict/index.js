@@ -13,8 +13,10 @@ export default {
 		'1': '绑定'
 	},
 	processingSts: {
-		'0': '未处理',
-		'1': '已处理'
+		unsolved: '未处理',
+		solved: '已处理',
+		checked: '已查看',
+		unchecked: '未查看'
 	},
 	deviceStatus: {
 		sensorFault: '传感器故障',
@@ -29,7 +31,10 @@ export default {
 		missingPhase: '缺相'
 	},
 	processingMethod: {
-		'0': '方式1',
-		'1': '方式2'
+		observing: "继续观察",
+		resetModule: "重置模块",
+		tryToHandle: "排查处理",
+		sysTest: "系统调试",
+		misinformation: "误报"
 	}
 }

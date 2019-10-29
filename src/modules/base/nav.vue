@@ -1,6 +1,6 @@
 <template>
     <header>
-        <h1>智慧用电安全隐患监管平台</h1>
+        <h1><i class="fa fa-gg logo-icon"></i>大道智联</h1>
         <div class="middle-menu">
             <i class="fa fa-bell alarm-icon"></i>
         </div>
@@ -48,12 +48,18 @@
         align-items: center;
         background-color: #3d78d2;
         h1 {
-            text-indent: 20px;
+            text-indent: 10px;
             font-size: 22px;
-            color: gainsboro;
+            color: #FFF;
             line-height: 60px;
 
             flex: 0 0 350px;
+
+            .logo-icon {
+                margin-right: 10px;
+                font-size: 26px;
+                color: #FFF;
+            }
         }
         .middle-menu {
             flex: 1 1 auto;

@@ -62,13 +62,8 @@
 			},
 			initMarkers(data) {
 				data.forEach(dev => {
-					let devPointInfo = {};
-					try {
-						devPointInfo = JSON.parse(dev.coordinateAxis);
-					} catch (e) {
-						devPointInfo = {}
-					}
-					if (devPointInfo.title) {
+					let devPointInfo = JSON.parse(dev.coordinateAxis);
+					if (devPointInfo.point) {
 						this.$refs.map.addMarker({
 							data: dev,
 							contentFormat: (data) => {
