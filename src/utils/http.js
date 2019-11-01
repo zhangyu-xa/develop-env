@@ -59,6 +59,7 @@ export const $http = function({ url, type, data, method, headers, cancelHttp = f
 	}
 	if(responseType) {
 		options.responseType = responseType;
+		options.headers["Accept"] = "*/*";
 	}
 	console.log("options:", options);
 	return httpRequest(options);

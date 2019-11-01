@@ -8,7 +8,7 @@ export default function (context) {
 				prop: "userName"
 			}, {
 				label: "手机号",
-				prop: "phoneNum",
+				prop: "phoneNum"
 			}, {
 				label: "创建时间",
 				prop: "createdTime"

@@ -1,3 +1,4 @@
+import axios from 'axios';
 const URLS = {
 	getGeneralInfo: '/dadaoapi/v1/generalInfo',
 	generalTrailTrend: '/dadaoapi/v1/generalTrail/trend',
@@ -84,11 +85,18 @@ export default {
 		});
 	},
 	exportGeneralTrailsIntoExcel(params) {
-		return $http({
-			url: `${URLS.getGeneralInfo}/${params.deviceId}/generalTrail/export`,
-			type: 'query',
-			data: params,
-			responseType: 'arraybuffer'
-		});
+		return axios.get(
+			`${URLS.getGeneralInfo}/${params.deviceId}/generalTrail/export`,
+			{
+				params: {
+					start: params.start,
+					end: params.end
+				},
+				headers: {
+					Authorization: `Bearer ${JSON.parse(window.sessionStorage.getItem("user")).jwtToken}`
+				},
+				responseType:"blob"
+			}
+		);
 	}
 }

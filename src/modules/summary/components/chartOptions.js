@@ -1,12 +1,10 @@
-const defaultxAxis = [];
-const defaultSeries = Array(10).fill(0);
 export default function (category) {
 	return {
 		title: {
-			text: category.title,
+			text: category.title || "",
 			left: 'center',
 			textStyle: {
-				color: category.color,
+				color: category.color || "#edb247",
 				fontWeight: 'normal',
 				fontFamily: 'microsoft yahei',
 				fontSize: 24
@@ -20,19 +18,19 @@ export default function (category) {
 		},
 		xAxis: {
 			type: 'category',
-			data: category.keys.length === 0 ? defaultxAxis : category.keys.reverse()
+			data: category.keys.length !== 0 ? category.keys.reverse() : Array(10).fill((new Date()).toLocaleDateString())
 		},
 		yAxis: {
 			type: 'value'
 		},
 		series: [{
-			data: category.values.reverse(),
+			data: category.values.length !== 0 ? category.values.reverse() : Array(10).fill(0),
 			type: 'line',
 			itemStyle: {
 				normal: {
-					color: category.color,
+					color: category.color || "#edb247",
 					lineStyle: {
-						color: category.color
+						color: category.color || "#edb247"
 					}
 				}
 			}

@@ -30,7 +30,6 @@
 	    },
 	    methods: {
 		    filterChange(timer) {
-			    console.log("timeRange:", timer.timeRange);
 			    this.$emit("input", timer.timeRange !== "" ? [].concat(timer.timeRange) : "");
 		    }
 	    }

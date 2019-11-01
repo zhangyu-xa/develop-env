@@ -1,3 +1,4 @@
+import axios from 'axios';
 const URLS = {
 	generalInfo: '/dadaoapi/v1/generalInfo',
 	alertPushCfg: '/dadaoapi/v1/alertPushCfg'
@@ -53,12 +54,16 @@ export default {
 		});
 	},
 	exportDeviceList(params) {
-		return $http({
-			url: `${URLS.generalInfo}/export`,
-			method: 'post',
-			data: params,
-			responseType: 'blob'
-		});
+		return axios.post(
+			`${URLS.generalInfo}/export`,
+			params,
+			{
+				headers: {
+					Authorization: `Bearer ${JSON.parse(window.sessionStorage.getItem("user")).jwtToken}`
+				},
+				responseType:"blob"
+			}
+		);
 	},
 	getGeneralInfoByDeviceId(params) {
 		return $http({

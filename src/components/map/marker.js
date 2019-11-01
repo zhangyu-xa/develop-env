@@ -1,6 +1,6 @@
 export default {
 	createMarker({data = {}, position, click = function () {}}) {
-		let marker = new AMap.Marker({position});
+		const marker = new AMap.Marker({position});
 		marker.data = data;
 		eleMap.add(marker);
 		//绑定click事件

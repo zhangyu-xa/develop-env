@@ -13,7 +13,7 @@
 				center: mapConfig.center,
 				layers: [
 					...(mapConfig.showSatellite ? [new AMap.TileLayer.Satellite()] : []),
-					...(mapConfig.showRoadNet ? [new AMap.TileLayer.RoadNet()] : []),
+					...(mapConfig.showRoadNet ? [new AMap.TileLayer.RoadNet()] : [])
 				],
 				zooms: mapConfig.zooms,
 				zoom: mapConfig.zoom
@@ -60,5 +60,4 @@
 </script>
 
 <style lang="less">
-    @import "./infoWindow.less";
 </style>

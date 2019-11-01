@@ -21,7 +21,9 @@ module.exports = {
     echarts: true,
     AMap: true,
     Dict: true,
-    $tools: true
+    $tools: true,
+    mapConfig: true,
+    eleMap: true
   },
   env: {
     browser: true,
@@ -70,6 +72,9 @@ module.exports = {
     'vue/singleline-html-element-content-newline': 0,
     'vue/html-closing-bracket-newline': 0,
     'vue/attributes-order': 0,
-    'vue/no-use-v-if-with-v-for': 0
+    'vue/no-use-v-if-with-v-for': 0,
+    'vue/attribute-hyphenation': 0,
+    'vue/require-prop-types': 0,
+    'vue/mustache-interpolation-spacing': 0
   }
 };

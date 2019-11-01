@@ -1,7 +1,7 @@
 <template>
     <div class="device-list">
         <comps-filter :options="filterOptions" class="filter" @trigger="filterChange"></comps-filter>
-        <slot name="toolbar" :total="total"/>
+        <slot name="toolbar" :total="total" />
         <slot></slot>
         <comps-table ref="table" :options="tableOptions" :displayMode="displayMode" class="data-content" @select="selectChange">
             <template v-slot:elemap="props">
@@ -62,12 +62,12 @@
 			},
 			initMarkers(data) {
 				data.forEach(dev => {
-					let devPointInfo = JSON.parse(dev.coordinateAxis);
+					const devPointInfo = JSON.parse(dev.coordinateAxis);
 					if (devPointInfo.point) {
 						this.$refs.map.addMarker({
 							data: dev,
 							contentFormat: (data) => {
-                                let content = ["<div class='device-info'>"];
+                                const content = ["<div class='device-info'>"];
                                 content.push(`<div>设备名称：${data.deviceName}</div>`);
 								content.push(`<div>设备状态：${Dict.currentStatus[data.currentStatus]}</div>`);
 								content.push(`<div>设备地址：${data.deviceAddress}</div>`);

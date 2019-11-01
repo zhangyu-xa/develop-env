@@ -86,6 +86,7 @@
 
             .el-input {
                 i {
+                    margin-left: 5px;
                     font-size: 20px;
                     margin-top: 12px;
                     color: #767474;

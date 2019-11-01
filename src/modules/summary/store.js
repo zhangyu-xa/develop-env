@@ -3,7 +3,7 @@ const URLS = {
 	generalTrail: '/dadaoapi/v1/generalTrail',
 	generalTrailTrend: '/dadaoapi/v1/generalTrail/trend',
 	getCoordinate: '/dadaoapi/v1/coordinateAxis',
-	getGeneralInfo: '/dadaoapi/v1/generalInfo',
+	getGeneralInfo: '/dadaoapi/v1/generalInfo'
 };
 
 export default {

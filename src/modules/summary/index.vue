@@ -41,7 +41,7 @@
 						        }
 					        },
 					        contentFormat(data) {
-						        let content = ["<div class='device-info'>"];
+						        const content = ["<div class='device-info'>"];
 						        content.push(`<div>设备名称：${data.deviceName}</div>`);
 						        content.push(`<div>设备状态：${Dict.currentStatus[data.currentStatus]}</div>`);
 						        content.push(`<div>设备地址：${data.deviceAddress}</div>`);

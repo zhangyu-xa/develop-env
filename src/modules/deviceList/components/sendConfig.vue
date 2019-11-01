@@ -7,21 +7,21 @@
         </el-row>
         <el-row v-for="(item, index) in configs" :key="index">
             <el-form class="send-form" :model="item">
-                <el-col :span="10">
+                <el-col :span="9">
                     <el-form-item label="">
                         <el-input v-model="item.contactCorporate" placeholder="请输入联系人姓名"></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col :span="10">
+                <el-col :span="9">
                     <el-form-item label="">
                         <el-input v-model="item.contactNumber" placeholder="请输入联系方式"></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col :span="2" style="text-align: left;">
+                <el-col :span="3" style="text-align: left;">
                     <el-button v-if="item.alertPushConfigId !== undefined" type="info" @click="onUpdate(index)">更新</el-button>
                     <el-button v-if="item.alertPushConfigId === undefined" type="primary" @click="onSubmit(index)">保存</el-button>
                 </el-col>
-                <el-col :span="2" style="text-align: left;">
+                <el-col :span="3" style="text-align: left;">
                     <el-button type="danger" @click="onDelete(index)">删除</el-button>
                 </el-col>
             </el-form>
@@ -35,11 +35,11 @@
 	export default {
 		name: "sendConfig",
 		props: ['deviceId'],
-        data() {
-	        return {
-	        	configs: []
-            };
-        },
+		data() {
+			return {
+				configs: []
+			};
+		},
 		mounted() {
 			Store.getDevicePushInfo({
 				deviceId: this.deviceId
@@ -47,56 +47,56 @@
 				this.configs = data;
 			});
 		},
-        methods: {
-	        onUpdate(index) {
-		        Store.updateDevicePushInfo({
-			        deviceId: this.deviceId,
-                   ...this.configs[index]
-		        }).then(res => {
-			        if(res) {
-				        this.$message.success("更新成功");
-			        } else {
-				        this.$message.error("更新失败");
-			        }
-                })
-	        },
-	        onSubmit(index) {
-		        Store.addDevicePushInfo({
-			        deviceId: this.deviceId,
-			        ...this.configs[index]
-		        }).then(res => {
-			        if(res > 0) {
-			        	this.configs[index].alertPushConfigId = res;
-				        this.$message.success("添加成功");
-			        } else {
-				        this.$message.error("添加失败");
-			        }
-		        })
-	        },
-	        onDelete(index) {
-		        let confId = this.configs[index].alertPushConfigId;
-		        if (confId) {
-			        Store.delDevicePushInfo({
-				        alertPushCfgId: confId
-			        }).then(res => {
-				        if(res) {
-					        this.configs.splice(index, 1);
-					        this.$message.success("删除成功");
-				        } else {
-					        this.$message.error("删除失败");
-				        }
-			        })
-		        } else {
-			        this.configs.splice(index, 1);
-		        }
-	        },
-            addNew() {
-	        	this.configs.push({
-			        contactCorporate: "",
-			        contactNumber: ""
-                })
-            }
-        }
+		methods: {
+			onUpdate(index) {
+				Store.updateDevicePushInfo({
+					deviceId: this.deviceId,
+					...this.configs[index]
+				}).then(res => {
+					if (res) {
+						this.$message.success("更新成功");
+					} else {
+						this.$message.error("更新失败");
+					}
+				})
+			},
+			onSubmit(index) {
+				Store.addDevicePushInfo({
+					deviceId: this.deviceId,
+					...this.configs[index]
+				}).then(res => {
+					if (res > 0) {
+						this.configs[index].alertPushConfigId = res;
+						this.$message.success("添加成功");
+					} else {
+						this.$message.error("添加失败");
+					}
+				})
+			},
+			onDelete(index) {
+				const confId = this.configs[index].alertPushConfigId;
+				if (confId) {
+					Store.delDevicePushInfo({
+						alertPushCfgId: confId
+					}).then(res => {
+						if (res) {
+							this.configs.splice(index, 1);
+							this.$message.success("删除成功");
+						} else {
+							this.$message.error("删除失败");
+						}
+					})
+				} else {
+					this.configs.splice(index, 1);
+				}
+			},
+			addNew() {
+				this.configs.push({
+					contactCorporate: "",
+					contactNumber: ""
+				})
+			}
+		}
 	}
 </script>
 

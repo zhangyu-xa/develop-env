@@ -43,7 +43,7 @@
 		name: "rate-set",
         props: ['data', 'notShowHeader'],
         data() {
-			let {
+			const {
 				thPhVoltOverThreshhold = 260,
                 thPhVoltUnderThreshhold = 170,
                 thPhCurrOverThreshhold = 6,

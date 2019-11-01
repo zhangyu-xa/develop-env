@@ -38,7 +38,7 @@
 	    binduser: "批量绑定用户",
 	    batchunbind: "批量解除绑定",
 	    alarmsend: "报警推送设置",
-	    edit: "设备编辑",
+	    edit: "设备编辑"
     }
 
 	export default {
@@ -86,6 +86,7 @@
 							title: DialogTitles[type],
 							width: '70%'
 						});
+						break;
 					case "binduser":
 						this.$refs.dialog.open({
 							showFooter: false,
@@ -115,15 +116,22 @@
 						break;
 					default:
 						Store.exportDeviceList({
-							exportVo: {
-								deviceIdList: this.selectedItems.map(i => i.deviceId)
-							}
-						}).then(data => {
-							if (data) {
-								this.$message.success("导出成功");
-							} else {
-								this.$message.error("导出失败");
-							}
+							deviceIdList: this.selectedItems.map(i => i.deviceId)
+						}).then(res => {
+							const blob = new Blob([res.data], {type: 'application/vnd.ms-excel,charset=utf-8'});
+							const fileName = '统计.xlsx';
+							const elink = document.createElement('a');
+							elink.download = fileName;
+							elink.style.display = 'none';
+							elink.href = URL.createObjectURL(blob);
+							document.body.appendChild(elink);
+							elink.click();
+							URL.revokeObjectURL(elink.href); // 释放URL 对象
+							document.body.removeChild(elink);
+							this.$message({
+								type: res ? 'success' : 'error',
+								message: res ? "导出成功" : "导出失败"
+							});
 						});
 				}
 			},
@@ -136,7 +144,7 @@
 							showFooter: false,
 							"custom-class": type,
 							title: DialogTitles[type],
-							width: '30%',
+							width: '50%',
 							top: '5vh'
 						});
 						break;

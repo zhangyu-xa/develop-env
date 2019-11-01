@@ -4,9 +4,9 @@ Vue.use(Vuex);
 
 import './styles/index.less';
 
-if(process.env.NODE_ENV === 'development') {
+//if(process.env.NODE_ENV === 'development') {
 	require('./hot');
-}
+//}
 
 import router from "./router/router";
 

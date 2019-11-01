@@ -89,5 +89,8 @@
 
 <style lang="less">
     .bread-crumb {
+        .el-breadcrumb__inner {
+            font-size: 14px;
+        }
     }
 </style>

@@ -6,7 +6,7 @@
         </div>
         <el-dropdown class="right-header" @command="commandHandler">
             <span class="el-dropdown-link">
-                 <i class="fa fa-user user-icon"></i>{{this.userName}}<i class="el-icon-arrow-down el-icon--right"></i>
+                 <i class="fa fa-user user-icon"></i>{{ userName }}<i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item><i class="fa fa-cog"></i>修改密码</el-dropdown-item>
@@ -26,7 +26,7 @@
 			};
 		},
         mounted() {
-	        let user = JSON.parse(window.sessionStorage.getItem("user"));
+	        const user = JSON.parse(window.sessionStorage.getItem("user"));
 
 	        this.userName = user.userName;
         },

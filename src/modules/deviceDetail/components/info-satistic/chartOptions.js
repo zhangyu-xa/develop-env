@@ -1,10 +1,10 @@
 export default function (category) {
 	return {
 		title: {
-			text: category.title,
+			text: category.title || "",
 			left: 'center',
 			textStyle: {
-				color: category.color,
+				color: category.color || "#67c23a",
 				fontWeight: 'normal',
 				fontFamily: 'microsoft yahei',
 				fontSize: 24
@@ -14,11 +14,11 @@ export default function (category) {
 			trigger: 'axis'
 		},
 		legend: {
-			data: category.legendData || []
+			data: category.legendData.length !== 0 ? category.legendData : ["A相电压", "B相电压", "C相电压"]
 		},
 		xAxis: {
 			type: 'category',
-			data: category.keys.reverse()
+			data: category.keys.length !== 0 ? category.keys.reverse() : Array(10).fill((new Date()).toLocaleDateString())
 		},
 		yAxis: {
 			type: 'value',
@@ -31,15 +31,15 @@ export default function (category) {
 		}],
 		series: category.values.map((item, i) => {
 			return {
-				name: category.legendData[i],
-				data: category.values[i].reverse(),
+				name: category.legendData[i] || "",
+				data: category.values[i].length !== 0 ? category.values[i].reverse() : Array(10).fill(0),
 				type: 'line',
 				smooth: true,
 				itemStyle: {
 					normal: {
-						color: category.colors[i],
+						color: category.colors[i] || "#67c23a",
 						lineStyle: {
-							color: category.colors[i]
+							color: category.colors[i] || "#67c23a"
 						}
 					}
 				}

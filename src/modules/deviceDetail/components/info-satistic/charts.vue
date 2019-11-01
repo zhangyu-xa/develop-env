@@ -18,19 +18,18 @@
         watch: {
 	        time: {
 		        handler(val) {
-			        console.log(val);
 			        this.updateChart(val);
 		        },
                 deep: true
 	        }
         },
 		mounted() {
-            this.myChart = echarts.init(document.getElementById(this.category));
 			if(this.time.length === 0) return;
 			this.updateChart(this.time);
 		},
         methods: {
 	        updateChart(time) {
+		        const myChart = echarts.init(document.getElementById(this.category));
 		        let url = "";
                 let prop = "";
 		        switch (this.category) {
@@ -44,13 +43,17 @@
                             start: time[0],
                             end: time[1]
                         }, url).then(res => {
+					        categoryInfo[this.category].keys = [];
+					        categoryInfo[this.category].values[0] = [];
+					        categoryInfo[this.category].values[1] = [];
+					        categoryInfo[this.category].values[2] = [];
 					        res.map(item => {
 						        categoryInfo[this.category].keys.push(item.occurredDate);
 						        categoryInfo[this.category].values[0].push(item[`phaseA${prop}`]);
 						        categoryInfo[this.category].values[1].push(item[`phaseB${prop}`]);
 						        categoryInfo[this.category].values[2].push(item[`phaseC${prop}`]);
 					        });
-					        this.myChart.setOption(options(categoryInfo[this.category]));
+					        myChart.setOption(options(categoryInfo[this.category]));
 				        });
 				        break;
 			        case "remain-current":
@@ -68,11 +71,13 @@
 					        start: time[0],
 					        end: time[1]
                         }, url).then(res => {
+					        categoryInfo[this.category].keys = [];
+					        categoryInfo[this.category].values[0] = [];
 					        res.map(item => {
 						        categoryInfo[this.category].keys.push(item.occurredDate);
 						        categoryInfo[this.category].values[0].push(item[prop]);
 					        });
-					        this.myChart.setOption(options(categoryInfo[this.category]));
+					        myChart.setOption(options(categoryInfo[this.category]));
 				        });
 				        break;
 		        }

@@ -13,7 +13,7 @@ export default function (context) {
 			}, {
 				label: "处理方式",
 				prop: "processingMethod"
-			},{
+			}, {
 				label: "通话开始时间",
 				prop: "phoneStartedTime"
 			}, {

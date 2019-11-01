@@ -1,22 +1,24 @@
 <template>
     <section class="real-alarm">
         <div class="title">故障报警信息</div>
-        <div class="alarm-count"><span><i class="fa fa-bell"></i>&nbsp;&nbsp;最新告警记录</span><span class="count">1000</span></div>
-        <div class="fault-count"><span><i class="fa fa-warning"></i>&nbsp;&nbsp;最新故障记录</span><span class="count">1000</span></div>
-        <ul class="alarm-new">
+        <div class="alarm-count"><span><i class="fa fa-bell"></i>&nbsp;&nbsp;最新告警记录</span></div>
+        <div class="fault-count"><span><i class="fa fa-warning"></i>&nbsp;&nbsp;最新故障记录</span></div>
+        <ul class="alarm-new" v-if="newAlarms.length !== 0">
             <li v-for="(alarm, index) in newAlarms" :key="index">
                 <i></i>
                 <div class="discription">{{alarm.deviceName}},&nbsp;{{alarm.deviceAddress}}</div>
                 <div class="time">{{alarm.createdTime}}</div>
             </li>
         </ul>
-        <ul class="fault-new">
+        <div class="alarm-new" v-else>暂无故障记录</div>
+        <ul class="fault-new" v-if="newFaults.length !== 0">
             <li v-for="(alarm, index) in newFaults" :key="index">
                 <i></i>
                 <div class="discription">{{alarm.deviceName}},&nbsp;{{alarm.deviceAddress}}</div>
                 <div class="time">{{alarm.createdTime}}</div>
             </li>
         </ul>
+        <div class="fault-new" v-else>暂无故障记录</div>
     </section>
 </template>
 
@@ -67,12 +69,8 @@
 
             padding: 0 20px 0 10px;
 
-            font-size: 18px;
+            font-size: 16px;
             color: #ffffff;
-
-            .count {
-                font-size: 30px;
-            }
         }
         .alarm-count {
             grid-area: alarmcount;

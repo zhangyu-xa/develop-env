@@ -45,7 +45,7 @@ export default function (context) {
 					operator: context.operators
 				}, {
 					title: "告警处理",
-					icon: "el-icon-document",
+					icon: "fa fa-warning",
 					operaType: "alarm-logs",
 					operator: context.operators
 				}]

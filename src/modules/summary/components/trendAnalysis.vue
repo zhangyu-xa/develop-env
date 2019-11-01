@@ -33,9 +33,7 @@
 				});
 
 				myChart.setOption(options(categoryInfo[this.category]));
-			}, () => {
-				myChart.setOption(options(categoryInfo[this.category]));
-            });
+			});
 		}
 	}
 </script>
