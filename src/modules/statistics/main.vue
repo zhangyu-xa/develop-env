@@ -4,7 +4,7 @@
             <div class="toolbar">
                 <div class="tips">共有&nbsp;&nbsp;{{props.total}}&nbsp;&nbsp;个设备</div>
                 <div class="btns">
-                    <el-button disabled>对比</el-button>
+                    <!--<el-button disabled>对比</el-button>-->
                 </div>
             </div>
         </template>

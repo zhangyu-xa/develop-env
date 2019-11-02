@@ -33,13 +33,15 @@
             };
 		},
 		mounted() {
-			Promise.all([
-				Store.getGeneralTrail({currentSts: 'alarm'}),
-				Store.getGeneralTrail({currentSts: 'fault'})
-			]).then(resArr => {
-                this.newAlarms = resArr[0];
-                this.newFaults = resArr[1];
-			});
+			setInterval(() => {
+				Promise.all([
+					Store.getGeneralTrail({currentSts: 'alarm'}),
+					Store.getGeneralTrail({currentSts: 'fault'})
+				]).then(resArr => {
+					this.newAlarms = resArr[0];
+					this.newFaults = resArr[1];
+				});
+			}, 5000);
 		}
 	}
 </script>

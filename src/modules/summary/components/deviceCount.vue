@@ -80,8 +80,8 @@
 
             padding: 14px;
             margin: 15px 0;
-            width: 60px;
-            height: 60px;
+            width: 35px;
+            height: 35px;
             border: solid 1px #ffffff;
             border-radius: 50%;
 

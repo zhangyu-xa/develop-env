@@ -18,7 +18,7 @@ export default function (category) {
 		},
 		xAxis: {
 			type: 'category',
-			data: category.keys.length !== 0 ? category.keys.reverse() : Array(10).fill((new Date()).toLocaleDateString())
+			data: category.keys.length !== 0 ? category.keys.reverse() : $tools.getLatestTimeXAxis(10)
 		},
 		yAxis: {
 			type: 'value'

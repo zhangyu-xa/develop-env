@@ -18,13 +18,21 @@ export default function (category) {
 		},
 		xAxis: {
 			type: 'category',
-			data: category.keys.length !== 0 ? category.keys.reverse() : Array(10).fill((new Date()).toLocaleDateString())
+			data: category.keys.length !== 0 ? category.keys.reverse() : $tools.getLatestDateXAxis(7),
+			splitLine: {
+				show: true
+			}
 		},
 		yAxis: {
-			type: 'value'
+			type: 'value',
+			minInterval: 1,
+			axisLine: {show: false},
+			splitLine: {
+				show: true
+			}
 		},
 		series: [{
-			data: category.values.length !== 0 ? category.values.reverse() : Array(10).fill(0),
+			data: category.values.length !== 0 ? category.values.reverse() : Array(7).fill(0),
 			type: 'line',
 			itemStyle: {
 				normal: {

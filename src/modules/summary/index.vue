@@ -71,13 +71,12 @@
         display: grid;
         grid-column-gap: 20px;
         grid-row-gap: 25px;
-        grid-template-rows: 180px 180px 600px 430px 400px 400px;
-        grid-template-areas: "all all all normal normal normal"
-                             "alarm alarm fault fault offline offline"
-                             "map map map map map map"
-                             "alarmlist alarmlist alarmlist alarmlist alarmlist alarmlist"
-                             "analysisalarm analysisalarm analysisalarm analysisalarm analysisalarm analysisalarm"
-                             "analysisfault analysisfault analysisfault analysisfault analysisfault analysisfault";
+        grid-template-rows: 150px 600px 430px 400px 400px;
+        grid-template-areas: "all normal alarm fault offline"
+        "map map map map map"
+        "alarmlist alarmlist alarmlist alarmlist alarmlist"
+        "analysisalarm analysisalarm analysisalarm analysisalarm analysisalarm"
+        "analysisfault analysisfault analysisfault analysisfault analysisfault";
 
         section {
             cursor: pointer;
@@ -127,6 +126,18 @@
             div + div {
                 margin-top: 10px;
             }
+        }
+    }
+
+    @media screen and (max-width: 1440px) {
+        .summary {
+            grid-template-rows: 150px 150px 600px 430px 400px 400px;
+            grid-template-areas: "all all all normal normal normal"
+            "alarm alarm fault fault offline offline"
+            "map map map map map map"
+            "alarmlist alarmlist alarmlist alarmlist alarmlist alarmlist"
+            "analysisalarm analysisalarm analysisalarm analysisalarm analysisalarm analysisalarm"
+            "analysisfault analysisfault analysisfault analysisfault analysisfault analysisfault";
         }
     }
 </style>

@@ -28,7 +28,7 @@ export default {
 			url: URLS.generalTrailTrend,
 			type: 'query',
 			data: Object.assign({
-				limit: 10
+				limit: 7
 			}, params)
 		});
 	},

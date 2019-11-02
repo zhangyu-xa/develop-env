@@ -9,20 +9,27 @@
                  <i class="fa fa-user user-icon"></i>{{ userName }}<i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item><i class="fa fa-cog"></i>修改密码</el-dropdown-item>
+                <!--<el-dropdown-item><i class="fa fa-cog"></i>修改密码</el-dropdown-item>-->
                 <el-dropdown-item command="logout"><i class="fa fa-sign-out"></i>退出登录</el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
+        <comps-dialog ref="dialog">
+            <comps-filter :options="changePwdOptions" @trigger="changePwd"></comps-filter>
+        </comps-dialog>
     </header>
 </template>
 
 <script>
+	import options from "./options";
+    import Store from "./store";
 	export default {
 		name: "nav",
 		props: ['user'],
 		data() {
+			const curOpts = options(this);
 			return {
-				userName: this.user.userName
+				userName: this.user.userName,
+				changePwdOptions: curOpts
 			};
 		},
         mounted() {
@@ -32,10 +39,36 @@
         },
         methods: {
 	        commandHandler(command) {
-	        	if(command === "logout") {
-			        window.sessionStorage.clear();
-			        this.$router.push({name: "login"});
+		        if (command === "logout") {
+			        Store.loginOut({}).then(res => {
+				        if (res) {
+					        window.sessionStorage.clear();
+					        this.$router.push({name: "login"});
+				        }
+			        });
+		        } else {
+			        //修改密码
+			        this.$refs.dialog.open({
+				        showFooter: false,
+				        "custom-class": "process",
+				        title: "修改密码",
+				        width: '30%'
+			        });
 		        }
+	        },
+	        changePwd(params) {
+	        	console.log(params);
+	        	return;
+		        params.deviceAlertTrailIds = this.deviceAlertTrailId;
+		        params.alertTrailId = this.deviceAlertTrailId;
+		        Store.updateAlertTrail(params).then(res => {
+			        this.$message({
+				        type: res ? "success" : "error",
+				        message: `报警处理${res ? "成功" : "失败"}`
+			        });
+			        res && this.$refs.dialog.close();
+			        this.$refs.alarmList.filterChange();
+		        });
 	        }
         }
 	}

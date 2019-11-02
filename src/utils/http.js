@@ -25,7 +25,6 @@ httpRequest.interceptors.request.use(
 // 请求之后拦截动作
 httpRequest.interceptors.response.use(
 	response => {
-		console.log("response:", response);
 		return response.data;
 	},
 	function httpUtilErrorRequest(error) {
@@ -61,6 +60,5 @@ export const $http = function({ url, type, data, method, headers, cancelHttp = f
 		options.responseType = responseType;
 		options.headers["Accept"] = "*/*";
 	}
-	console.log("options:", options);
 	return httpRequest(options);
 };

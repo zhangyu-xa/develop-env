@@ -1,5 +1,17 @@
 <template>
-    <section :id="`${category}TrendChart`" class="alarm-line"></section>
+    <section class="alarm-line">
+        <!--<el-date-picker
+                v-model="timeRange"
+                type="daterange"
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+                :default-time="['00:00:00', '23:59:59']"
+                :picker-options="pickerOptions"
+                value-format="yyyy-MM-dd HH:mm:ss">
+        </el-date-picker>-->
+        <div class="chart" :id="`${category}TrendChart`"></div>
+    </section>
 </template>
 
 <script>
@@ -23,6 +35,18 @@
 	export default {
 		name: "alarmAnalysis",
 		props: ['category'],
+        data() {
+	        return {
+	        	timeRange: [],
+		        pickerOptions: {
+		        }
+            };
+        },
+        watch: {
+	        timeRange(val) {
+                console.log(val);
+	        }
+        },
 		mounted() {
 			const myChart = echarts.init(document.getElementById(`${this.category}TrendChart`));
 
@@ -38,8 +62,18 @@
 	}
 </script>
 
-<style scoped>
+<style lang="less">
     .alarm-line {
         padding:20px;
+
+        .el-date-editor {
+            float: right;
+            z-index: 10;
+        }
+
+        .chart {
+            width: 100%;
+            height: 100%;
+        }
     }
 </style>

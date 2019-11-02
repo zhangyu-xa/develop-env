@@ -1,7 +1,7 @@
 export default function (context) {
 	return {
 		tableOptions: {
-			hasSelect: true,
+			hasSelect: false,
 			columns: [{
 				label: "设备ID",
 				prop: "deviceSerialId",
