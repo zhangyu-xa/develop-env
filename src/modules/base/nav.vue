@@ -2,7 +2,7 @@
     <header>
         <h1><i class="fa fa-gg logo-icon"></i>大道智联</h1>
         <div class="middle-menu">
-            <i class="fa fa-bell alarm-icon"></i>
+            <i class="fa fa-bell alarm-icon" :class="{'doudong': isRing}"></i>
         </div>
         <el-dropdown class="right-header" @command="commandHandler">
             <span class="el-dropdown-link">
@@ -29,15 +29,31 @@
 			const curOpts = options(this);
 			return {
 				userName: this.user.userName,
-				changePwdOptions: curOpts
+				changePwdOptions: curOpts,
+				isRing: false
 			};
 		},
         mounted() {
 	        const user = JSON.parse(window.sessionStorage.getItem("user"));
 
 	        this.userName = user.userName;
+
+	        this.updateRecords();
+	        setInterval(() => {
+		        this.updateRecords();
+	        }, 5000);
         },
         methods: {
+	        updateRecords() {
+		        Promise.all([
+			        Store.getGeneralTrail({currentSts: 'alarm'}),
+			        Store.getGeneralTrail({currentSts: 'fault'})
+		        ]).then(resArr => {
+			        this.isRing = resArr[0].length > 0 || resArr[1].length > 0;
+
+			        this.$emit("alarmList", resArr);
+		        });
+	        },
 	        commandHandler(command) {
 		        if (command === "logout") {
 			        Store.loginOut({}).then(res => {
@@ -58,7 +74,7 @@
 	        },
 	        changePwd(params) {
 	        	console.log(params);
-	        	return;
+		        /*return;
 		        params.deviceAlertTrailIds = this.deviceAlertTrailId;
 		        params.alertTrailId = this.deviceAlertTrailId;
 		        Store.updateAlertTrail(params).then(res => {
@@ -68,7 +84,7 @@
 			        });
 			        res && this.$refs.dialog.close();
 			        this.$refs.alarmList.filterChange();
-		        });
+		        });*/
 	        }
         }
 	}
@@ -116,6 +132,50 @@
             .user-icon {
                 font-size: 18px;
                 margin-right: 10px;
+            }
+        }
+        .doudong {
+            color: red !important;
+            animation: uk-text-shadow-glitch .65s cubic-bezier(1, -1.91, 0, 2.79) 0s infinite normal both running;
+        }
+        @keyframes uk-text-shadow-glitch {
+            0% {
+                text-shadow: none
+            }
+            25% {
+                text-shadow: -2px -2px 0 #ff0048, 2px 2px 0 #3234ff
+            }
+            50% {
+                text-shadow: 2px -2px 0 #ff0048, -2px 2px 0 #3234ff
+            }
+            75% {
+                text-shadow: -2px 2px 0 #ff0048,2px -2px 0 #3234ff
+            }
+            100% {
+                text-shadow: 2px 2px 0 #ff0048,-2px -2px 0 #3234ff
+            }
+        }
+        @keyframes uk-flicker {
+            0% {
+                opacity: 0
+            }
+            10% {
+                opacity: .6;
+                transform: scale(.8)
+            }
+            20% {
+                opacity: 0
+            }
+            40% {
+                opacity: 1
+            }
+            50% {
+                opacity: .2;
+                transform: scale(1.1)
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1)
             }
         }
     }

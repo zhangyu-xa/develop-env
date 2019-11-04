@@ -1,9 +1,9 @@
 <template>
     <section class="main-container" :class="{'no-crumb': !isShowCrumnb, 'no-menus': !showMenus, 'no-header': !showHeader}">
-        <nav-header v-if="showHeader" class="header" :user="user" />
+        <nav-header v-if="showHeader" class="header" :user="user" @alarmList="alarmList" />
         <menu-list v-if="showMenus && showHeader" class="menu" />
         <bread-crumb class="bread-crumb" v-show="isShowCrumnb"></bread-crumb>
-        <router-view class="content" @login-success="loginSuccess"></router-view>
+        <router-view class="content" @login-success="loginSuccess" :alarmLists="alarmLists"></router-view>
     </section>
 </template>
 
@@ -22,6 +22,12 @@
         },
 		watch: {
 			$route(to, from) {
+				if (to.name !== "login") {
+					if(!window.sessionStorage.getItem("user")) {
+						window.sessionStorage.clear();
+						this.$router.push({name: "login"});
+					}
+				}
 				if (to.name === "summary") {
 					this.isShowCrumnb = false;
 					this.showHeader = true;
@@ -46,13 +52,17 @@
 				isShowCrumnb: true,
 				showMenus: false,
 				showHeader: false,
-				user: {}
+				user: {},
+				alarmLists: []
 			}
 		},
         mounted() {},
         methods: {
 	        loginSuccess(user) {
                 this.user = user;
+	        },
+	        alarmList(resArr = []) {
+	        	this.alarmLists = resArr;
 	        }
         }
 	}

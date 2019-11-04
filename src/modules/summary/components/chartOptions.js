@@ -18,19 +18,16 @@ export default function (category) {
 		},
 		xAxis: {
 			type: 'category',
-			data: category.keys.length !== 0 ? category.keys.reverse() : $tools.getLatestDateXAxis(7),
-			splitLine: {
-				show: true
-			}
+			data: category.keys.length !== 0 ? category.keys.reverse() : $tools.getLatestDateXAxis(7)
 		},
 		yAxis: {
-			type: 'value',
-			minInterval: 1,
-			axisLine: {show: false},
-			splitLine: {
-				show: true
-			}
+			type: 'value'
 		},
+		dataZoom: [{
+			startValue: '0'    // 只需要将这一项设置为0即可
+		}, {
+			type: 'inside'
+		}],
 		series: [{
 			data: category.values.length !== 0 ? category.values.reverse() : Array(7).fill(0),
 			type: 'line',

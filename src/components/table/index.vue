@@ -3,7 +3,6 @@
         <el-table
                 v-show="!displayMode || displayMode==='list'"
                 :data="data"
-                height="1"
                 stripe="true"
                 @cell-click="options.cellClick"
                 @selection-change="handleSelectionChange"
@@ -32,12 +31,12 @@
             </el-table-column>
             <el-table-column
                     v-if="options.operators"
+                    fixed="right"
                     :label="options.operators.label"
                     :width="options.operators.width"
-                    :prop="options.operators.prop"
-                    align="center">
+                    :prop="options.operators.prop">
                 <template slot-scope="scope">
-                    <i v-for="(opera, index) in options.operators.operas" :key="index"
+                    <i class="ele-table-icon" v-for="(opera, index) in options.operators.operas" :key="index"
                        @click="opera.operator(opera.operaType, scope.row)"
                        :class="opera.icon"
                        :title="opera.title"></i>
@@ -117,9 +116,11 @@
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
+        position: relative;
 
         .el-table, .ele-map {
             flex: 1 1 auto;
+            position: absolute;
         }
 
         .el-table {
@@ -165,6 +166,13 @@
 
             .no-data {
                 color: darkgrey;
+            }
+
+            .ele-table-icon {
+                &:hover {
+                    font-size: 20px;
+                    color: #409eff;
+                }
             }
         }
 

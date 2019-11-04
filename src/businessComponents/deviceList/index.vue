@@ -92,6 +92,7 @@
 
         .filter {
             flex: 0 0 60px;
+            display: flex;
         }
 
         .toolbar {

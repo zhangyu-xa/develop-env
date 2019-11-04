@@ -38,12 +38,12 @@ export const $tools = {
 	},
 	getLatestDateXAxis(num) {
 		return Array(num).fill(0).map((i, index) => {
-			return this.dateFormat("YYYY-mm-dd", new Date(Date.now() - 3600*1000*24*index));
+			return this.dateFormat("YYYY-mm-dd", new Date(Date.now() - 3600 * 1000 * 24 * index));
 		}).reverse();
 	},
 	getLatestTimeXAxis(num) {
 		return Array(num).fill(0).map((i, index) => {
-			return this.dateFormat("YYYY-mm-dd HH:MM:SS", new Date(Date.now() - 5*1000*index));
+			return this.dateFormat("YYYY-mm-dd HH:MM:SS", new Date(Date.now() - 5 * 1000 * index));
 		}).reverse();
 	}
 };

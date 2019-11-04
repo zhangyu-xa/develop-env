@@ -119,7 +119,7 @@
 							deviceIdList: this.selectedItems.map(i => i.deviceId)
 						}).then(res => {
 							const blob = new Blob([res.data], {type: 'application/vnd.ms-excel,charset=utf-8'});
-							const fileName = '统计.xlsx';
+							const fileName = '设备列表.xlsx';
 							const elink = document.createElement('a');
 							elink.download = fileName;
 							elink.style.display = 'none';

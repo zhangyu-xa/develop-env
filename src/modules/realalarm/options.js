@@ -37,7 +37,7 @@ export default function (context) {
 			operators: {
 				label: "操作",
 				prop: "deviceId",
-				width: 150,
+				width: 80,
 				operas: [{
 					title: "设备详情",
 					icon: "el-icon-tickets",

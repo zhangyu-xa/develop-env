@@ -23,6 +23,11 @@ export default function (category) {
 		yAxis: {
 			type: 'value'
 		},
+		dataZoom: [{
+			startValue: '0'    // 只需要将这一项设置为0即可
+		}, {
+			type: 'inside'
+		}],
 		series: [{
 			data: category.values.length !== 0 ? category.values.reverse() : Array(10).fill(0),
 			type: 'line',

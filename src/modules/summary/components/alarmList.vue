@@ -3,16 +3,16 @@
         <div class="title">故障报警信息</div>
         <div class="alarm-count"><span><i class="fa fa-bell"></i>&nbsp;&nbsp;最新告警记录</span></div>
         <div class="fault-count"><span><i class="fa fa-warning"></i>&nbsp;&nbsp;最新故障记录</span></div>
-        <ul class="alarm-new" v-if="newAlarms.length !== 0">
-            <li v-for="(alarm, index) in newAlarms" :key="index">
+        <ul class="alarm-new" v-if="alarmLists[0].length !== 0">
+            <li v-for="(alarm, index) in alarmLists[0]" :key="index">
                 <i></i>
                 <div class="discription">{{alarm.deviceName}},&nbsp;{{alarm.deviceAddress}}</div>
                 <div class="time">{{alarm.createdTime}}</div>
             </li>
         </ul>
         <div class="alarm-new" v-else>暂无故障记录</div>
-        <ul class="fault-new" v-if="newFaults.length !== 0">
-            <li v-for="(alarm, index) in newFaults" :key="index">
+        <ul class="fault-new" v-if="alarmLists[1].length !== 0">
+            <li v-for="(alarm, index) in alarmLists[1]" :key="index">
                 <i></i>
                 <div class="discription">{{alarm.deviceName}},&nbsp;{{alarm.deviceAddress}}</div>
                 <div class="time">{{alarm.createdTime}}</div>
@@ -23,26 +23,14 @@
 </template>
 
 <script>
-	import Store from "../store";
 	export default {
 		name: "alarmList",
+		props: ['alarmLists'],
 		data() {
-			return {
-				newAlarms: [],
-                newFaults: []
-            };
+			return {};
 		},
-		mounted() {
-			setInterval(() => {
-				Promise.all([
-					Store.getGeneralTrail({currentSts: 'alarm'}),
-					Store.getGeneralTrail({currentSts: 'fault'})
-				]).then(resArr => {
-					this.newAlarms = resArr[0];
-					this.newFaults = resArr[1];
-				});
-			}, 5000);
-		}
+		mounted() {},
+		methods: {}
 	}
 </script>
 

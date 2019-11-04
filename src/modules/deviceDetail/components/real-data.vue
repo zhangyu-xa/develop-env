@@ -98,7 +98,10 @@
                 }
 
                 span {
-                    margin-left: 20px;
+                    display: inline-block;
+                    width: 70px;
+                    text-align: left;
+                    text-indent: 10px;
                 }
             }
         }
