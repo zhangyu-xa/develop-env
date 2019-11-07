@@ -34,8 +34,7 @@
 		},
 		watch: {
 			time: {
-				handler(val) {
-					console.log(val);
+				handler() {
 					this.updateChart();
 				},
 				deep: true
@@ -46,7 +45,9 @@
 		},
 		methods: {
 			updateChart() {
-				const url = this.category === "alarm" ? "alarmRpt" : "faultRpt"
+				const url = this.category === "alarm" ? "alarmRpt" : "faultRpt";
+				categoryInfo[this.category].keys = [];
+				categoryInfo[this.category].values = [];
 				Store.getAlarmOrFaultReports({
 					deviceId: this.deviceId,
 					start: this.time[0],

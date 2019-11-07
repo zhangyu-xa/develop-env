@@ -30,7 +30,14 @@
 	    },
 	    methods: {
 		    filterChange(timer) {
-			    this.$emit("input", timer.timeRange !== "" ? [].concat(timer.timeRange) : "");
+			    if (timer.timeRange) {
+				    this.$emit("input", [].concat(timer.timeRange));
+			    } else {
+				    this.$emit("input", [
+					    $tools.getCurDate().startTime,
+					    $tools.getCurDate().endTime
+				    ]);
+			    }
 		    }
 	    }
     }

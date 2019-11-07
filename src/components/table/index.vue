@@ -123,6 +123,11 @@
             position: absolute;
         }
 
+        .ele-map {
+            width: 100%;
+            height: 100%;
+        }
+
         .el-table {
             .normal, .alarm, .fault, .offline, .online {
                 .status-style();
