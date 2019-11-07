@@ -72,7 +72,7 @@
         display: grid;
         grid-column-gap: 20px;
         grid-row-gap: 25px;
-        grid-template-rows: 150px 600px 430px 400px 400px;
+        grid-template-rows: 150px 600px 430px 450px 450px;
         grid-template-areas: "all normal alarm fault offline"
         "map map map map map"
         "alarmlist alarmlist alarmlist alarmlist alarmlist"

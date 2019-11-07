@@ -1,15 +1,14 @@
 <template>
     <section class="alarm-line">
-        <!--<el-date-picker
+        <el-date-picker
                 v-model="timeRange"
                 type="daterange"
                 range-separator="至"
                 start-placeholder="开始日期"
                 end-placeholder="结束日期"
-                :default-time="['00:00:00', '23:59:59']"
                 :picker-options="pickerOptions"
-                value-format="yyyy-MM-dd HH:mm:ss">
-        </el-date-picker>-->
+                value-format="yyyy-MM-dd">
+        </el-date-picker>
         <div class="chart" :id="`${category}TrendChart`"></div>
     </section>
 </template>
@@ -43,31 +42,44 @@
             };
         },
         watch: {
-	        timeRange(val) {
-                console.log(val);
+	        timeRange() {
+                this.updateChart();
 	        }
         },
 		mounted() {
-			const myChart = echarts.init(document.getElementById(`${this.category}TrendChart`));
+			this.updateChart();
+		},
+        methods: {
+	        updateChart() {
+		        const myChart = echarts.init(document.getElementById(`${this.category}TrendChart`));
+		        const [start, end] = this.timeRange.length === 0 ? $tools.getLastSeveralDateRange() : this.timeRange;
+		        categoryInfo[this.category].keys = [];
+		        categoryInfo[this.category].values = [];
+		        Store.getGeneralTrailTrend({
+			        currentSts: this.category,
+			        start,
+			        end
+		        }).then(res => {
+			        res.map(item => {
+				        categoryInfo[this.category].keys.push(item.occurredDate.substr(0, 10));
+				        categoryInfo[this.category].values.push(item.totalCount);
+			        });
 
-			Store.getGeneralTrailTrend({currentSts: this.category}).then(res => {
-				res.map(item => {
-					categoryInfo[this.category].keys.push(item.occurredDate.substr(0, 10));
-					categoryInfo[this.category].values.push(item.totalCount);
-				});
-
-				myChart.setOption(options(categoryInfo[this.category]));
-			});
-		}
+			        myChart.setOption(options(categoryInfo[this.category]));
+		        });
+	        }
+        }
 	}
 </script>
 
 <style lang="less">
     .alarm-line {
-        padding:20px;
+        padding: 20px;
+        position: relative;
 
         .el-date-editor {
-            float: right;
+            position: absolute;
+            right: 20px;
             z-index: 10;
         }
 

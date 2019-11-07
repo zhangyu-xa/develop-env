@@ -1,15 +1,18 @@
 export default function (data) {
 	const defaultData = [{
 		name: "漏电流报警",
-		value: 3000
+		value: 0
 	}, {
 		name: "设备离线警告",
-		value: 2000
+		value: 0
 	}, {
 		name: "缺相报警",
-		value: 1000
+		value: 0
+	}, {
+		name: "",
+		value: ""
 	}];
-	const defaultLegendData = ["漏电流报警", "设备离线警告", "缺相报警"];
+	const defaultLegendData = ["", "漏电流报警", "设备离线警告", "缺相报警"];
 	return {
 		title: {
 			text: data.title,

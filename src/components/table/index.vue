@@ -180,6 +180,7 @@
             flex: 0 0 30px;
             display: flex;
             align-items: center;
+            margin-top: 20px;
         }
     }
 </style>

@@ -99,7 +99,7 @@
 
                 span {
                     display: inline-block;
-                    width: 70px;
+                    width: 100px;
                     text-align: left;
                     text-indent: 10px;
                 }

@@ -36,6 +36,12 @@ export const $tools = {
 		}
 		return fmt;
 	},
+	getLastSeveralDateRange(format = "YYYY-mm-dd", several = 7) {
+		return [
+			this.dateFormat(format, new Date(Date.now() - 3600 * 1000 * 24 * several)),
+			this.dateFormat(format, new Date(Date.now()))
+		];
+	},
 	getLatestDateXAxis(num) {
 		return Array(num).fill(0).map((i, index) => {
 			return this.dateFormat("YYYY-mm-dd", new Date(Date.now() - 3600 * 1000 * 24 * index));
