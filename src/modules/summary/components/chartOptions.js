@@ -18,7 +18,7 @@ export default function (category) {
 		},
 		xAxis: {
 			type: 'category',
-			data: category.keys.length !== 0 ? category.keys.reverse() : $tools.getLatestDateXAxis(7)
+			data: category.keys.length !== 0 ? category.keys : $tools.getLatestDateXAxis(7)
 		},
 		yAxis: {
 			type: 'value'
@@ -29,7 +29,7 @@ export default function (category) {
 			type: 'inside'
 		}],
 		series: [{
-			data: category.values.length !== 0 ? category.values.reverse() : Array(7).fill(0),
+			data: category.values.length !== 0 ? category.values : Array(7).fill(0),
 			type: 'line',
 			itemStyle: {
 				normal: {

@@ -1,6 +1,6 @@
 <template>
     <section class="alarm-line">
-        <el-date-picker
+        <!--<el-date-picker
                 v-model="timeRange"
                 type="daterange"
                 range-separator="至"
@@ -8,7 +8,7 @@
                 end-placeholder="结束日期"
                 :picker-options="pickerOptions"
                 value-format="yyyy-MM-dd">
-        </el-date-picker>
+        </el-date-picker>-->
         <div class="chart" :id="`${category}TrendChart`"></div>
     </section>
 </template>

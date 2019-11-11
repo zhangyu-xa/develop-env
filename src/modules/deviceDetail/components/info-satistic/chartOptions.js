@@ -18,7 +18,7 @@ export default function (category) {
 		},
 		xAxis: {
 			type: 'category',
-			data: category.keys.length !== 0 ? category.keys.reverse() : $tools.getLatestTimeXAxis(10)
+			data: category.keys.length !== 0 ? category.keys : $tools.getLatestTimeXAxis(10)
 		},
 		yAxis: {
 			type: 'value',
@@ -32,7 +32,7 @@ export default function (category) {
 		series: category.values.map((item, i) => {
 			return {
 				name: category.legendData[i] || "",
-				data: category.values[i].length !== 0 ? category.values[i].reverse() : Array(10).fill(0),
+				data: category.values[i].length !== 0 ? category.values[i] : Array(10).fill(0),
 				type: 'line',
 				smooth: true,
 				itemStyle: {

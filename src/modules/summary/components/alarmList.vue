@@ -7,6 +7,7 @@
             <li v-for="(alarm, index) in alarmLists[0]" :key="index">
                 <i></i>
                 <div class="discription">{{alarm.deviceName}},&nbsp;{{alarm.deviceAddress}}</div>
+                <div>告警原因：{{alarm.faultDetails}}</div>
                 <div class="time">{{alarm.createdTime}}</div>
             </li>
         </ul>
@@ -15,6 +16,7 @@
             <li v-for="(alarm, index) in alarmLists[1]" :key="index">
                 <i></i>
                 <div class="discription">{{alarm.deviceName}},&nbsp;{{alarm.deviceAddress}}</div>
+                <div>故障原因：{{alarm.faultDetails}}</div>
                 <div class="time">{{alarm.createdTime}}</div>
             </li>
         </ul>
@@ -77,8 +79,7 @@
 
             li {
                 position: relative;
-                height: 40px;
-                padding: 10px 0 10px 30px;
+                padding: 2px 0 2px 30px;
 
                 &:hover {
                     background-color: #F5F7FA;
