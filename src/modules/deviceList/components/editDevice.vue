@@ -68,7 +68,7 @@
 	        onSubmit() {
 		        Store.updateGeneralInfoByDeviceId({
 			        deviceId: this.deviceId,
-			        deviceGeneralInfoVO: this.data,
+			        ...this.data,
 			        coordinateAxis: `{"content":"N/A","icon":{"h":0,"l":0,"lb":0,"t":0,"w":0,"x":0},"isOpen":0,"point":"${this.curCoordinate.join("|")}","title":"${this.deviceId}"}`
 		        }).then(res => {
 			        this.$message({

@@ -18,13 +18,13 @@
 	    alarm: {
 		    keys: [],
 		    values: [],
-		    title: '告警设备趋势',
+		    title: '告警总数趋势',
 		    color: '#edb247'
 	    },
 	    fault: {
 		    keys: [],
 		    values: [],
-		    title: '故障设备趋势',
+		    title: '故障总数趋势',
 		    color: '#ff5656'
 	    }
     };

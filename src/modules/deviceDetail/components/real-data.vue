@@ -54,7 +54,7 @@
                 <label>环境温度:</label><span>{{data.envTemp}} °C</span>
             </div>
             <div class="text item">
-                <label>总用电量:</label><span>{{data.totalPower}}</span>
+                <label>总用电量:</label><span>{{data.totalPower}} kwh</span>
             </div>
         </el-card>
     </section>

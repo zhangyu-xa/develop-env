@@ -28,7 +28,9 @@ export default {
 		overTemperature: '超温',
 		underTemperature: '低温',
 		normal: '正常',
-		missingPhase: '缺相'
+		missingPhase: '缺相',
+		powerSupplyStop: '供电中断',
+		signalAlarm: '信号报警'
 	},
 	processingMethod: {
 		observing: "继续观察",
@@ -36,5 +38,29 @@ export default {
 		tryToHandle: "排查处理",
 		sysTest: "系统调试",
 		misinformation: "误报"
+	},
+	deviceType: {
+		eleDevice: "智能用电设备",
+		smokeDevice: "烟感设备"
+	},
+	faultDetails: {
+		"phAVoltSts-overVoltage": "A相电压过压",
+		"phBVoltSts-overVoltage": "B相电压过压",
+		"phCVoltSts-overVoltage": "C相电压过压",
+		"phACurrSts-overCurrent": "A相电流过流",
+		"phBCurrSts-overCurrent": "B相电流过流",
+		"phCCurrSts-overCurrent": "C相电流过流",
+		"leftCurrSts-overCurrent": "剩余电流过流",
+		"phACableTempSts-overTemperature": "A相线缆超温",
+		"phBCableTempSts-overTemperature": "B相线缆超温",
+		"phCCableTempSts-overTemperature": "C相线缆超温",
+		"phACableTempSensorSts-sensorFault": "A相线缆温度传感器故障",
+		"phBCableTempSensorSts-sensorFault": "B相线缆温度传感器故障",
+		"phCCableTempSensorSts-sensorFault": "C相线缆温度传感器故障",
+		"envTempSts-overTemperature": "环境温度超温",
+		"envTempSensorSts-sensorFault": "环境温度传感器故障",
+		"fireSignalAlarmSts-signalAlarmv": "消防信号报警",
+		"phLossAlarmSts-missingPhase": "缺相报警",
+		"powerSupplySts-powerSupplyStop": "供电中断报警"
 	}
 }

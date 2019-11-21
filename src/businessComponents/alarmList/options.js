@@ -12,7 +12,7 @@ export default function (context) {
 				tips: true
 			}, {
 				label: "最近告警时间",
-				prop: "updatedTime"
+				prop: "createdTime"
 			}, {
 				label: "处理日志",
 				prop: "processingDetails"

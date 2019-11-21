@@ -86,6 +86,10 @@
 
         .data-content {
             flex: 1 1 auto;
+
+            .el-table {
+                position: inherit;
+            }
         }
 
         .process {
