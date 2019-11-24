@@ -3,32 +3,28 @@ export default function () {
 		notInline: true,
 		submitBtnText: "提交",
 		params: {
-			processingPerson: '',
-			processingMethod: '',
-			processingDetails: ''
+			oldPwd: '',
+			newPwd: '',
+			comfirmNewPwd: ''
 		},
 		fields: [{
-			prop: 'processingPerson',
+			prop: 'oldPwd',
 			type: 'el-input',
-			placeholder: '处理人员',
-			label: '处理人员:'
+			subType: 'password',
+			placeholder: '请输入原密码',
+			label: '原密码:'
 		}, {
-			prop: 'processingMethod',
-			type: 'el-select',
-			placeholder: '处理方法',
-			label: '处理方法:',
-			selOptions: Object.keys(Dict.processingMethod).map(k => {
-				return {
-					label: Dict.processingMethod[k],
-					val: k
-				};
-			})
-		}, {
-			prop: 'processingDetails',
+			prop: 'newPwd',
 			type: 'el-input',
-			subType: 'textarea',
-			placeholder: '处理信息',
-			label: '处理信息:'
+			subType: 'password',
+			placeholder: '请输入新密码',
+			label: '新密码:'
+		}, {
+			prop: 'comfirmNewPwd',
+			type: 'el-input',
+			subType: 'password',
+			placeholder: '请输入新密码',
+			label: '确认新密码:'
 		}]
 	}
 }

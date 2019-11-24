@@ -80,7 +80,6 @@
 				console.log(to, from);
 				this.breadCrumb = [];
 				if (to.name !== "summary") {
-					console.log(getBreadCrumb(to));
 					this.breadCrumb.push(rootCrumb, ...getBreadCrumb(to));
 				}
 			}
