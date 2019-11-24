@@ -1,7 +1,7 @@
 
 const URLS = {
 	login: '/dadaoapi/v1/dadaoUser/logout',
-	generalTrail: '/dadaoapi/v1/generalTrail'
+	generalInfo: '/dadaoapi/v1/generalInfo'
 };
 
 export default {
@@ -13,12 +13,13 @@ export default {
 			data: params
 		});
 	},
-	getGeneralTrail(params) {
+	getGeneralInfo(params) {
 		return $http({
-			url: URLS.generalTrail,
+			url: URLS.generalInfo,
 			type: 'query',
 			data: Object.assign({
-				limit: 5
+				limit: 1,
+				pageNum: 1
 			}, params)
 		});
 	}

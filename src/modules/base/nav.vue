@@ -41,18 +41,18 @@
 	        this.updateRecords();
 	        setInterval(() => {
 		        this.updateRecords();
-	        }, 5000);
+	        }, 1000 * 60);
         },
         methods: {
 	        updateRecords() {
-		        Promise.all([
-			        Store.getGeneralTrail({currentSts: 'alarm'}),
-			        Store.getGeneralTrail({currentSts: 'fault'})
-		        ]).then(resArr => {
-			        this.isRing = resArr[0].length > 0 || resArr[1].length > 0;
-
-			        this.$emit("alarmList", resArr);
-		        });
+		        Store.getGeneralInfo({currentSts: 'alarm'}).then(res => {
+			        this.isRing = res.totalCount > 0;
+			        if(!this.isRing) {
+				        Store.getGeneralInfo({currentSts: 'fault'}).then(res => {
+					        this.isRing = res.totalCount > 0;
+				        });
+			        }
+                });
 	        },
 	        commandHandler(command) {
 		        if (command === "logout") {

@@ -120,7 +120,6 @@
 
         .el-table, .ele-map {
             flex: 1 1 auto;
-            position: absolute;
         }
 
         .ele-map {

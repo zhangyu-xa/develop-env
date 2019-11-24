@@ -56,6 +56,7 @@ module.exports = {
     'object-property-newline': 0,
     'object-curly-newline': 0,
     'no-multi-spaces': 0,
+    'no-unneeded-ternary': 0,
     // 要求使用 === 和 !==
     'eqeqeq': 2,
     // 禁用 arguments.caller 或 arguments.callee

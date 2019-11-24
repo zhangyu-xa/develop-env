@@ -4,7 +4,8 @@
             :visible.sync="centerDialogVisible"
             :custom-class="options['custom-class']"
             :top="options.top"
-            :width="options.width">
+            :width="options.width"
+            :close-on-click-modal="false">
         <slot></slot>
         <span slot="footer" class="dialog-footer" v-if="options.showFooter">
             <el-button @click="centerDialogVisible = false">取 消</el-button>

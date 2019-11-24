@@ -9,8 +9,8 @@ export default function (data) {
 		name: "缺相报警",
 		value: 0
 	}, {
-		name: "",
-		value: ""
+		name: "无异常",
+		value: 1
 	}];
 	const defaultLegendData = ["", "漏电流报警", "设备离线警告", "缺相报警"];
 	return {

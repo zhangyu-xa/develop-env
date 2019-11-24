@@ -50,7 +50,7 @@
 				thPhCableTempOverThreshhold = 100,
 				leftCurrOverThreshhold = 500,
 				envTempOverThreshhold = 80,
-				deviceDetailId
+				deviceId
 			} = this.data;
 	        return {
 	        	inputDisabled: true,
@@ -62,7 +62,7 @@
 	                leftCurrOverThreshhold,
 	                envTempOverThreshhold
                 },
-		        deviceDetailId
+		        deviceId
             };
         },
 		methods: {
@@ -82,8 +82,13 @@
 					return;
 				}
                 Store.updateDeviceRateById({
-	                deviceDetailVO: this.params,
-	                deviceDetailId: this.deviceDetailId
+	                envTempOverThreshold: this.params.envTempOverThreshhold+"",
+	                leftCurrOverThreshold: this.params.leftCurrOverThreshhold+"",
+	                thPhCableTempOverThreshold: this.params.thPhCableTempOverThreshhold+"",
+	                thPhCurrOverThreshold: this.params.thPhCurrOverThreshhold+"",
+	                thPhVoltOverThreshold: this.params.thPhVoltOverThreshhold+"",
+	                thPhVoltUnderThreshold: this.params.thPhVoltUnderThreshhold+"",
+	                deviceId: this.deviceId
                 }).then(res => {
 	                this.$message({
 		                type: res ? "success" : "error",

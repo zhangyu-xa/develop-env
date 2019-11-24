@@ -1,12 +1,12 @@
 const URLS = {
-	updateDeviceRate: '/dadaoapi/v1/deviceDetail'
+	updateDeviceRate: '/dadaoapi/v1/eleDevice/threshold/setAll'
 };
 
 export default {
 	updateDeviceRateById(params) {
 		return $http({
-			url: `${URLS.updateDeviceRate}/${params.deviceDetailId}`,
-			method: 'put',
+			url: `${URLS.updateDeviceRate}`,
+			method: 'post',
 			data: params
 		});
 	},

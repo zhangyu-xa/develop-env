@@ -33,9 +33,14 @@ const filters = {
 		if (key === "processingSts") {
 			return `<span class='${getTableCellClass(key, val)}'>${Dict[key][val]}</span>`;
 		}
-		/*if (key === "faultDetails") {
-			return `<span>${Dict[key][val]}</span>`;
-		}*/
+		if (key === "faultDetails") {
+			const res = val.split(",").reduce((res, cur) => {
+				if (Dict[key][cur]) {
+					return `${res}${res === "" ? "" : ","}${Dict[key][cur]}`;
+				}
+			}, "");
+			return `<span>${res ? res : val}</span>`;
+		}
 		return val;
 	},
 	deviceStatus(val) {

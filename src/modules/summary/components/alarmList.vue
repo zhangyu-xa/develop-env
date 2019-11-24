@@ -3,20 +3,20 @@
         <div class="title">故障报警信息</div>
         <div class="alarm-count"><span><i class="fa fa-bell"></i>&nbsp;&nbsp;最新告警记录</span></div>
         <div class="fault-count"><span><i class="fa fa-warning"></i>&nbsp;&nbsp;最新故障记录</span></div>
-        <ul class="alarm-new" v-if="alarmLists[0].length !== 0">
-            <li v-for="(alarm, index) in alarmLists[0]" :key="index">
+        <ul class="alarm-new" v-if="alarms.length !== 0">
+            <li v-for="(alarm, index) in alarms" :key="index">
                 <i></i>
                 <div class="discription">{{alarm.deviceName}},&nbsp;{{alarm.deviceAddress}}</div>
-                <div>告警原因：{{alarm.faultDetails}}</div>
+                <div>告警原因：{{formats(alarm.faultDetails)}}</div>
                 <div class="time">{{alarm.createdTime}}</div>
             </li>
         </ul>
         <div class="alarm-new" v-else>暂无故障记录</div>
-        <ul class="fault-new" v-if="alarmLists[1].length !== 0">
-            <li v-for="(alarm, index) in alarmLists[1]" :key="index">
+        <ul class="fault-new" v-if="faults.length !== 0">
+            <li v-for="(alarm, index) in faults" :key="index">
                 <i></i>
                 <div class="discription">{{alarm.deviceName}},&nbsp;{{alarm.deviceAddress}}</div>
-                <div>故障原因：{{alarm.faultDetails}}</div>
+                <div>故障原因：{{formats(alarm.faultDetails)}}</div>
                 <div class="time">{{alarm.createdTime}}</div>
             </li>
         </ul>
@@ -25,14 +25,42 @@
 </template>
 
 <script>
+    import Store from "../store";
 	export default {
 		name: "alarmList",
-		props: ['alarmLists'],
+		props: [],
 		data() {
-			return {};
+			return {
+				alarms: [],
+				faults: []
+			};
 		},
-		mounted() {},
-		methods: {}
+		mounted() {
+			this.updateRecords();
+			setInterval(() => {
+				this.updateRecords();
+			}, 1000 * 60);
+        },
+		methods: {
+			updateRecords() {
+				Promise.all([
+					Store.getGeneralTrail({currentSts: 'alarm'}),
+					Store.getGeneralTrail({currentSts: 'fault'})
+				]).then(resArr => {
+					this.alarms = resArr[0];
+					this.faults = resArr[1];
+				});
+			},
+			formats(detail) {
+				const res = detail.split(",").reduce((res, cur) => {
+					if (Dict.faultDetails[cur]) {
+						return `${res}${res === "" ? "" : ","}${Dict.faultDetails[cur]}`;
+					}
+				}, "");
+
+				return !res ? detail : res;
+			}
+		}
 	}
 </script>
 

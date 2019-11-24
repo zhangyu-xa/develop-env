@@ -54,12 +54,12 @@
 			        end: this.time[1]
 		        }).then(res => {
 			        dataList.alarm.seriesData = res.map(item => {
-				        dataList.alarm.legendData.push(item.alarmDescription);
-			        	return {
-					        name: item.alarmDescription,
+				        dataList.alarm.legendData.push(Dict.faultDetails[item.alarmDescription] || "");
+				        return {
+					        name: Dict.faultDetails[item.alarmDescription] || "",
 					        value: item.percentage
-                        };
-                    });
+				        };
+			        });
 
 			        this.alarmChart.setOption(options(dataList.alarm));
 		        });
@@ -71,9 +71,9 @@
 			        end: this.time[1]
 		        }).then(res => {
 			        dataList.fault.seriesData = res.map(item => {
-			        	dataList.fault.legendData.push(item.alarmDescription);
+				        dataList.fault.legendData.push(Dict.faultDetails[item.alarmDescription] || "");
 				        return {
-					        name: item.alarmDescription,
+					        name: Dict.faultDetails[item.alarmDescription] || "",
 					        value: item.percentage
 				        };
 			        });

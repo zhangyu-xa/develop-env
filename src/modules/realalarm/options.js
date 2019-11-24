@@ -53,7 +53,7 @@ export default function (context) {
 			async: {
 				fresh: "",
 				pagination: true,
-				pageSize: 15,
+				pageSize: 10,
 				getData: context.getGeneralInfoList
 			}
 		},
