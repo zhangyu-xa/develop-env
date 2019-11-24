@@ -7,7 +7,7 @@
         <discriptions v-if="isShow('discrip')" ref="discrpt" class="discriptions"></discriptions>
         <alarms-query v-if="isShow('alarmlist')" :deviceId="deviceId" class="alarm-list">报警列表</alarms-query>
         <rate-set v-if="isShow('rateset')" :data="realData" class="rate-set"></rate-set>
-        <open-close v-if="isShow('openclose')" class="open-close"></open-close>
+        <open-close v-if="isShow('openclose')" :deviceId="deviceId" class="open-close"></open-close>
         <info-statistic v-if="isShow('infosta')" :deviceId="deviceId" :time="timeRange" class="info-satistic">信息图表统计</info-statistic>
         <category-statistic v-if="isShow('categorysta')" :deviceId="deviceId" :time="timeRange" class="category-statistic">告警故障类别统计图</category-statistic>
         <report-statistic v-if="isShow('reportsta')" :deviceId="deviceId" :time="timeRange" class="report-statistic">报表统计</report-statistic>

@@ -4,7 +4,7 @@ const URLS = {
 	generalTrailTrend: '/dadaoapi/v1/generalTrail/trend',
 	getStatistics: 'dadaoapi/v1/statisticAnalysis',
 	getAlertTrail: '/dadaoapi/v1/alertTrail',
-	updateDeviceRate: '/dadaoapi/v1/deviceDetail'
+	remoteControl: '/dadaoapi/v1/eleDevice/remoteControl'
 };
 
 export default {
@@ -70,20 +70,6 @@ export default {
 			}
 		});
 	},
-	updateDeviceRateById(params) {
-		return $http({
-			url: `${URLS.updateDeviceRate}/${params.deviceDetailId}`,
-			method: 'put',
-			data: params
-		});
-	},
-	updateDevicesRate(params) {
-		return $http({
-			url: `${URLS.updateDeviceRate}`,
-			method: 'put',
-			data: params
-		});
-	},
 	exportGeneralTrailsIntoExcel(params) {
 		return axios.get(
 			`${URLS.getGeneralInfo}/${params.deviceId}/generalTrail/export`,
@@ -98,5 +84,13 @@ export default {
 				responseType:"blob"
 			}
 		);
+	},
+	remoteControl(params, url = "") {
+		return $http({
+			url: `${URLS.remoteControl}/${url !== "" ? url : ""}`,
+			type: 'query',
+			method: 'post',
+			data: params
+		});
 	}
 }

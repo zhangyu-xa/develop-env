@@ -1,18 +1,9 @@
 export default function (data) {
 	const defaultData = [{
-		name: "漏电流报警",
-		value: 0
-	}, {
-		name: "设备离线警告",
-		value: 0
-	}, {
-		name: "缺相报警",
-		value: 0
-	}, {
 		name: "无异常",
 		value: 1
 	}];
-	const defaultLegendData = ["", "漏电流报警", "设备离线警告", "缺相报警"];
+	const defaultLegendData = [""];
 	return {
 		title: {
 			text: data.title,
@@ -39,6 +30,21 @@ export default function (data) {
 						shadowBlur: 10,
 						shadowOffsetX: 0,
 						shadowColor: 'rgba(0, 0, 0, 0.5)'
+					},
+					normal:{
+						color:function(params) {
+							if(params.name === "无异常") return "#67c23a";
+							//自定义颜色
+							var colorList = [
+								'#edb247',
+								'#ff5656',
+								'#909399',
+								'#FF8C00',
+								'#FF0000',
+								'#FE8463'
+							];
+							return colorList[params.dataIndex]
+						}
 					}
 				}
 			}

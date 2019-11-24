@@ -1,6 +1,6 @@
 <template>
     <el-breadcrumb v-if="isShowBread" class="bread-crumb" separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item v-for="(crumb, index) in breadCrumb" :key="index" :to="{name: `${crumb.name}`}">{{crumb.label}}</el-breadcrumb-item>
+        <el-breadcrumb-item v-for="(crumb, index) in breadCrumb" :key="index" @click="clickBreadCrumb" :to="getRouterByName(crumb.name)">{{crumb.label}}</el-breadcrumb-item>
     </el-breadcrumb>
 </template>
 
@@ -80,10 +80,39 @@
 				console.log(to, from);
 				this.breadCrumb = [];
 				if (to.name !== "summary") {
+					console.log(getBreadCrumb(to));
 					this.breadCrumb.push(rootCrumb, ...getBreadCrumb(to));
 				}
 			}
-		}
+		},
+        methods: {
+	        getRouterByName(name) {
+		        const routerName = this.getRouterName(name);
+		        return {
+			        name: this.getRouterName(name),
+			        ...(routerName === "" ? {query: this.getQueryParams()} : {})
+		        }
+	        },
+	        getRouterName(name) {
+		        if (name === "deviceDetail") return "";
+		        return name;
+	        },
+	        getQueryParams() {
+                const querys = window.location.hash.split("?")[1];
+                const queryParams = {};
+                if(querys) {
+	                querys.split("&").forEach(item => {
+	                	const [key, value] = item.split("=");
+		                queryParams[key] = value;
+                    });
+                }
+                return queryParams;
+	        },
+	        clickBreadCrumb(e) {
+		        e.preventDefault();
+		        return false;
+	        }
+        }
 	}
 </script>
 

@@ -11,12 +11,12 @@
                 </el-input>
             </div>
             <div class="text item">
-                <el-input v-model="params.password" placeholder="请输入密码" type="password">
+                <el-input id="pwd" v-model="params.password" placeholder="请输入密码" type="password">
                     <i slot="prefix" class="fa fa-lock"></i>
                 </el-input>
             </div>
             <div class="text item">
-                <el-button type="primary" @click="login">登&nbsp;&nbsp;&nbsp;&nbsp;录</el-button>
+                <el-button type="primary" native-type="submit" @click="login">登&nbsp;&nbsp;&nbsp;&nbsp;录</el-button>
             </div>
         </el-card>
     </section>
@@ -34,6 +34,13 @@
 				}
             }
 		},
+        mounted() {
+	        document.getElementById("pwd").addEventListener("keypress", e => {
+		        if (e.keyCode === 13) {
+			        this.login();
+		        }
+	        });
+        },
 		methods: {
 			login() {
 				if(this.params.userName === "" || this.params.password === "") {

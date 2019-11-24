@@ -1,5 +1,6 @@
 const URLS = {
-	updateDeviceRate: '/dadaoapi/v1/eleDevice/threshold/setAll'
+	updateDeviceRate: '/dadaoapi/v1/eleDevice/threshold/setAll',
+	batchUpdateDeviceRate:'/dadaoapi/v1/eleDevice/threshold/batchSetAll'
 };
 
 export default {
@@ -12,8 +13,8 @@ export default {
 	},
 	updateDevicesRate(params) {
 		return $http({
-			url: `${URLS.updateDeviceRate}`,
-			method: 'put',
+			url: `${URLS.batchUpdateDeviceRate}`,
+			method: 'post',
 			data: params
 		});
 	}

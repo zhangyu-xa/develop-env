@@ -39,7 +39,7 @@ const filters = {
 					return `${res}${res === "" ? "" : ","}${Dict[key][cur]}`;
 				}
 			}, "");
-			return `<span>${res ? res : val}</span>`;
+			return `<span>${res || val}</span>`;
 		}
 		return val;
 	},
