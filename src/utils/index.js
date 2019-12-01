@@ -51,5 +51,16 @@ export const $tools = {
 		return Array(num).fill(0).map((i, index) => {
 			return this.dateFormat("YYYY-mm-dd HH:MM:SS", new Date(Date.now() - 5 * 1000 * index));
 		}).reverse();
+	},
+	getDeviceListPageSize() {
+		if (window.screen.height < 800) {
+			return 7;
+		} else if (window.screen.height < 900 && window.screen.height >= 800) {
+			return 9;
+		} else if (window.screen.height <= 1050 && window.screen.height >= 900) {
+			return 10;
+		} else {
+			return 13;
+		}
 	}
 };

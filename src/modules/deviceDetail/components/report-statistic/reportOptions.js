@@ -1,6 +1,12 @@
 export default function (context) {
+	function isShowColum() {
+		if (window.screen.width < 1366) {
+			return false;
+		}
+		return true;
+	}
 	return {
-		hasIndex: true,
+		hasIndex: isShowColum(),
 		columns: [{
 			label: "时间",
 			prop: "createdTime"
@@ -31,16 +37,19 @@ export default function (context) {
 		}, {
 			label: "C相线缆温度",
 			prop: "phCCableTemp"
-		}, {
+		},
+			...(!isShowColum() ? [] : [{
 			label: "剩余电流",
 			prop: "leftCurr"
-		}, {
+		}]),
+			...(!isShowColum() ? [] : [{
 			label: "环境温度",
 			prop: "envTemp"
-		}, {
+		}]),
+			...(!isShowColum() ? [] : [{
 			label: "总电量",
 			prop: "totalPower"
-		}],
+		}])],
 		async: {
 			notAutoAjax: true,
 			fresh: "",

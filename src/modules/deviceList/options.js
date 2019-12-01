@@ -5,11 +5,11 @@ export default function (context) {
 			columns: [{
 				label: "设备ID",
 				prop: "deviceSerialId",
-				width: 150
+				width: 140
 			}, {
 				label: "设备名称",
 				prop: "deviceName",
-				width: 150,
+				width: 120,
 				tips: true
 			}, {
 				label: "联网状态",
@@ -37,7 +37,7 @@ export default function (context) {
 			}, {
 				label: "SIM卡串码",
 				prop: "simCode",
-				width: 120
+				width: 100
 			}, {
 				label: "安装位置",
 				prop: "deviceLocation",
@@ -77,7 +77,7 @@ export default function (context) {
 			async: {
 				fresh: "",
 				pagination: true,
-				pageSize: 10,
+				pageSize: $tools.getDeviceListPageSize(),
 				getData: context.getGeneralInfoList
 			}
 		},

@@ -53,7 +53,7 @@ export default function (context) {
 			async: {
 				fresh: "",
 				pagination: true,
-				pageSize: 10,
+				pageSize: $tools.getDeviceListPageSize(),
 				getData: context.getGeneralInfoList
 			}
 		},

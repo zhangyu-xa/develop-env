@@ -150,4 +150,14 @@
             padding: 0 6px 6px 6px;
         }
     }
+    @media screen and (max-width: 1440px) {
+        .main-container {
+
+            grid-template-columns: 180px 1fr;
+
+            &.no-crumb {
+                grid-template-columns: 180px 1fr;
+            }
+        }
+    }
 </style>

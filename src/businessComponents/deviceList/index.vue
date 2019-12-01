@@ -116,6 +116,15 @@
 
         .data-content {
             flex: 1 1 auto;
+
+            .el-table {
+                position: absolute;
+                height: calc(100% - 50px);
+            }
+            .pagination{
+                position: absolute;
+                bottom: 0;
+            }
         }
 
         .device-info {

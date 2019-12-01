@@ -46,6 +46,7 @@
         <slot name="elemap" :slotClass="'ele-map'"></slot>
         <el-pagination
                 v-if="showPagination"
+                v-show="!displayMode || displayMode==='list'"
                 class="pagination"
                 background
                 @size-change="handleSizeChange"
