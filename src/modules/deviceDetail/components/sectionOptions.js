@@ -1,5 +1,5 @@
 export default {
-	info: ['alarmLogs', 'deviceDetails', 'remoteContrl'],
+	info: ['alarmLogs', 'deviceDetails', 'remoteContrl', 'alarmStatistics', 'detailStatistics'],
 	status: ['deviceDetails'],
 	data: ['deviceDetails'],
 	alarmlist: ['alarmLogs'],

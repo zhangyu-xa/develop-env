@@ -42,11 +42,13 @@
 
             .el-tabs__content {
                 display: flex;
+                width: 100%;
             }
         }
         .el-tab-pane {
             flex: 1 1 auto;
             display: flex;
+            width: 100%;
         }
     }
 </style>

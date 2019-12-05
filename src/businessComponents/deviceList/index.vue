@@ -119,10 +119,11 @@
 
             .el-table {
                 position: absolute;
-                height: calc(100% - 50px);
+                height: calc(100% - 35px);
             }
             .pagination{
                 position: absolute;
+                margin-top: 0;
                 bottom: 0;
             }
         }

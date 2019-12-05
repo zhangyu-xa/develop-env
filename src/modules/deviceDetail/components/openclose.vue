@@ -33,8 +33,8 @@
 					deviceId: this.deviceId
 				}, evtype).then(res => {
 					this.$message({
-						type: res ? "success" : "error",
-						message: `${Tips[evtype]}${res ? "成功" : "失败"}`
+						type: "success",
+						message: `${Tips[evtype]}成功`
 					});
 				});
 			}
@@ -71,16 +71,22 @@
                 border: solid 1px #8c939d;
                 color: #8c939d;
                 cursor: pointer;
-                background-color: #efecec;
+                background-color: #ffffff;
 
                 &.fa-play {
-                    color: @normalColor;
+                    color: @offlineColor;
                 }
                 &.fa-stop {
                     color: @faultColor;
                 }
 
                 position: relative;
+            }
+            i:hover {
+                background-color: #efecec;
+                &.fa-play {
+                    color: @normalColor;
+                }
             }
             .tips {
                 position: relative;

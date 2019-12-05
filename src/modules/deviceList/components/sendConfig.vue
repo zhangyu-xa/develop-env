@@ -41,13 +41,21 @@
 			};
 		},
 		mounted() {
-			Store.getDevicePushInfo({
-				deviceId: this.deviceId
-			}).then(data => {
-				this.configs = data;
-			});
+            this.listPushInfo();
 		},
+        watch: {
+	        deviceId() {
+		        this.listPushInfo();
+	        }
+        },
 		methods: {
+			listPushInfo() {
+				Store.getDevicePushInfo({
+					deviceId: this.deviceId
+				}).then(data => {
+					this.configs = data;
+				});
+			},
 			onUpdate(index) {
 				Store.updateDevicePushInfo({
 					deviceId: this.deviceId,

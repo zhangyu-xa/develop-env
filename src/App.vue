@@ -149,14 +149,25 @@
 
             padding: 0 6px 6px 6px;
         }
-    }
-    @media screen and (max-width: 1440px) {
-        .main-container {
 
+        @media screen and (max-width: 1440px) {
+            grid-template-rows: 60px 40px 1fr;
             grid-template-columns: 180px 1fr;
+            grid-template-areas: "header header"
+            "menu breadcrumb"
+            "menu content";
 
             &.no-crumb {
+                grid-template-rows: 60px 1fr;
                 grid-template-columns: 180px 1fr;
+                grid-template-areas: "header header"
+                "menu content";
+            }
+
+            &.no-menus {
+                grid-template-rows: 60px 1fr;
+                grid-template-columns: 1fr;
+                grid-template-areas: "header" "content";
             }
         }
     }

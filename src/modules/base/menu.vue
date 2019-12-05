@@ -62,5 +62,12 @@
                 color: #efefef;
             }
         }
+        @media screen and (max-width: 1440px) {
+            .el-submenu .el-menu-item {
+                min-width: inherit;
+                padding-left: 20px !important;
+                margin-left: 20px;
+            }
+        }
     }
 </style>
