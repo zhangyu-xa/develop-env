@@ -5,7 +5,8 @@ export default function (context) {
 			columns: [{
 				label: "设备ID",
 				prop: "deviceSerialId",
-				width: 140
+				width: 140,
+				tips: true
 			}, {
 				label: "设备名称",
 				prop: "deviceName",

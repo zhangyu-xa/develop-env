@@ -53,13 +53,13 @@ export const $tools = {
 		}).reverse();
 	},
 	getDeviceListPageSize() {
-		const bodyHeight = window.screen.height;
-		if (bodyHeight < 800) {
+		const bodyHeight = window.screen.height - 150;
+		if (bodyHeight < 800 - 150) {
 			return 7;
-		} else if (bodyHeight < 900 && bodyHeight >= 800) {
+		} else if (bodyHeight < 900 - 150 && bodyHeight >= 800 - 150) {
+			return 8;
+		} else if (bodyHeight <= 1050 - 150 && bodyHeight >= 900 - 150) {
 			return 9;
-		} else if (bodyHeight <= 1050 && bodyHeight >= 900) {
-			return 10;
 		} else {
 			return 13;
 		}
