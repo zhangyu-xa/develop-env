@@ -43,27 +43,59 @@
 		name: "rate-set",
         props: ['data', 'notShowHeader'],
         data() {
-			const {
-				thPhVoltOverThreshhold = 260,
-                thPhVoltUnderThreshhold = 170,
-                thPhCurrOverThreshhold = 6,
-				thPhCableTempOverThreshhold = 100,
-				leftCurrOverThreshhold = 500,
-				envTempOverThreshhold = 80,
-				deviceId
-			} = this.data;
 	        return {
 	        	inputDisabled: true,
                 params: {
-	                thPhVoltOverThreshhold,
-	                thPhVoltUnderThreshhold,
-	                thPhCurrOverThreshhold,
-	                thPhCableTempOverThreshhold,
-	                leftCurrOverThreshhold,
-	                envTempOverThreshhold
+	                thPhVoltOverThreshhold: 260,
+	                thPhVoltUnderThreshhold: 170,
+	                thPhCurrOverThreshhold: 6,
+	                thPhCableTempOverThreshhold: 100,
+	                leftCurrOverThreshhold: 500,
+	                envTempOverThreshhold: 80
                 },
-		        deviceId
+		        deviceId: -1
             };
+        },
+        watch: {
+            data(val) {
+                const {
+                    thPhVoltOverThreshhold = 260,
+                    thPhVoltUnderThreshhold = 170,
+                    thPhCurrOverThreshhold = 6,
+                    thPhCableTempOverThreshhold = 100,
+                    leftCurrOverThreshhold = 500,
+                    envTempOverThreshhold = 80,
+                    deviceId
+                } = val;
+
+                this.params.thPhVoltOverThreshhold = thPhVoltOverThreshhold;
+                this.params.thPhVoltUnderThreshhold = thPhVoltUnderThreshhold;
+                this.params.thPhCurrOverThreshhold = thPhCurrOverThreshhold;
+                this.params.thPhCableTempOverThreshhold = thPhCableTempOverThreshhold;
+                this.params.leftCurrOverThreshhold = leftCurrOverThreshhold;
+                this.params.envTempOverThreshhold = envTempOverThreshhold;
+                this.deviceId = deviceId;
+                console.log("this.deviceId:", this.deviceId);
+            }
+        },
+        mounted() {
+            const {
+                thPhVoltOverThreshhold = 260,
+                thPhVoltUnderThreshhold = 170,
+                thPhCurrOverThreshhold = 6,
+                thPhCableTempOverThreshhold = 100,
+                leftCurrOverThreshhold = 500,
+                envTempOverThreshhold = 80,
+                deviceId
+            } = this.data;
+
+            this.params.thPhVoltOverThreshhold = thPhVoltOverThreshhold;
+            this.params.thPhVoltUnderThreshhold = thPhVoltUnderThreshhold;
+            this.params.thPhCurrOverThreshhold = thPhCurrOverThreshhold;
+            this.params.thPhCableTempOverThreshhold = thPhCableTempOverThreshhold;
+            this.params.leftCurrOverThreshhold = leftCurrOverThreshhold;
+            this.params.envTempOverThreshhold = envTempOverThreshhold;
+            this.deviceId = deviceId;
         },
 		methods: {
 			onSubmit() {
@@ -74,10 +106,14 @@
 							deviceIds: this.data.map(d => d.deviceId)
 						})
 					}).then(res => {
-						this.$message({
+                        this.$message({
+                            type: "success",
+                            message: `设置阈值成功`
+                        });
+						/*this.$message({
 							type: res ? "success" : "error",
 							message: `设置阈值${res ? "成功" : "失败"}`
-						});
+						});*/
 					});
 					return;
 				}
@@ -86,10 +122,14 @@
 		                deviceId: this.deviceId
 	                })
                 }).then(res => {
-	                this.$message({
+                    this.$message({
+                        type: "success",
+                        message: `设置阈值成功`
+                    });
+	                /*this.$message({
 		                type: res ? "success" : "error",
 		                message: `设置阈值${res ? "成功" : "失败"}`
-	                });
+	                });*/
                 });
 			},
             onSet() {
