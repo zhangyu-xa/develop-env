@@ -47,13 +47,18 @@
 					this.$message({
                         type: "warning",
                         message: "用户名或密码不能为空"
-                    })
+                    });
 					return;
                 }
 				Store.login({...this.params}).then(data => {
 					this.$router.push({name: "index"});
 					this.$emit("login-success", this.params);
 					window.sessionStorage.setItem("user", JSON.stringify(data));
+                }, () => {
+                    this.$message({
+                        type: "warning",
+                        message: "用户名或密码错误，请重新输入"
+                    });
                 });
 			}
 		}
